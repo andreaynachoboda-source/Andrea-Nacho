@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Boda de Andrea & Nacho</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="pagina-principal">
+
+
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div class="desktop-menu">
+
+                <a href="Nuestra historia.html" class="nav-link">Nuestra Historia</a>
+
+                <a href="La boda.html" class="nav-link">La Boda</a>
+
+                <a href="direccion.html" class="nav-link">Dirección</a>
+
+            </div>
+
+
+
+            <div class="asistencia-centro">
+
+                <a href="asistencia.html" target="_blank" class="btn-asistencia">Asistencia</a>
+
+            </div>
+
+
+
+            <div class="desktop-menu menu-right">
+
+                <a href="alojamientos.html" class="nav-link">Alojamiento</a>
+
+                <a href="regalos.html" class="nav-link">Regalos</a>
+
+                <a href="contacto.html" class="nav-link">Contacto</a>
+
+            </div>
+
+
+
+            <button class="menu-toggle" id="menuToggle">
+
+                <span></span><span></span><span></span>
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <div class="mobile-overlay" id="mobileMenu">
+
+        <div class="mobile-nav-content">
+
+            <a href="nuestra-historia.html" class="mobile-link">Nuestra Historia</a>
+
+            <a href="boda.html" class="mobile-link">La Boda</a>
+
+            <a href="direccion.html" class="mobile-link">Dirección</a>
+
+            <a href="alojamientos.html" class="mobile-link">Alojamientos</a>
+
+            <a href="regalos.html" class="mobile-link">Regalos</a>
+
+            <a href="contacto.html" class="mobile-link">Contacto</a>
+
+        </div>
+
+    </div>
+
+
+
+    <header class="hero">
+
+        <div class="capa motivos"></div>
+
+        <div class="capa foco-luz"></div>
+
+
+
+       <div class="escenario">
+
+            <div class="bloque-nombres-sellado">
+
+                <h1 class="nombre andrea">Andrea</h1>
+
+                <span class="ampersand">&</span>
+
+                <h1 class="nombre nacho">Nacho</h1>
+
+            </div>
+
+           
+
+            <div class="bloque-fecha">
+
+                <p class="fecha-texto">05 . DICIEMBRE . 2026</p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+   <script>
+
+    const menuToggle = document.getElementById('menuToggle');
+
+    const mobileMenu = document.getElementById('mobileMenu');
+
+
+
+    // Función para abrir/cerrar (la que ya tenías)
+
+    const toggleMenu = () => {
+
+        menuToggle.classList.toggle('active');
+
+        mobileMenu.classList.toggle('active');
+
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+
+    };
+
+
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+
+
+    // NUEVO: Cerrar al tocar el fondo blanco
+
+    mobileMenu.addEventListener('click', (e) => {
+
+        // Si el clic es directamente en el fondo (no en un enlace)
+
+        if (e.target === mobileMenu) {
+
+            toggleMenu();
+
+        }
+
+    });
+
+   </script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Boda de Andrea & Nacho</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="pagina-interna">
+
+    <nav class="navbar"> ... </nav>
+
+   <div class="mobile-overlay" id="mobileMenu">
+    <div class="mobile-nav-content">
+        <a href="nuestra-historia.html" class="mobile-link">Nuestra Historia</a>
+        <a href="la-boda.html" class="mobile-link">La Boda</a>
+        <a href="direccion.html" class="mobile-link">Dirección</a>
+        <a href="alojamientos.html" class="mobile-link">Alojamientos</a>
+        <a href="regalos.html" class="mobile-link">Regalos</a>
+        <a href="contacto.html" class="mobile-link">Contacto</a>
+    </div>
+</div>
+
+    <main class="contenedor-editorial" style="margin-top: 150px;">
+        <div class="bloque-editorial">
+            <div class="columna-texto">
+                <div class="caja-relato">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const toggleMenu = () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        };
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) toggleMenu();
+        });
+    </script>
+</body>
+</html>

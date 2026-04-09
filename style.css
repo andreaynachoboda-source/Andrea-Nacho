@@ -1,0 +1,1097 @@
+/* --- 1. CONFIGURACIÓN BASE --- */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+
+body, html {
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow-x: hidden;
+
+    background-image: url('img/TesturaAcuarela.png');
+
+    background-color: #fdfdfd;
+
+    background-blend-mode: multiply;
+
+    background-attachment: fixed;
+
+    background-size: cover;
+
+    background-position: center;
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+
+
+/* --- 2. NAVBAR --- */
+
+.navbar {
+
+    position: fixed;
+
+    top: 0;
+
+    width: 100%;
+
+    z-index: 2000;
+
+    background-color: rgba(253, 253, 253, 0.85);
+
+    backdrop-filter: blur(12px);
+
+    padding: 10px 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    min-height: 80px;
+
+    border-bottom: 1px solid rgba(139, 0, 0, 0.08);
+
+}
+
+
+
+.nav-container {
+
+    width: 92%;
+
+    max-width: 1300px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+
+.desktop-menu {
+
+    display: flex;
+
+    gap: clamp(15px, 2.5vw, 45px);
+
+    flex: 1;
+
+    align-items: center;
+
+}
+
+
+
+.menu-right { justify-content: flex-end; }
+
+
+
+.nav-link {
+
+    text-decoration: none;
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: clamp(11px, 1vw, 13px);
+
+    color: #5d6d7e;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+
+    transition: 0.3s;
+
+    position: relative;
+
+}
+
+
+
+.nav-link:hover { color: #8B0000; }
+
+
+
+/* --- BOTÓN ASISTENCIA --- */
+
+/* --- BOTÓN ASISTENCIA (FIJO PARA EVITAR SALTOS) --- */
+.btn-asistencia {
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    
+    /* Cambiamos clamp por valor fijo */
+    font-size: 11px; 
+    
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    background: transparent !important;
+    color: #8B0000 !important;
+    
+    /* Cambiamos clamp por valores fijos */
+    padding: 10px 28px; 
+    
+    border-radius: 50px;
+    border: 1px solid rgba(139, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+}
+
+
+
+.btn-asistencia:hover {
+
+    background-color: #800020 !important; /* Burdeos */
+
+    color: #ffffff !important;
+
+    border-color: #800020 !important;
+
+}
+
+
+
+/* --- 4. HERO & NOMBRES --- */
+
+.hero {
+
+    position: relative;
+
+    width: 100vw;
+
+    height: calc(100vh - 80px);
+
+    margin-top: 80px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+
+.capa {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
+    top: 0;
+
+    left: 0;
+
+}
+
+
+
+.motivos {
+
+    background: url('img/Motivo_adornos.png') center/contain repeat;
+
+    opacity: 0.40;
+
+    z-index: 2;
+
+}
+
+
+
+.foco-luz {
+
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%);
+
+    z-index: 3;
+
+}
+
+
+
+.escenario {
+
+    position: relative;
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+
+
+.bloque-nombres-sellado {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 1 auto;
+
+}
+
+
+
+.nombre {
+
+    font-family: 'Pinyon Script', cursive;
+
+    font-size: clamp(90px, 15vw, 220px);
+
+    font-weight: 100;
+
+    line-height: 0.85;
+
+    color: #8B0000;
+
+    text-align: center;
+
+    width: 100%;
+
+}
+
+
+
+.andrea { margin-bottom: 0.1em; }
+
+
+
+.ampersand {
+
+    font-family: 'Pinyon Script', cursive;
+
+    font-size: clamp(50px, 8vw, 110px);
+
+    color: #8B0000;
+
+    opacity: 0.7;
+
+    margin: 0.1em 0;
+
+    line-height: 0.5;
+
+}
+
+
+
+.nacho {
+
+    margin-top: 0.1em;
+
+    transform: translateY(15px);
+
+}
+
+
+
+/* --- 5. BLOQUE FECHA --- */
+
+.bloque-fecha {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: 2vh;
+
+    z-index: 15;
+
+}
+
+
+
+.fecha-texto {
+
+    position: relative;
+
+    font-family: 'Playfair Display', serif;
+
+    font-weight: 400;
+
+    font-style: italic;
+
+    font-size: clamp(14px, 1.2vw, 18px);
+
+    letter-spacing: 0.35em;
+
+    color: #8B0000;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    border-top: 1px solid rgba(139, 0, 0, 0.15);
+
+    border-bottom: 1px solid rgba(139, 0, 0, 0.15);
+
+    padding: 15px 40px;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+
+}
+
+
+
+/* --- 6. RESPONSIVE INTELIGENTE (GIRO DINÁMICO Y SIMETRÍA) --- */
+
+
+
+/* 1. MODO MÓVIL (Vertical o pantallas donde el menú no cabe) */
+
+/* El punto de corte a 1150px evita que el menú se vea apretado en tablets */
+
+@media (max-width: 1149px) and (orientation: portrait), (max-width: 1024px) {
+
+    .desktop-menu { display: none !important; }
+
+   
+
+    .nav-container {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 0 5%;
+
+    }
+
+
+
+    .menu-toggle {
+
+        display: flex !important;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        width: 30px;
+
+        height: 18px;
+
+        background: none;
+
+        border: none;
+
+        z-index: 3000;
+
+        order: 2; /* Hamburguesa a la derecha */
+
+    }
+
+   
+
+    .menu-toggle span { width: 100%; height: 2px; background-color: #8B0000; }
+
+    .nombre { font-size: clamp(70px, 18vw, 100px) !important; }
+
+}
+
+
+
+/* 2. MODO ORDENADOR, TABLET Y MÓVIL HORIZONTAL (Ajuste Fino) */
+
+@media (min-width: 1150px), (min-width: 768px) and (orientation: landscape) {
+
+    .menu-toggle { display: none !important; }
+
+    .desktop-menu { display: flex !important; }
+
+    .mobile-overlay { display: none !important; }
+
+
+
+    /* Reducimos navbar para ganar aire vertical en móviles girados */
+
+    .navbar {
+
+        min-height: 70px !important;
+
+        padding: 5px 0 !important;
+
+    }
+
+
+
+    .nav-container {
+
+        display: grid;
+
+        grid-template-columns: 1fr auto 1fr; /* Tres columnas perfectas */
+
+        align-items: center;
+
+        width: 100%;
+
+        max-width: 1500px;
+
+        margin: 0 auto;
+
+        padding: 0 4%; /* Sangría exterior */
+
+    }
+
+
+
+    .desktop-menu {
+
+        gap: clamp(15px, 2.5vw, 35px);
+
+    }
+
+
+
+    .menu-left {
+
+        justify-content: flex-start;
+
+        /* SEPARACIÓN FIJA CON EL BOTÓN: Nunca menos de 50px */
+
+        padding-right: 50px;
+
+    }
+
+
+
+    .menu-right {
+
+        justify-content: flex-end;
+
+        /* SEPARACIÓN FIJA CON EL BOTÓN: Nunca menos de 50px */
+
+        padding-left: 50px;
+
+    }
+
+
+
+    .asistencia-centro {
+
+        display: flex;
+
+        justify-content: center;
+
+        flex-shrink: 0;
+
+    }
+
+
+
+    /* --- BLOQUE CENTRAL (NOMBRES Y FECHA) --- */
+
+    .hero {
+
+        height: auto !important;
+
+        min-height: calc(100vh - 70px);
+
+        margin-top: 70px !important;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding: 40px 0;
+
+    }
+
+
+
+    .escenario { gap: 0; }
+
+
+
+    .nombre {
+
+        font-size: clamp(80px, 16vh, 190px) !important;
+
+        line-height: 1.1 !important; /* Evita que las letras se pisen al crecer */
+
+    }
+
+
+
+    /* Separaciones fijas para que no se junten al redimensionar */
+
+    .andrea { margin-bottom: 15px !important; }
+
+   
+
+    .ampersand {
+
+        font-size: clamp(40px, 9vh, 90px);
+
+        margin: 15px 0 !important;
+
+        line-height: 1;
+
+    }
+
+
+
+    .nacho {
+
+        margin-top: 15px !important;
+
+        transform: translateY(0) !important;
+
+    }
+
+
+
+    .bloque-fecha {
+
+        margin-top: 50px !important;
+
+    }
+
+}
+
+
+
+
+
+
+
+/* --- 7. MENÚ OVERLAY (DISEÑO NUPCIAL CON ADORNOS) --- */
+
+.mobile-overlay {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100vh;
+
+    background-image: url('img/TesturaAcuarela.png');
+
+    background-color: rgba(255, 255, 255, 0.98);
+
+    display: flex;
+
+    flex-direction: column; /* Cambiado a column para apilar adornos y menú */
+
+    justify-content: center;
+
+    align-items: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    z-index: 2500;
+
+}
+
+
+
+.mobile-overlay.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+
+/* --- ADORNO INFERIOR CENTRADO (COLOR BURDEOS) --- */
+
+.mobile-overlay::after {
+
+    content: "";
+
+    display: block; /* Asegura que se comporte como un bloque debajo del texto */
+
+    width: 220px;
+
+    height: 80px;
+
+    background: url('img/Hojas_pino.png') center/contain no-repeat;
+
+   
+
+    /* EL FILTRO MÁGICO PARA EL COLOR BURDEOS */
+
+    filter: sepia(100%) saturate(600%) hue-rotate(-60deg) brightness(0.35) contrast(1.1);
+
+   
+
+    opacity: 0.7;
+
+    margin-top: 40px; /* Espacio elegante tras la última opción del menú */
+
+   
+
+    /* Invertimos el adorno para cerrar el diseño hacia abajo */
+
+    transform: rotate(180deg);
+
+   
+
+    /* Para que el diseño sea fluido */
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+/* IMPORTANTE: Asegúrate de que el contenedor del menú tenga flex-direction: column
+
+para que el adorno se coloque debajo de los enlaces */
+
+.mobile-overlay {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    /* ... resto de tu configuración ... */
+
+}
+
+.mobile-nav-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 40px; /* Espaciado generoso entre opciones */
+
+    align-items: center;
+
+}
+
+
+
+.mobile-link {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 17px !important;
+
+    color: #5d6d7e;
+
+    text-decoration: none;
+
+    font-weight: 400;
+
+    text-transform: uppercase;
+
+    letter-spacing: 5px;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.mobile-link:hover {
+
+    color: #8B0000 !important;
+
+    letter-spacing: 7px;
+
+}
+
+
+
+/* --- LIMPIEZA FINAL --- */
+
+.nav-link, .mobile-link {
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+}
+
+
+
+
+
+/* --- EFECTO TÁCTIL PARA MÓVIL (SIMULANDO HOVER) --- */
+
+
+
+/* Cuando el dedo toca la opción en el menú hamburguesa */
+
+.mobile-link:active {
+
+    color: #8B0000 !important;
+
+    letter-spacing: 7px; /* El ligero estiramiento que ya tenías */
+
+    transition: 0.1s; /* Respuesta instantánea al toque */
+
+}
+
+
+
+/* Para el botón de Asistencia en el móvil */
+
+.btn-asistencia:active {
+
+    background-color: #800020 !important;
+
+    color: #ffffff !important;
+
+    transform: scale(0.95); /* Efecto de que el botón se hunde al pisarlo */
+
+}
+
+
+
+/* --- TRUCO PARA QUE EL IPHONE RESPONDA AL TOQUE AL INSTANTE --- */
+
+.mobile-link, .btn-asistencia {
+
+    -webkit-tap-highlight-color: transparent; /* Quita el recuadro gris feo de iOS */
+
+    cursor: pointer;
+
+}
+
+
+/* --- ESTILOS ESPECÍFICOS PÁGINA HISTORIA --- */
+
+.header-historia {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.contenido-titulo .frase-script {
+    font-size: clamp(60px, 10vw, 120px);
+    margin-bottom: 20px;
+}
+
+.linea-decorativa {
+    width: 60px;
+    height: 1px;
+    background: #8B0000;
+    margin: 0 auto;
+    opacity: 0.5;
+}
+
+.bloque-frase-central {
+    padding: 150px 20px;
+    text-align: center;
+    background-color: transparent;
+}
+
+.bloque-frase-central .frase-script {
+    font-size: clamp(40px, 6vw, 80px);
+    color: rgba(139, 0, 0, 0.7);
+}
+
+.footer-historia {
+    padding: 100px 0;
+    text-align: center;
+    opacity: 0.6;
+}
+
+/* Ajuste para que las imágenes en historia tengan un toque más artístico */
+.foto-wrapper img {
+    filter: sepia(10%) contrast(1.05); /* Un toque vintage muy leve */
+    transition: transform 1s ease;
+}
+
+.foto-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* Espaciado extra entre bloques */
+.bloque-editorial {
+    margin-bottom: 120px;
+}
+
+
+/* Estilo especial para el enlace con icono */
+.home-icon {
+    display: flex !important;
+    align-items: center;
+    gap: 10px; /* Espacio entre la casa y la palabra Inicio */
+    justify-content: center;
+    margin-bottom: 10px; /* Un poco de aire extra para separarlo del resto */
+    border-bottom: 1px solid rgba(139, 0, 0, 0.1); /* Una línea muy fina divisoria */
+    padding-bottom: 15px;
+}
+
+/* Efecto al tocar el icono */
+.home-icon:active {
+    transform: scale(0.95);
+}
+
+/* Esto centra la casita y le da aire */
+.home-icon-superior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px; /* Espacio generoso debajo de la casa */
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    width: 100%; /* Asegura el centrado horizontal */
+}
+
+/* Efecto sutil al tocar con el dedo */
+.home-icon-superior:active {
+    transform: scale(0.9);
+}
+
+/* El trazo fino del dibujo */
+.home-icon-superior svg {
+    stroke: #8B0000; /* Color Burdeos Andrea & Nacho */
+    stroke-width: 1.1px;
+}
+
+/* Configuramos el contenedor para pantallas grandes */
+@media (min-width: 1150px) {
+    .nav-container {
+        display: grid !important;
+        /* Creamos 3 columnas: el centro (auto) y los lados reparten el espacio (1fr) */
+        grid-template-columns: 1fr auto 1fr; 
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* La casita "flota" a la izquierda del primer bloque sin romper el grid */
+    .home-nav-icon {
+        position: absolute;
+        left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .desktop-menu {
+        display: flex !important;
+    }
+
+    .asistencia-centro {
+        grid-column: 2; /* Obligamos a que Asistencia sea el eje central */
+        justify-content: center;
+    }
+}
+
+/* Ajuste para que la casita no se pegue al borde */
+.home-nav-icon {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    
+}
+
+
+
+/* --- 6. RESPONSIVE MÓVIL (Punto de corte 1149px) --- */
+@media (max-width: 1149px) {
+    .desktop-menu { display: none !important; }
+
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center;
+        padding: 0 5%;
+        width: 100%;
+    }
+
+    /* --- COMPORTAMIENTO PORTADA (Página Principal) --- */
+    .pagina-principal .asistencia-centro {
+        display: flex;
+        flex: 1;
+        justify-content: flex-start; /* Botón a la izquierda */
+        order: 1;
+    }
+
+    /* --- COMPORTAMIENTO HISTORIA (Página Interna) --- */
+    .pagina-interna .asistencia-centro {
+        display: flex;
+        flex: 1;
+        justify-content: center; /* Botón al centro */
+        order: 2;
+    }
+
+    /* La casita solo se ve en la página interna */
+    .pagina-interna .mobile-only-icon {
+        display: flex !important;
+        order: 1; /* Casa a la izquierda */
+        width: 35px;
+    }
+
+    /* La hamburguesa siempre a la derecha */
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 18px;
+        background: none;
+        border: none;
+        z-index: 3000;
+        order: 3; 
+    }
+
+    .menu-toggle span { width: 100%; height: 2px; background-color: #8B0000; }
+    
+    /* Ajuste de nombres para móvil */
+    .nombre { font-size: clamp(70px, 18vw, 100px) !important; }
+}
+
+
+
+
+
+
+//* --- 1. FONDO UNIFICADO (IGUAL A LA PORTADA) --- */
+body.pagina-interna {
+    background-image: url('img/TesturaAcuarela.png');
+    background-color: #fdfdfd; /* El crema exacto */
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+
+
+/* --- 2. CONTENEDOR PRINCIPAL --- */
+.contenedor-editorial {
+    position: relative;
+    z-index: 10;
+    margin-top: 160px;
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 80px 40px; /* Mucho espacio vertical entre filas */
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+}
+
+/* --- 3. POLAROID ESTILO GALERÍA (Mantenidas) --- */
+.polaroid-frame {
+    background-color: #8B0000 !important;
+    padding: 10px 10px 45px 10px !important;
+    box-shadow: 15px 25px 45px rgba(0,0,0,0.15) !important;
+    border-radius: 1px;
+    transition: all 0.5s ease;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.1) brightness(0.95);
+    transition: filter 0.6s ease;
+}
+
+.polaroid-frame:hover img {
+    filter: grayscale(0%) contrast(1) brightness(1);
+}
+
+.polaroid-year {
+    font-family: 'Pinyon Script', cursive;
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+/* --- 4. MODELO SERPIENTE (Para cuando hay Hamburguesa) --- */
+@media (max-width: 1149px) {
+    .timeline-grid {
+        grid-template-columns: 1fr !important;
+        gap: 140px 0 !important; /* Espaciado de lujo en móvil */
+        max-width: 450px;
+    }
+
+    .polaroid-item {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    /* Zig-Zag */
+    .polaroid-item:nth-child(odd) { justify-content: flex-start; }
+    .polaroid-item:nth-child(even) { justify-content: flex-end; }
+
+    /* Rotaciones muy sutiles */
+    .polaroid-item:nth-child(odd) .polaroid-frame { transform: rotate(-1.5deg) !important; }
+    .polaroid-item:nth-child(even) .polaroid-frame { transform: rotate(1.5deg) !important; }
+
+    .polaroid-frame {
+        max-width: 190px !important;
+    }
+}
