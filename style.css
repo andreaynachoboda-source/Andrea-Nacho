@@ -827,7 +827,7 @@ para que el adorno se coloque debajo de los enlaces */
     align-items: center;
     position: relative;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 100px;
 }
 
 .contenido-titulo .frase-script {
@@ -1009,17 +1009,112 @@ para que el adorno se coloque debajo de los enlaces */
 
 
 
+/* --- NUEVA MAQUETACIÓN EDITORIAL "CAMINO BOTÁNICO" --- */
 
+.contenedor-editorial {
+    padding-top: 60px;
+    padding-bottom: 150px;
+}
 
+/* La línea central sutil que une la historia */
+.timeline-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 0; /* Controlamos el espacio manualmente */
+}
 
-//* --- 1. FONDO UNIFICADO (IGUAL A LA PORTADA) --- */
-body.pagina-interna {
-    background-image: url('img/TesturaAcuarela.png');
-    background-color: #fdfdfd; /* El crema exacto */
-    background-blend-mode: multiply;
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 0;
+/* Creamos la línea vertical burdeos de fondo */
+.timeline-grid::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(139, 0, 0, 0.2) 10%, rgba(139, 0, 0, 0.2) 90%, transparent);
+    z-index: 1;
+}
+
+.polaroid-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -40px; /* Superposición elegante */
+}
+
+/* Estilo de la foto (Marco blanco elegante, no burdeos) */
+.polaroid-frame {
+    background-color: white !important; /* Volvemos al blanco para que destaque sobre el fondo */
+    padding: 15px 15px 60px 15px !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07) !important;
+    border-radius: 2px;
+    max-width: 320px;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.polaroid-frame img {
+    width: 100%;
+    aspect-ratio: 3/4; /* Formato vertical más editorial */
+    object-fit: cover;
+    filter: sepia(20%) contrast(1.02); /* Toque cálido coherente con tu portada */
+}
+
+.polaroid-year {
+    font-family: 'Pinyon Script', cursive;
+    color: #8B0000 !important; /* El burdeos de Andrea & Nacho */
+    font-size: 45px !important;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    left: 0;
+}
+
+/* --- ASIMETRÍA (Izquierda y Derecha) --- */
+
+/* Fotos impares a la izquierda */
+.polaroid-item:nth-child(odd) {
+    justify-content: flex-start;
+    padding-left: 5%;
+}
+.polaroid-item:nth-child(odd) .polaroid-frame { transform: rotate(-2deg); }
+
+/* Fotos pares a la derecha */
+.polaroid-item:nth-child(even) {
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+.polaroid-item:nth-child(even) .polaroid-frame { transform: rotate(2deg); }
+
+/* Efecto al pasar el ratón */
+.polaroid-item:hover {
+    z-index: 100;
+}
+.polaroid-item:hover .polaroid-frame {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 25px 50px rgba(139, 0, 0, 0.1) !important;
+}
+
+/* --- AJUSTE PARA MÓVILES --- */
+@media (max-width: 768px) {
+    .timeline-grid::before { left: 20px; } /* Línea a un lado en móvil */
+    
+    .polaroid-item {
+        justify-content: flex-start !important;
+        padding-left: 50px !important;
+        padding-right: 20px !important;
+        margin-bottom: 60px;
+    }
+    
+    .polaroid-frame {
+        max-width: 100%;
+        transform: rotate(0deg) !important;
+    }
 }
 
 
@@ -1095,3 +1190,260 @@ body.pagina-interna {
         max-width: 190px !important;
     }
 }
+
+
+/* --- DISEÑO CAMINO BOTÁNICO NUESTRA HISTORIA --- */
+
+.contenedor-camino {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 20px 100px 20px;
+    position: relative;
+}
+
+.titulo-historia {
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.nombre-script {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(60px, 8vw, 90px);
+    color: #8B0000;
+    font-weight: 100;
+}
+
+
+/* La línea central del tiempo */
+.camino-botanico {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.camino-botanico::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(139, 0, 0, 0.15);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* Cada bloque de año + foto */
+.punto-historia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    min-height: 420px; /* DISTANCIA MATEMÁTICA: Todos los bloques medirán esto */
+}
+
+/* Estilo de la foto tipo Camafeo/Ovalada */
+.foto-ovalada {
+    width: 200px;
+    height: 270px;
+    margin: 0 auto;
+    border-radius: 100px; /* Crea el efecto ovalado */
+    overflow: hidden;
+    border: 1.5px solid #A99F92;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 5;
+    background-color: #fdfdfd; /* Tapa la línea que pasa por detrás */
+}
+
+.foto-ovalada img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(1.02) contrast(1.04) !important;
+    transition: filter 0.6s ease;
+}
+/* Esto es opcional, pégalo justo debajo del bloque anterior */
+.foto-ovalada:hover img {
+    filter: grayscale(100%) brightness(1.08) contrast(1.06) !important;
+}
+
+/* Textos de los años */
+.año-script {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 55px;
+    color: #8B0000;
+    line-height: 1;
+}
+
+.hito-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #5d6d7e;
+    margin-top: 5px;
+}
+
+/* Zig-Zag: Impares a la izquierda, Pares a la derecha */
+.punto-historia:nth-child(odd) .texto-historia {
+    text-align: right;
+    padding-right: 80px;
+}
+
+.punto-historia:nth-child(even) .texto-historia {
+    grid-column: 2;
+    text-align: left;
+    padding-left: 80px;
+}
+
+.punto-historia:nth-child(even) .foto-ovalada {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Fondo de motivos atenuado para la historia */
+.motivos-historia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/Motivo_adornos.png') center/contain repeat;
+    opacity: 0.08; /* Muy sutil para no distraer de las fotos */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ajuste móvil: todo en una columna */
+@media (max-width: 768px) {
+    .camino-botanico::before {
+        display: none; /* Quitamos la línea en móvil para ganar limpieza visual */
+    }
+
+    .contenedor-camino {
+        padding-top: 20px; /* Reducimos espacio superior en móvil */
+    }
+}
+
+/* Ajuste móvil: todo en una columna */
+@media (max-width: 768px) {
+
+    .header-historia {
+        height: auto !important; /* Quita el exceso de altura */
+        margin-top: 90px !important; /* Lo baja lo justo para que no lo tape la navbar */
+        display: block !important;
+    }
+    
+    /* 1. ELIMINAR LÍNEA Y PEGAR TÍTULO */
+    .linea-fina {
+        display: none !important; /* Quita la línea burdeos horizontal */
+    }
+
+    .titulo-historia {
+        margin-bottom: 10px !important; /* Espacio mínimo con el 2019 */
+        position: relative !important;
+        z-index: 10;
+    }
+
+    .nombre-script {
+        font-size: 55px !important; /* Tamaño legible en móvil */
+        display: block !important;
+    }
+
+    .contenedor-camino {
+        padding-top: 10px !important; /* REDUCIDO: Pegamos el bloque al título */
+    }
+
+    .camino-botanico::before {
+        display: none !important; 
+    }
+
+    /* 2. RESET DE CONTENEDOR (2019, 2020...) */
+    .punto-historia {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 8px !important; 
+        margin-bottom: 200px !important; 
+        margin-top: 0 !important;
+        padding: 0 !important;
+        position: relative;
+    }
+
+    /* Forzamos que el primer año suba un poco más si fuera necesario */
+    .punto-historia:first-child {
+        margin-top: -10px !important;
+    }
+
+    /* 3. TEXTOS */
+    .año-script {
+        font-size: 42px !important;
+        margin: 0 !important; 
+        line-height: 1 !important;
+        order: 1;
+    }
+
+    .hito-texto {
+        font-size: 11px !important;
+        margin: 0 !important;
+        letter-spacing: 1.5px;
+        order: 2;
+        padding-bottom: 5px;
+    }
+
+    /* 4. LA FOTO OVALADA */
+    .foto-ovalada {
+        order: 3; 
+        width: 42vw; 
+        height: calc(42vw * 1.35); 
+        max-width: 155px;
+        max-height: 210px;
+        border-radius: 80px;
+        border: 1.5px solid #A99F92;
+        margin: 0 auto !important;
+        z-index: 5;
+        background-color: #fdfdfd;
+    }
+
+    /* 5. LÍNEA VERTICAL CONECTORA */
+    .punto-historia::after {
+        content: '';
+        position: absolute;
+        top: 100%; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 160px; 
+        background: linear-gradient(to bottom, 
+            #A99F92 0%,         
+            #A99F92 75%,        
+            rgba(169, 159, 146, 0.4) 90%, 
+            transparent 100%    
+        );
+        z-index: 1;
+    }
+
+    .punto-historia:last-child {
+        margin-bottom: 80px !important;
+    }
+
+    .punto-historia:last-child::after {
+        display: none !important;
+    }
+
+    
+}
+
+
+/* En móvil, ajustamos el margen para que no quede un hueco blanco gigante */
+@media (max-width: 768px) {
+    .titulo-historia {
+        margin-top: 110px !important;
+    }
+}
+
