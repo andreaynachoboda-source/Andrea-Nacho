@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="subtitulo-etiqueta">Ayúdanos a organizar los invitados</p>
     </div>
 
-    <form action="https://docs.google.com/forms/d/e/https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/viewform?usp=dialog/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
         
         <div class="grupo-input-nombre">
             <label>Nombre y Apellidos</label>
@@ -281,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <button type="submit" class="btn-confirmar-grande">Confirmar Asistencia</button>
     </form> 
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { alert('¡Muchas gracias! Hemos recibido vuestra confirmación.'); cerrarAsistencia(); }"></iframe>
 </div>
 
 <script>
@@ -296,6 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function verNinos(mostrar) {
         document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
     }
+    var submitted = false;
+    document.getElementById('form-boda').onsubmit = function() {
+        submitted = true;
+    };
 </script>
 
 </body>
