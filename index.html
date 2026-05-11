@@ -1,193 +1,302 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
     <link rel="preload" href="https://fonts.gstatic.com/s/pinyonscript/v22/6xKtdS_1bc-v47U7_oF9377y9X6V2D8.woff2" as="font" type="font/woff2" crossorigin>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Boda de Andrea & Nacho</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body class="pagina-principal">
 
+
+
     <nav class="navbar">
+
         <div class="nav-container">
+
             <div class="desktop-menu">
+
                 <a href="nuestra-historia.html" class="nav-link">Nuestra Historia</a>
+
                 <a href="la-boda.html" class="nav-link">La Boda</a>
+
                 <a href="direccion.html" class="nav-link">Dirección</a>
+
             </div>
+
+
 
             <div class="asistencia-centro">
-                <a href="#" class="btn-asistencia">Asistencia</a>
+
+                <a href="asistencia.html" target="_blank" class="btn-asistencia">Asistencia</a>
+
             </div>
+
+
 
             <div class="desktop-menu menu-right">
+
                 <a href="alojamientos.html" class="nav-link">Alojamiento</a>
+
                 <a href="regalos.html" class="nav-link">Regalos</a>
+
                 <a href="contacto.html" class="nav-link">Contacto</a>
+
             </div>
+
+
 
             <button class="menu-toggle" id="menuToggle">
+
                 <span></span><span></span><span></span>
+
             </button>
+
         </div>
+
     </nav>
 
+
+
     <div class="mobile-overlay" id="mobileMenu">
+
         <div class="mobile-nav-content">
+
             <a href="nuestra-historia.html" class="mobile-link">Nuestra Historia</a>
-            <a href="la-boda.html" class="mobile-link">La Boda</a>
+
+            <a href="boda.html" class="mobile-link">La Boda</a>
+
             <a href="direccion.html" class="mobile-link">Dirección</a>
+
             <a href="alojamientos.html" class="mobile-link">Alojamientos</a>
+
             <a href="regalos.html" class="mobile-link">Regalos</a>
+
             <a href="contacto.html" class="mobile-link">Contacto</a>
-            <a href="#" class="mobile-link">Asistencia</a>
+
         </div>
+
     </div>
+
+
 
     <header class="hero">
+
         <div class="capa motivos"></div>
+
         <div class="capa foco-luz"></div>
-        <div class="escenario">
+
+
+
+       <div class="escenario">
+
             <div class="bloque-nombres-sellado">
+
                 <h1 class="nombre andrea">Andrea</h1>
+
                 <span class="ampersand">&</span>
+
                 <h1 class="nombre nacho">Nacho</h1>
+
             </div>
+
+           
+
             <div class="bloque-fecha">
+
                 <p class="fecha-texto">05 . DICIEMBRE . 2026</p>
+
             </div>
+
         </div>
+
     </header>
 
-    <div id="seccion-asistencia-overlay" class="asistencia-full-page">
-        <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
-        
-        <div class="contenedor-formulario-centrado">
-            <div class="contenedor-camino">
-                <div class="titulo-historia">
-                    <h1 class="nombre-script">Asistencia</h1>
-                    <p class="subtitulo-etiqueta">Cuéntanos si podrás venir</p>
-                </div>
 
-                <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda"></form>
-                    
-                    <div class="grupo-input-nombre">
-                        <label>Nombre y Apellidos</label>
-                        <input type="text" name="entry.1691230691" placeholder="Tu nombre completo..." required>
-                    </div>
 
-                    <div class="grupo-input-asistencia">
-                        <label class="titulo">¿Podrás acompañarnos?</label> 
-                        <div class="opciones-radio">
-                            <label><input type="radio" name="entry.1018698544" value="¡Sí, allí estaré!" onclick="gestionarAsistencia(true)" required> ¡Sí!</label>
-                            <label><input type="radio" name="entry.1018698544" value="Lo siento, no puedo" onclick="gestionarAsistencia(false)"> No puedo</label>
-                        </div>
-                    </div>
+   <script>
 
-                    <div id="bloque-confirmado" style="display:none;">
-                        
-                        <div class="grupo-input-nombre">
-                            <label>Tus Alergias o Intolerancias</label>
-                            <input type="text" name="entry.1352496739" placeholder="Ninguna, celíaco, etc...">
-                        </div>
-                        
-                        <div class="grupo-input-asistencia">
-                            <label class="titulo">¿Vienes acompañado/a?</label>
-                            <div class="opciones-radio">
-                                <label><input type="radio" name="entry.1989433917" value="Sí" onclick="verAcompanante(true)"> Sí</label>
-                                <label><input type="radio" name="entry.1989433917" value="No" onclick="verAcompanante(false)" checked> No</label>
-                            </div>
-                        </div>
+    const menuToggle = document.getElementById('menuToggle');
 
-                        <div id="seccion-acomp" style="display:none; border-left: 1px solid rgba(139,0,0,0.2); padding-left: 20px; margin-top: 10px;">
-                            <div class="grupo-input-nombre">
-                                <label>Nombre del Acompañante</label>
-                                <input type="text" name="entry.1065876426" placeholder="Nombre completo...">
-                            </div>
-                            <div class="grupo-input-nombre">
-                                <label>Alergias del Acompañante</label>
-                                <input type="text" name="entry.1219213508" placeholder="Dieta especial...">
-                            </div>
-                        </div>
+    const mobileMenu = document.getElementById('mobileMenu');
 
-                        <div class="grupo-input-asistencia" style="margin-top: 20px;">
-                            <label class="titulo">¿Vienes con niños?</label>
-                            <div class="opciones-radio">
-                                <label><input type="radio" name="entry.1491740924" value="Sí" onclick="verNinos(true)"> Sí</label>
-                                <label><input type="radio" name="entry.1491740924" value="No" onclick="verNinos(false)" checked> No</label>
-                            </div>
-                        </div>
 
-                        <div id="seccion-ninos" style="display:none; border-left: 1px solid rgba(139,0,0,0.2); padding-left: 20px; margin-top: 10px;">
-                            <div class="grupo-input-nombre">
-                                <label>Nombres y edades</label>
-                                <input type="text" name="entry.1458899732" placeholder="Ej: Lucas (5), Ana (8)...">
-                            </div>
-                            <div class="grupo-input-nombre">
-                                <label>Alergias o Menú Niños</label>
-                                <input type="text" name="entry.2096621067" placeholder="Alergias de los peques...">
-                            </div>
-                        </div>
-                    </div> 
 
-                    <button type="submit" class="btn-confirmar-grande">Confirmar Asistencia</button>
-                </form> 
-            </div> 
-        </div> 
+    // Función para abrir/cerrar (la que ya tenías)
+
+    const toggleMenu = () => {
+
+        menuToggle.classList.toggle('active');
+
+        mobileMenu.classList.toggle('active');
+
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+
+    };
+
+
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+
+
+    // NUEVO: Cerrar al tocar el fondo blanco
+
+    mobileMenu.addEventListener('click', (e) => {
+
+        // Si el clic es directamente en el fondo (no en un enlace)
+
+        if (e.target === mobileMenu) {
+
+            toggleMenu();
+
+        }
+
+    });
+    
+
+   </script>
+
+   <script>
+// Función para abrir la pantalla de asistencia
+function abrirAsistencia() {
+    const overlayAsistencia = document.getElementById('seccion-asistencia-overlay');
+    overlayAsistencia.classList.add('active');
+    
+    // Si el menú móvil está abierto, lo cerramos para que no estorbe detrás
+    const mobileOverlay = document.querySelector('.mobile-overlay');
+    if(mobileOverlay) mobileOverlay.classList.remove('active');
+}
+
+// Función para cerrar la pantalla de asistencia
+function cerrarAsistencia() {
+    document.getElementById('seccion-asistencia-overlay').classList.remove('active');
+}
+
+// ESTO BUSCA TUS BOTONES Y LES DA LA ORDEN
+document.addEventListener('DOMContentLoaded', () => {
+    // Buscamos cualquier botón o enlace que contenga la palabra "Asistencia"
+    const botones = document.querySelectorAll('.btn-asistencia, .mobile-link, .nav-link');
+    
+    botones.forEach(boton => {
+        if(boton.textContent.trim().toLowerCase().includes('asistencia')) {
+            boton.addEventListener('click', (e) => {
+                e.preventDefault(); // Evita que la página intente ir a otra URL
+                abrirAsistencia();
+            });
+        }
+    });
+});
+</script>
+
+<div id="seccion-asistencia-overlay" class="asistencia-full-page">
+    <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
+    
+    <div class="contenedor-formulario-centrado">
+    <div class="titulo-historia">
+        <h1 class="nombre-script">Asistencia</h1>
+        <p class="subtitulo-etiqueta">Ayúdanos a organizar los invitados</p>
     </div>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {gracias();}"></iframe>
-
-    <script>
-        var submitted = false;
-        document.getElementById('form-boda').onsubmit = function() { submitted = true; };
-
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        const toggleMenu = () => {
-            menuToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
-        };
-        menuToggle.addEventListener('click', toggleMenu);
-
-        function abrirAsistencia() {
-            document.getElementById('seccion-asistencia-overlay').classList.add('active');
-            if(mobileMenu.classList.contains('active')) toggleMenu();
-            document.body.style.overflow = 'hidden';
-        }
-        function cerrarAsistencia() {
-            document.getElementById('seccion-asistencia-overlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        document.querySelectorAll('.btn-asistencia, .mobile-link, .nav-link').forEach(boton => {
-            if(boton.textContent.trim().toLowerCase().includes('asistencia')) {
-                boton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    abrirAsistencia();
-                });
-            }
-        });
-
-        function gestionarAsistencia(asiste) { document.getElementById('bloque-confirmado').style.display = asiste ? 'block' : 'none'; }
-        function verAcompanante(mostrar) { document.getElementById('seccion-acomp').style.display = mostrar ? 'block' : 'none'; }
-        function verNinos(mostrar) { document.getElementById('seccion-ninos').style.display = mostrar ? 'block' : 'none'; }
+    <form action="https://docs.google.com/forms/d/e/https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/viewform?usp=dialog/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
         
-        function gracias() { 
-            alert("¡Muchas gracias! Confirmación recibida."); 
-            cerrarAsistencia(); 
-            // Reiniciar estado para futuros envíos
-            submitted = false;
-            document.getElementById('form-boda').reset();
-            document.getElementById('bloque-confirmado').style.display = 'none';
-        }
-    </script>
+        <div class="grupo-input-nombre">
+            <label>Nombre y Apellidos</label>
+            <input type="text" name="entry.85827570" placeholder="Tu nombre completo..." required>
+        </div>
+
+        <div class="grupo-input-asistencia">
+            <label class="titulo">¿Podrás acompañarnos?</label> 
+            <div class="opciones-radio">
+                <label><input type="radio" name="entry.1044971269" value="¡Sí, allí estaré!" onclick="gestionarAsistencia(true)" required> ¡Sí, allí estaré!</label>
+                <label><input type="radio" name="entry.1044971269" value="Lo siento, no puedo ir" onclick="gestionarAsistencia(false)"> Lo siento, no puedo ir</label>
+            </div>
+        </div>
+
+        <div id="bloque-confirmado" style="display:none;">
+            
+            <div class="grupo-input-nombre">
+                <label>Tus Alergias o Intolerancia</label>
+                <input type="text" name="entry.750939641" placeholder="Ninguna, celíaco, etc...">
+            </div>
+
+            <div class="grupo-input-asistencia">
+                <label class="titulo">¿Vienes acompañado/a?</label>
+                <div class="opciones-radio">
+                    <label><input type="radio" name="entry.1318985222" value="Sí" onclick="verAcompanante(true)"> Sí</label>
+                    <label><input type="radio" name="entry.1318985222" value="No" onclick="verAcompanante(false)" checked> No</label>
+                </div>
+            </div>
+
+            <div id="bloque-seccion-acomp" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
+                <div class="grupo-input-nombre">
+                    <label>Nombre y Apellidos del acompañante</label>
+                    <input type="text" name="entry.1717837555" id="input-nombre-acomp" placeholder="Nombre del acompañante...">
+                </div>
+                <div class="grupo-input-nombre">
+                    <label>Alergias o menú especial del acompañante</label>
+                    <input type="text" name="entry.645895321" placeholder="Alergias del acompañante...">
+                </div>
+            </div>
+
+            <div class="grupo-input-asistencia">
+                <label class="titulo">¿Venís con niños?</label>
+                <div class="opciones-radio">
+                    <label><input type="radio" name="entry.1546168443" value="Sí" onclick="verNinos(true)"> Sí</label>
+                    <label><input type="radio" name="entry.1546168443" value="No" onclick="verNinos(false)" checked> No</label>
+                </div>
+            </div>
+
+            <div id="bloque-seccion-ninos" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px;">
+                <div class="grupo-input-nombre">
+                    <label>¿Cuántos niños vienen?</label>
+                    <input type="text" name="entry.1965253487" placeholder="Número de niños...">
+                </div>
+                <div class="grupo-input-nombre">
+                    <label>Nombres y edades de los niños</label>
+                    <input type="text" name="entry.1079713451" placeholder="Ej: Lucas (5), Sofía (8)...">
+                </div>
+                <div class="grupo-input-nombre">
+                    <label>Alergias o intolerancias de los niños</label>
+                    <input type="text" name="entry.430685118" placeholder="Alergias de los niños...">
+                </div>
+            </div>
+
+        </div> 
+
+        <button type="submit" class="btn-confirmar-grande">Confirmar Asistencia</button>
+    </form> 
+</div>
+
+<script>
+    function gestionarAsistencia(asiste) {
+        document.getElementById('bloque-confirmado').style.display = asiste ? 'block' : 'none';
+    }
+
+    function verAcompanante(mostrar) {
+        document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
+        document.getElementById('input-nombre-acomp').required = mostrar;
+    }
+
+    function verNinos(mostrar) {
+        document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
+    }
+</script>
+
 </body>
 </html>
