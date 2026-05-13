@@ -210,10 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="contenedor-formulario-centrado">
     <div class="titulo-historia">
         <h1 class="nombre-script">Asistencia</h1>
-        <p class="subtitulo-etiqueta">Ayúdanos a organizar los invitados</p>
+        <p class="subtitulo-etiqueta">Cuéntanos si podrás acompañarnos</p>
     </div>
 
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
+    <form action="https://docs.google.com/forms/d/e/https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/viewform?usp=dialog/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
         
         <div class="grupo-input-nombre">
             <label>Nombre y Apellidos</label>
@@ -277,9 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
 
-            <div class="grupo-input-nombre">
-                <label>Tu número de teléfono</label>
-                <input type="tel" name="entry.112131532" placeholder="Para avisarte de cualquier novedad..." required>
+            <div class="grupo-input-telefono">
+                <label>Un número de contacto</label>
+                <input type="tel" name="telefono" placeholder="Escribe tu móvil..." required>
             </div>
 
             <div class="grupo-input-nombre">
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         </div> 
 
-        <button type="submit" class="btn-confirmar-grande">Confirmar Asistencia</button>
+        <button type="submit" class="btn-confirmar-grande" style="margin-top: 30px;">ENVIAR</button>
     </form> 
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { alert('¡Muchas gracias! Hemos recibido vuestra confirmación.'); cerrarAsistencia(); }"></iframe>
 </div>
