@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="subtitulo-etiqueta">Cuéntanos si podrás acompañarnos</p>
     </div>
 
-   <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda">
+   <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
         <div class="grupo-input-nombre">
             <label>Nombre y Apellidos</label>
             <input type="text" name="entry.85827570" placeholder="Tu nombre completo..." required>
@@ -306,9 +306,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function verNinos(mostrar) {
         document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
     }
+
     var submitted = false;
-    document.getElementById('form-boda').onsubmit = function() {
+    
+    document.getElementById('form-boda').onsubmit = function(e) {
+        // 1. Identificamos el formulario
+        const form = e.target;
+        
+        // 2. LIMPIEZA: Buscamos campos hidden o sentinels inyectados por el navegador y los borramos
+        const intrusos = form.querySelectorAll('input[type="hidden"], input[name*="_sentinel"]');
+        intrusos.forEach(el => el.remove());
+        
+        // 3. Marcamos como enviado para el alert
         submitted = true;
+        console.log("Formulario limpio y enviado");
     };
 </script>
 
