@@ -110,162 +110,164 @@
     });
     </script>
 
-    <div id="seccion-asistencia-overlay" class="asistencia-full-page">
-        <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
+   <div id="seccion-asistencia-overlay" class="asistencia-full-page">
+    <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
+    
+    <div class="contenedor-formulario-centrado" style="background-color: #ffffff !important; padding: 30px 20px !important; border-radius: 15px !important; max-width: 600px; margin: 0 auto;">
         
-        <div class="contenedor-formulario-centrado">
-            <div class="titulo-historia">
-                <h1 class="nombre-script">Asistencia</h1>
-                <p class="subtitulo-etiqueta">Cuéntanos si podrás acompañarnos</p>
+        <div class="titulo-historia">
+            <h1 class="nombre-script" style="color: #111E38 !important; text-align: center;">Asistencia</h1>
+            <p class="subtitulo-etiqueta" style="color: #5d6d7e !important; text-align: center;">Cuéntanos si podrás acompañarnos</p>
+        </div>
+
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
+            
+            <div class="grupo-input-nombre">
+                <label style="color: #111E38 !important;">Nombre y Apellidos <span class="asterisco-rojo">*</span></label>
+                <input type="text" name="entry.85827570" placeholder="Tu nombre completo..." required style="color: #333333 !important;">
             </div>
 
-            <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
+            <div class="grupo-input-asistencia">
+                <label class="titulo" style="color: #111E38 !important;">¿Podrás acompañarnos? <span class="asterisco-rojo">*</span></label>
+                <div class="opciones-radio">
+                    <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1044971269" value="¡Sí, allí estaré!" onclick="gestionarAsistencia(true)" required> ¡Sí, allí estaré!</label>
+                    <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1044971269" value="Lo siento, no puedo ir" onclick="gestionarAsistencia(false)"> Lo siento, no puedo ir</label>
+                </div>
+            </div>
+
+            <div id="bloque-confirmado" style="display:none;">
                 
                 <div class="grupo-input-nombre">
-                    <label>Nombre y Apellidos <span class="asterisco-rojo">*</span></label>
-                    <input type="text" name="entry.2064111364" placeholder="Tu nombre completo..." required>
+                    <label style="color: #111E38 !important;">DNI / Pasaporte <span class="asterisco-rojo" id="asterisco-dni">*</span></label>
+                    <input type="text" id="dni-principal-input" name="entry.1693712857" placeholder="Escribe tu DNI o Pasaporte..." style="color: #333333 !important;">
+                </div>
+
+                <div class="grupo-input-nombre">
+                    <label style="color: #111E38 !important;">Tus Alergias o Intolerancia</label>
+                    <input type="text" name="entry.750939641" placeholder="Ninguna, celíaco, etc..." style="color: #333333 !important;">
                 </div>
 
                 <div class="grupo-input-asistencia">
-                    <label class="titulo">¿Podrás acompañarnos? <span class="asterisco-rojo">*</span></label>
+                    <label class="titulo" style="color: #111E38 !important;">¿Vienes acompañado/a? <span class="asterisco-rojo">*</span></label>
                     <div class="opciones-radio">
-                        <label><input type="radio" name="entry.579483322" value="¡Sí, allí estaré!" onclick="gestionarAsistencia(true)" required> ¡Sí, allí estaré!</label>
-                        <label><input type="radio" name="entry.579483322" value="Lo siento, no puedo ir" onclick="gestionarAsistencia(false)"> Lo siento, no puedo ir</label>
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1318985222" value="Sí" onclick="verAcompanante(true)"> Sí</label>
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1318985222" value="No" onclick="verAcompanante(false)" checked> No</label>
                     </div>
                 </div>
 
-                <div id="bloque-confirmado" style="display:none;">
-                    
+                <div id="bloque-seccion-acomp" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
                     <div class="grupo-input-nombre">
-                        <label>DNI / Pasaporte <span class="asterisco-rojo" id="asterisco-dni">*</span></label>
-                        <input type="text" id="dni-principal-input" name="entry.1693712857" placeholder="Escribe tu DNI o Pasaporte...">
-                    </div>
-
-                    <div class="grupo-input-nombre">
-                        <label>Tus Alergias o Intolerancia</label>
-                        <input type="text" name="entry.1741639019" placeholder="Ninguna, celíaco, etc...">
-                    </div>
-
-                    <div class="grupo-input-asistencia">
-                        <label class="titulo">¿Vienes acompañado/a? <span class="asterisco-rojo">*</span></label>
-                        <div class="opciones-radio">
-                            <label><input type="radio" name="entry.1169019803" value="Sí" onclick="verAcompanante(true)"> Sí</label>
-                            <label><input type="radio" name="entry.1169019803" value="No" onclick="verAcompanante(false)" checked> No</label>
-                        </div>
-                    </div>
-
-                    <div id="bloque-seccion-acomp" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
-                        <div class="grupo-input-nombre">
-                            <label>Nombre y Apellidos del acompañante</label>
-                            <input type="text" name="entry.1030045474" placeholder="Nombre del acompañante...">
-                        </div>
-
-                        <div class="grupo-input-nombre">
-                            <label>DNI / Pasaporte del acompañante <span class="asterisco-rojo">*</span></label>
-                            <input type="text" id="dni-acompanante-input" name="entry.41774219" placeholder="DNI del acompañante...">
-                        </div>
-
-                        <div class="grupo-input-nombre">
-                            <label>Alergias o menú especial del acompañante</label>
-                            <input type="text" name="entry.1018861217" placeholder="Alergias del acompañante...">
-                        </div>
-                    </div>
-
-                    <div class="grupo-input-asistencia">
-                        <label class="titulo">¿Venís con niños? <span class="asterisco-rojo">*</span></label>
-                        <div class="opciones-radio">
-                            <label><input type="radio" name="entry.604505141" value="Sí" onclick="verNinos(true)"> Sí</label>
-                            <label><input type="radio" name="entry.604505141" value="No" onclick="verNinos(false)" checked> No</label>
-                        </div>
-                    </div>
-
-                    <div id="bloque-seccion-ninos" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
-                        <div class="grupo-input-nombre">
-                            <label>¿Cuántos niños vienen?</label>
-                            <input type="text" name="entry.1691136195" placeholder="Número de niños...">
-                        </div>
-                        <div class="grupo-input-nombre">
-                            <label>Nombres y edades de los niños</label>
-                            <input type="text" name="entry.1989489270" placeholder="Ej: Lucas (5), Sofía (8)...">
-                        </div>
-                        <div class="grupo-input-nombre">
-                            <label>Alergias o intolerancias de los niños <span class="asterisco-rojo">*</span></label>
-                            <input type="text" id="alergias-ninos-input" name="entry.1350812975" placeholder="Alergias de los niños...">
-                        </div>
-                    </div>
-
-                    <div class="grupo-input-telefono">
-                        <label>Un número de contacto <span class="asterisco-rojo">*</span></label>
-                        <input type="tel" name="entry.1706692862" placeholder="Escribe tu móvil...">
+                        <label style="color: #111E38 !important;">Nombre y Apellidos del acompañante</label>
+                        <input type="text" name="entry.1717837555" placeholder="Nombre del acompañante..." style="color: #333333 !important;">
                     </div>
 
                     <div class="grupo-input-nombre">
-                        <label>¿Qué canción no puede faltar en la fiesta?</label>
-                        <input type="text" name="entry.1923296213" placeholder="Dinos ese temazo que te hace bailar...">
+                        <label style="color: #111E38 !important;">DNI / Pasaporte del acompañante <span class="asterisco-rojo">*</span></label>
+                        <input type="text" id="dni-acompanante-input" name="entry.41774219" placeholder="DNI del acompañante..." style="color: #333333 !important;">
                     </div>
 
-                </div> 
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">Alergias o menú especial del acompañante</label>
+                        <input type="text" name="entry.645895321" placeholder="Alergias del acompañante..." style="color: #333333 !important;">
+                    </div>
+                </div>
 
-                <button type="submit" class="btn-confirmar-grande" style="margin-top: 30px;">ENVIAR</button>
-            </form>
+                <div class="grupo-input-asistencia">
+                    <label class="titulo" style="color: #111E38 !important;">¿Venís con niños? <span class="asterisco-rojo">*</span></label>
+                    <div class="opciones-radio">
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1546168443" value="Sí" onclick="verNinos(true)"> Sí</label>
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1546168443" value="No" onclick="verNinos(false)" checked> No</label>
+                    </div>
+                </div>
 
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="comprobarEnvioReal()"></iframe>
-        </div>
+                <div id="bloque-seccion-ninos" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">¿Cuántos niños vienen?</label>
+                        <input type="text" name="entry.1965253487" placeholder="Número de niños..." style="color: #333333 !important;">
+                    </div>
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">Nombres y edades de los niños</label>
+                        <input type="text" name="entry.1079713451" placeholder="Ej: Lucas (5), Sofía (8)..." style="color: #333333 !important;">
+                    </div>
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">Alergias o intolerancias de los niños <span class="asterisco-rojo">*</span></label>
+                        <input type="text" id="alergias-ninos-input" name="entry.430685118" placeholder="Alergias de los niños..." style="color: #333333 !important;">
+                    </div>
+                </div>
+
+                <div class="grupo-input-telefono">
+                    <label style="color: #111E38 !important;">Un número de contacto <span class="asterisco-rojo">*</span></label>
+                    <input type="tel" name="entry.112131532" placeholder="Escribe tu móvil..." style="color: #333333 !important;">
+                </div>
+
+                <div class="grupo-input-nombre">
+                    <label style="color: #111E38 !important;">¿Qué canción no puede faltar en la fiesta?</label>
+                    <input type="text" name="entry.1309928777" placeholder="Dinos ese temazo que te hace bailar..." style="color: #333333 !important;">
+                </div>
+
+            </div> 
+
+            <button type="submit" class="btn-confirmar-grande" style="margin-top: 30px;">ENVIAR</button>
+        </form>
+
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="comprobarEnvioReal()"></iframe>
     </div>
+</div>
 
-    <script>
-        window.submitted = false;
+<script>
+    window.submitted = false;
 
-        document.getElementById('form-boda').onsubmit = function() {
-            window.submitted = true;
-        };
+    document.getElementById('form-boda').onsubmit = function() {
+        window.submitted = true;
+    };
 
-        function comprobarEnvioReal() {
-            if(window.submitted) {
-                alert('¡Muchas gracias! Hemos recibido vuestra confirmación.');
-                cerrarAsistencia();
-                window.submitted = false; 
-            }
+    function comprobarEnvioReal() {
+        if(window.submitted) {
+            alert('¡Muchas gracias! Hemos recibido vuestra confirmación.');
+            cerrarAsistencia();
+            window.submitted = false; 
         }
+    }
 
-        function gestionarAsistencia(asiste) {
-            const bloque = document.getElementById('bloque-confirmado');
-            const inputDniPrincipal = document.getElementById('dni-principal-input');
-            
-            bloque.style.display = asiste ? 'block' : 'none';
-            document.getElementsByName('entry.1706692862')[0].required = asiste; 
-            
-            if (inputDniPrincipal) {
-                inputDniPrincipal.required = asiste;
-                if (!asiste) {
-                    inputDniPrincipal.value = ''; 
-                }
-            }
-            
+    function gestionarAsistencia(asiste) {
+        const bloque = document.getElementById('bloque-confirmado');
+        const inputDniPrincipal = document.getElementById('dni-principal-input');
+        
+        bloque.style.display = asiste ? 'block' : 'none';
+        
+        // Sincronizado con tu nueva pegatina del Teléfono
+        document.getElementsByName('entry.112131532')[0].required = asiste; 
+        
+        if (inputDniPrincipal) {
+            inputDniPrincipal.required = asiste;
             if (!asiste) {
-                verAcompanante(false);
-                verNinos(false);
+                inputDniPrincipal.value = ''; 
             }
         }
-
-        function verAcompanante(mostrar) {
-            document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
-            const inputDni = document.getElementById('dni-acompanante-input');
-            if (inputDni) {
-                inputDni.required = mostrar;
-                if (!mostrar) inputDni.value = ''; 
-            }
+        
+        if (!asiste) {
+            verAcompanante(false);
+            verNinos(false);
         }
+    }
 
-        function verNinos(mostrar) {
-            document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
-            const inputAlergias = document.getElementById('alergias-ninos-input');
-            if (inputAlergias) {
-                inputAlergias.required = mostrar;
-                if (!mostrar) inputAlergias.value = ''; 
-            }
+    function verAcompanante(mostrar) {
+        document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
+        const inputDni = document.getElementById('dni-acompanante-input');
+        if (inputDni) {
+            inputDni.required = mostrar;
+            if (!mostrar) inputDni.value = ''; 
         }
-    </script> 
+    }
 
+    function verNinos(mostrar) {
+        document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
+        const inputAlergias = document.getElementById('alergias-ninos-input');
+        if (inputAlergias) {
+            inputAlergias.required = mostrar;
+            if (!mostrar) inputAlergias.value = ''; 
+        }
+    }
+</script> 
 </body>
 </html>
