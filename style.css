@@ -154,8 +154,10 @@ body, html {
     position: relative;
     width: 100%;
     /* Reservamos el espacio de la pantalla menos la navbar */
-    min-height: calc(100vh - 80px); 
-    margin-top: 80px;
+    height: 100vh !important; 
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     display: flex;
     flex-direction: column; /* Cambiamos a column para que el cuestionario baje */
     justify-content: center;
@@ -221,6 +223,8 @@ body, html {
 
     height: 100%;
 
+    padding-top: 80px !important;
+
 }
 
 
@@ -245,7 +249,7 @@ body, html {
 
     font-family: 'Pinyon Script', cursive;
 
-    font-size: clamp(100px, 25vw, 150px);
+    font-size: clamp(90px, 14vh, 160px);
     
     font-display: block; 
     
@@ -257,7 +261,7 @@ body, html {
 
     font-weight: 400 !important;
 
-    line-height: 0.8;
+    line-height: 1.0 !important;
 
     color: #8B0000;
 
@@ -275,34 +279,21 @@ body, html {
 
 
 .ampersand {
-
     font-family: 'Pinyon Script', cursive;
-   
-    font-size: clamp(70px, 18vw, 100px);
-    
+    font-size: clamp(50px, 8vh, 80px); /* <--- ¡CORREGIDO! Añadida la palabra 'clamp' que faltaba */
     color: #8B0000;
-   
-    opacity: 0; /* Mantengo tu opacidad baja original para que sea sutil */
-   
-    margin: 50px 0 !important;
-    
+    opacity: 0; 
+    margin: 10px 0 !important;
     line-height: 0.6 !important;
-
     animation: aparecerSuave 1s ease-in forwards;
-    /* IGUALAMOS EL RETRASO AQUÍ */
-   
     animation-delay: 0.7s;
-}
+} /* <--- Asegúrate de que esta llave cierra el bloque */
 
 
 
 .nacho { 
-    margin-top: 20px !important; 
-
-    transform: translateY(10px) !important; 
+    margin-top: 5px !important; 
 }
-
-
 
 /* --- 5. BLOQUE FECHA --- */
 
@@ -318,12 +309,14 @@ body, html {
 
     width: 100%;
 
-    margin-top: 2vh;
+    margin-top: 35px !important;
 
     z-index: 15;
+
     opacity: 0; /* Empezamos invisible */
    
     animation: aparecerSuave 1s ease-in forwards; /* Aparece con elegancia */
+
     animation-delay: 0.8s; /* Un pelín de retraso para un efecto más orgánico */;
 
 }
@@ -520,8 +513,10 @@ body, html {
        position: relative;
         width: 100%;
         /* Reservamos el espacio de la pantalla menos la navbar */
-        min-height: calc(100vh - 80px); 
-        margin-top: 80px;
+        height: 100vh !important; 
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
         display: flex;
         flex-direction: column; /* Cambiamos a column para que el cuestionario baje */
         justify-content: center;
@@ -531,31 +526,11 @@ body, html {
 
 
 
-    .escenario { gap: 0; }
+    .escenario { gap: 0; padding-top: 80px !important; }
 
 
-
-    .nombre {
-
-        font-size: clamp(80px, 16vh, 190px) !important;
-
-        line-height: 1.1 !important; /* Evita que las letras se pisen al crecer */
-
-    }
-
-
-
-    /* Separaciones fijas para que no se junten al redimensionar */
-
-    .andrea { margin-bottom: 15px !important; }
-
-   
 
     .ampersand {
-
-        font-size: clamp(40px, 9vh, 90px);
-
-        margin: 15px 0 !important;
 
         line-height: 1;
 
@@ -565,24 +540,11 @@ body, html {
 
     .nacho {
 
-        margin-top: 15px !important;
-
         transform: translateY(0) !important;
 
     }
 
-
-
-    .bloque-fecha {
-
-        margin-top: 50px !important;
-
-    }
-
 }
-
-
-
 
 
 
@@ -1529,9 +1491,9 @@ para que el adorno se coloque debajo de los enlaces */
 
 
 
-/* ==========================================
-    ESTILO BASE: MINIMALISTA Y CERCANO
-   ========================================== */
+/* ==========================================================================
+    ESTILO BASE: EDITORIAL, LIMPIO Y PREMIUM
+   ========================================================================== */
 
 .contenedor-formulario-centrado {
     width: 100%;
@@ -1541,26 +1503,25 @@ para que el adorno se coloque debajo de los enlaces */
 
 /* Ajuste específico para el título principal */
 .formulario-boda h1, 
-.titulo-asistencia { /* Usa la clase que tenga tu título en el HTML */
+.titulo-asistencia { 
     margin-top: 0 !important;
+    color: #111E38 !important; /* Azul Noche */
     padding-top: 0 !important;
 }
 
-/* Subtítulo bajo los nombres (Cero presión) */
+/* Subtítulo bajo los nombres (Estilo Base Ordenador) */
 .subtitulo-etiqueta {
     font-family: 'Playfair Display', serif !important;
-    font-size: 18px !important;
-    color: #5d6d7e !important;
+    font-size: 15px !important;
+    color: #5d6d7e !important; /* Gris seda */
     font-style: italic;
     text-align: center;
     display: block;
-    
-    /* --- EL CAMBIO CLAVE --- */
-    margin-top: -20px !important;  /* Margen negativo para subirlo */
-    margin-bottom: 80px !important; /* Espacio con lo que viene debajo */
+    margin-top: -20px !important;  
+    margin-bottom: 80px !important; 
 }
 
-/* 1. AMPLIACIÓN DE LÍNEA: Cambiado max-width de 400 a 600px */
+/* Líneas de entrada de texto */
 .formulario-boda input[type="text"],
 .formulario-boda input[type="tel"] {
     font-family: 'Playfair Display', serif !important;
@@ -1570,10 +1531,10 @@ para que el adorno se coloque debajo de los enlaces */
     border-bottom: 1px solid rgba(139, 0, 0, 0.2) !important;
     background: transparent !important;
     text-align: center;
-    padding: 12px 0 !important; /* Un poco más de aire sobre la línea */
+    padding: 12px 0 !important; 
     outline: none !important;
     width: 100% !important;
-    max-width: 600px !important; /* <--- LÍNEA MÁS LARGA PARA ORDENADOR */
+    max-width: 600px !important; 
     margin: 0 auto;
     display: block;
     transition: border-bottom 0.3s ease;
@@ -1592,24 +1553,25 @@ para que el adorno se coloque debajo de los enlaces */
     align-items: center;
     text-align: center;
     gap: 12px;
-    margin-bottom: 60px !important; /* Más espacio entre bloques para que respire */
+    margin-bottom: 60px !important; 
     padding: 0 10px;
 }
 
-/* 2. JERARQUÍA DE TEXTO: Label principal un pelín más grande (21px) */
+/* Etiquetas de las preguntas base */
 .grupo-input-nombre label,
 .grupo-input-telefono label,
 .grupo-input-asistencia label.titulo {
     font-family: 'Playfair Display', serif !important;
-    font-size: 21px !important; /* <--- MÁS PRESENCIA */
-    color: #8B0000 !important;
+    font-size: 17px !important; 
+    font-style: italic !important; 
+    color: #111E38 !important; 
     text-transform: none !important;
     font-weight: 400 !important;
-    letter-spacing: 0px !important;
-    margin-bottom: 8px !important;
+    letter-spacing: 0.5px !important; 
+    margin-bottom: 12px !important;
 }
 
-/* --- OPCIONES SÍ / NO --- */
+/* --- OPCIONES SÍ / NO (Ordenador en Línea Horizontal) --- */
 .opciones-radio {
     display: flex;
     justify-content: center;
@@ -1629,26 +1591,27 @@ para que el adorno se coloque debajo de los enlaces */
     gap: 10px;
 }
 
-/* 3. ADIÓS AL AZUL: Círculos de selección en color granate */
+/* Círculos de selección */
 .opciones-radio input[type="radio"] {
-    accent-color: #8B0000 !important; /* Cambia el color del círculo del navegador */
+    accent-color: #111E38 !important; 
     width: 18px;
     height: 18px;
     cursor: pointer;
 }
 
-/* --- BOTÓN DE ENVIAR --- */
+/* --- BOTÓN DE ENVIAR BASE (Ordenador con texto Blanco corregido) --- */
 .btn-confirmar-grande {
     display: block !important;
     margin: 40px auto 80px !important;
     font-family: 'Playfair Display', serif !important;
-    text-transform: none !important;
-    font-size: 19px !important;
-    font-weight: 500 !important;
-    background-color: #8B0000 !important;
-    color: #ffffff !important;
-    border-radius: 4px !important;
-    padding: 16px 50px !important;
+    text-transform: uppercase !important;
+    font-size: 13px !important; 
+    letter-spacing: 2px !important; 
+    font-weight: 400 !important;
+    background-color: #111E38 !important; 
+    color: #ffffff !important; 
+    border-radius: 2px !important; 
+    padding: 14px 45px !important;
     width: fit-content !important;
     min-width: 240px !important;
     border: none !important;
@@ -1667,36 +1630,6 @@ para que el adorno se coloque debajo de los enlaces */
     text-align: center;
 }
 
-/* ==========================================
-    ESTILO PARA MÓVIL (Mantenemos la línea al 100%)
-   ========================================== */
-@media (max-width: 767px) {
-
-    .subtitulo-etiqueta {
-        font-size: 16px !important;
-        margin-top: -20px !important;  /* Margen negativo para subirlo */
-        margin-bottom: 80px !important; /* Espacio con lo que viene debajo */ 
-        
-    }
-    
-    .formulario-boda input[type="text"],
-    .formulario-boda input[type="tel"] {
-        font-size: 17px !important; /* Subido de 15 a 17 para legibilidad */
-        max-width: 100% !important;
-    }
-    .contenedor-formulario-centrado {
-        background-color: rgba(255, 255, 255, 0.4) !important; /* Transparencia muy leve */
-        padding: 20px 15px !important;
-        border-radius: 0; /* En móvil, los bordes rectos suelen aprovechar mejor el espacio */
-        box-shadow: none !important; /* Quita la sombra para que no parezca un "pegote" */
-    }
-    
-    .grupo-input-nombre label,
-    .grupo-input-telefono label,
-    .grupo-input-asistencia label.titulo {
-        font-size: 19px !important; /* Un poco más pequeño en móvil */
-    }
-}
 
 /* ==========================================
     AJUSTES PARA ORDENADOR (Desktop)
@@ -1706,25 +1639,135 @@ para que el adorno se coloque debajo de los enlaces */
         max-width: 1000px;
         margin: 20px auto; 
         padding: 40px 100px;
-        
-        /* 1. FONDO: Cambia 0.5 o 0.6 por 0.9 o 1 para que sea más sólido */
         background-color: rgba(255, 255, 255, 0.95) !important; 
-        
         border-radius: 20px;
-        
-        /* 2. SOMBRA: Aumenta el último número (opacidad) de 0.05 a 0.15 o 0.2 */
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
-        
-        /* 3. BORDE OPCIONAL: Si aún se pierde, añade una línea muy fina */
         border: 1px solid rgba(139, 0, 0, 0.1) !important; 
-        
         backdrop-filter: blur(10px);
- 
     }
 
     .subtitulo-etiqueta {
         font-size: 18px !important;
-        margin-top: -20px !important;  /* Margen negativo para subirlo */
-        margin-bottom: 80px !important; /* Espacio con lo que viene debajo */ 
+        margin-top: -20px !important;  
+        margin-bottom: 80px !important; 
+    }
+
+    /* Escalado tipográfico premium para el botón en ordenador */
+    .btn-confirmar-grande {
+        font-size: 15px !important;      
+        letter-spacing: 3px !important; 
+        padding: 16px 60px !important;  
+    }
+}
+
+
+/* ==========================================
+    ESTILO PARA MÓVIL (Compacto y Corregido)
+   ========================================== */
+/* ==========================================
+    ESTILO PARA MÓVIL (Compacto y Corregido)
+   ========================================== */
+@media (max-width: 767px) {
+
+    /* 1. Forzamos a la pantalla completa a tirar de todo hacia el techo */
+    .asistencia-full-page {
+        padding-top: 80px !important; 
+        overflow-y: auto !important;
+    }
+    
+    /* Nueva regla de seguridad para móviles: */
+    .asistencia-full-page.active {
+        display: block !important;
+    }
+    /* 2. AJUSTE DE PRECISIÓN: Espaciado elegante de la cabecera en smartphones */
+    .subtitulo-etiqueta {
+        font-size: 15px !important;   
+        margin-top: -8px !important;    /* Deja respirar los rasgos caligráficos de "Asistencia" */
+        margin-bottom: 35px !important; /* Distancia armónica con la primera pregunta */
+    }
+    
+    /* 3. Contenedor del formulario */
+    .contenedor-formulario-centrado {
+        background-color: rgba(255, 255, 255, 0.4) !important; 
+        padding: 0px 15px !important; 
+        margin-top: 0 !important;
+        border-radius: 0; 
+        box-shadow: none !important; 
+    }
+
+    /* 4. Bloque de títulos */
+    .titulo-historia {
+        margin-top: 0 !important;
+        margin-bottom: 45px !important; 
+    }
+
+    /* 5. El botón de enviar optimizado para móvil (Texto Blanco Garantizado) */
+    .btn-confirmar-grande {
+        min-width: 0px !important;      
+        width: 150px !important;       
+        padding: 12px 15px !important;  
+        font-size: 13px !important;    
+        letter-spacing: 2px !important; 
+        text-transform: uppercase !important;
+        font-weight: 400 !important;
+        background-color: #111E38 !important; /* Azul noche */
+        color: #ffffff !important; 
+        margin: 30px auto 40px auto !important; 
+        display: block !important;
+        border-radius: 2px !important; 
+    }
+
+    /* 6. Margen de la primera pregunta */
+    .formulario-boda .grupo-input-nombre:first-of-type {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .formulario-boda {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Inputs recogidos en móvil */
+    .formulario-boda input[type="text"],
+    .formulario-boda input[type="tel"] {
+        font-size: 16px !important; 
+        max-width: 260px !important; 
+        border-bottom: 1px solid rgba(17, 30, 56, 0.2) !important; 
+    }
+    
+   /* --- BLOQUES DE PREGUNTA --- */
+    .grupo-input-nombre,
+    .grupo-input-telefono,
+    .grupo-input-asistencia {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+        margin-bottom: 60px !important; 
+        padding: 0 10px !important;
+    }
+
+    /* 7. Rediseño Vertical y Simétrico para los botones de Sí / No en móvil */
+    .opciones-radio {
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
+        gap: 16px !important;              
+        margin: 15px auto 0 auto !important;
+        width: fit-content !important;     
+    }
+
+    .opciones-radio label {
+        font-family: 'Playfair Display', serif !important;
+        font-size: 16px !important;
+        font-style: italic !important;
+        color: #7f8c8d !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;              
+        cursor: pointer !important;
+        text-align: left !important;
     }
 }
