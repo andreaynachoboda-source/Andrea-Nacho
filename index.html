@@ -113,22 +113,20 @@
    <div id="seccion-asistencia-overlay" class="asistencia-full-page">
     <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
     
+   <div id="seccion-asistencia-overlay" class="asistencia-full-page">
+    <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
+    
     <div class="contenedor-formulario-centrado">
         <div class="titulo-historia">
             <h1 class="nombre-script">Asistencia</h1>
             <p class="subtitulo-etiqueta">Cuéntanos si podrás acompañarnos</p>
         </div>
 
-        <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponses" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
             
             <div class="grupo-input-nombre">
                 <label>Nombre y Apellidos <span class="asterisco-rojo">*</span></label>
                 <input type="text" name="entry.2064111364" placeholder="Tu nombre completo..." required>
-            </div>
-
-            <div class="grupo-input-nombre">
-                <label>DNI / Pasaporte <span class="asterisco-rojo">*</span></label>
-                <input type="text" name="entry.1693712857" placeholder="Escribe tu DNI o Pasaporte..." required>
             </div>
 
             <div class="grupo-input-asistencia">
@@ -141,6 +139,11 @@
 
             <div id="bloque-confirmado" style="display:none;">
                 
+                <div class="grupo-input-nombre">
+                    <label>DNI / Pasaporte <span class="asterisco-rojo" id="asterisco-dni">*</span></label>
+                    <input type="text" id="dni-principal-input" name="entry.1693712857" placeholder="Escribe tu DNI o Pasaporte...">
+                </div>
+
                 <div class="grupo-input-nombre">
                     <label>Tus Alergias o Intolerancia</label>
                     <input type="text" name="entry.1741639019" placeholder="Ninguna, celíaco, etc...">
@@ -162,7 +165,7 @@
 
                     <div class="grupo-input-nombre">
                         <label>DNI / Pasaporte del acompañante <span class="asterisco-rojo">*</span></label>
-                        <input type="text" name="entry.41774219" placeholder="DNI del acompañante...">
+                        <input type="text" id="dni-acompanante-input" name="entry.41774219" placeholder="DNI del acompañante...">
                     </div>
 
                     <div class="grupo-input-nombre">
@@ -190,7 +193,7 @@
                     </div>
                     <div class="grupo-input-nombre">
                         <label>Alergias o intolerancias de los niños <span class="asterisco-rojo">*</span></label>
-                        <input type="text" name="entry.1350812975" placeholder="Alergias de los niños...">
+                        <input type="text" id="alergias-ninos-input" name="entry.1350812975" placeholder="Alergias de los niños...">
                     </div>
                 </div>
 
@@ -214,7 +217,6 @@
 </div>
 
 <script>
-    // CORREGIDO: Forzamos la variable a nivel de ventana global (Window) para que no falle en móviles
     window.submitted = false;
 
     document.getElementById('form-boda').onsubmit = function() {
@@ -225,14 +227,27 @@
         if(window.submitted) {
             alert('¡Muchas gracias! Hemos recibido vuestra confirmación.');
             cerrarAsistencia();
-            window.submitted = false; // Reset de seguridad
+            window.submitted = false; 
         }
     }
 
     function gestionarAsistencia(asiste) {
         const bloque = document.getElementById('bloque-confirmado');
+        const inputDniPrincipal = document.getElementById('dni-principal-input');
+        
+        // Mostrar u ocultar el bloque de preguntas adicionales
         bloque.style.display = asiste ? 'block' : 'none';
+        
+        // El teléfono solo es obligatorio si asiste
         document.getElementsByName('entry.1706692862')[0].required = asiste; 
+        
+        // MODIFICADO: El DNI principal solo es requerido si asiste. Si no asiste, se limpia.
+        if (inputDniPrincipal) {
+            inputDniPrincipal.required = asiste;
+            if (!asiste) {
+                inputDniPrincipal.value = ''; 
+            }
+        }
         
         if (!asiste) {
             verAcompanante(false);
@@ -242,14 +257,25 @@
 
     function verAcompanante(mostrar) {
         document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
-        document.getElementsByName('entry.41774219')[0].required = mostrar; 
+        const inputDni = document.getElementById('dni-acompanante-input');
+        if (inputDni) {
+            inputDni.required = mostrar;
+            if (!mostrar) inputDni.value = ''; 
+        }
     }
 
     function verNinos(mostrar) {
         document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
-        document.getElementsByName('entry.1350812975')[0].required = mostrar;
+        const inputAlergias = document.getElementById('alergias-ninos-input');
+        if (inputAlergias) {
+            inputAlergias.required = mostrar;
+            if (!mostrar) inputAlergias.value = ''; 
+        }
     }
 </script> 
+
+</body>
+</html>
 
 </body>
 </html>
