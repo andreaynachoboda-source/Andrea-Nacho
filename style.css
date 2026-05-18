@@ -1502,10 +1502,11 @@ para que el adorno se coloque debajo de los enlaces */
 }
 
 /* Ajuste específico para el título principal */
+/* Ajuste específico para el título principal */
 .formulario-boda h1, 
 .titulo-asistencia { 
     margin-top: 0 !important;
-    color: #111E38 !important; /* Azul Noche */
+    color: #8B0000 !important; /* CAMBIADO A: Burdeos */
     padding-top: 0 !important;
 }
 
@@ -1639,6 +1640,7 @@ para que el adorno se coloque debajo de los enlaces */
         max-width: 1000px;
         margin: 20px auto; 
         padding: 40px 100px;
+        /* Esto dibuja la tarjeta blanca en ordenadores */
         background-color: rgba(255, 255, 255, 0.95) !important; 
         border-radius: 20px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
@@ -1661,9 +1663,7 @@ para que el adorno se coloque debajo de los enlaces */
 }
 
 
-/* ==========================================
-    ESTILO PARA MÓVIL (Compacto y Corregido)
-   ========================================== */
+
 /* ==========================================
     ESTILO PARA MÓVIL (Compacto y Corregido)
    ========================================== */
@@ -1686,13 +1686,16 @@ para que el adorno se coloque debajo de los enlaces */
         margin-bottom: 35px !important; /* Distancia armónica con la primera pregunta */
     }
     
-    /* 3. Contenedor del formulario */
+    /* 3. Contenedor del formulario en smartphones */
     .contenedor-formulario-centrado {
-        background-color: rgba(255, 255, 255, 0.4) !important; 
+        /* Al hacerlo transparente y quitar la sombra, el recuadro desaparece en el móvil */
+        background-color: transparent !important; 
+        background: transparent !important;
+        box-shadow: none !important; 
+        border: none !important;
         padding: 0px 15px !important; 
         margin-top: 0 !important;
-        border-radius: 0; 
-        box-shadow: none !important; 
+        border-radius: 0 !important; 
     }
 
     /* 4. Bloque de títulos */
