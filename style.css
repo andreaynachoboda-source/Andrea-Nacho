@@ -1,760 +1,555 @@
-/* --- 1. CONFIGURACIÓN BASE --- */
-
+/* #region 1. CONFIGURACIÓN BASE Y ESTILOS GLOBALES */
 * {
-
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
-
 }
 
-
-
-body, html {
-
+html, body {
     width: 100%;
-
     height: 100%;
-
     overflow-x: hidden;
-
-    background-image: url('img/TesturaAcuarela.png');
-
-    background-color: #fdfdfd;
-
+    background: #fdfdfd url('img/TesturaAcuarela.png') no-repeat center/cover fixed;
     background-blend-mode: multiply;
-
-    background-attachment: fixed;
-
-    background-size: cover;
-
-    background-position: center;
-
     -webkit-font-smoothing: antialiased;
-
+    -moz-osx-font-smoothing: grayscale;
 }
+/* #endregion */
 
 
-
-/* --- 2. NAVBAR --- */
-
+/* #region 2. NAVBAR Y MENÚS (ESCRITORIO Y ADAPTACIONES MÓVILES) */
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+    height: 80px;
     z-index: 2000;
     background-color: rgba(253, 253, 253, 0.85);
     backdrop-filter: blur(12px);
-    padding: 0; /* Quitamos padding para controlar la altura con min-height */
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     justify-content: center;
-    height: 80px; /* Altura fija unificada */
-    min-height: 80px;
     border-bottom: 1px solid rgba(139, 0, 0, 0.08);
 }
 
-
-
 .nav-container {
-
     width: 92%;
-
     max-width: 1300px;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
 }
-
-
 
 .desktop-menu {
-
     display: flex;
-
-    gap: clamp(15px, 2.5vw, 45px);
-
-    flex: 1;
-
     align-items: center;
-
+    gap: clamp(15px, 2.5vw, 45px);
+    flex: 1;
 }
 
-
-
-.menu-right { justify-content: flex-end; }
-
-
+.menu-right { 
+    justify-content: flex-end; 
+}
 
 .nav-link {
-    text-decoration: none;
     font-family: 'Playfair Display', serif;
-    /* Subimos el grosor a 700 (Bold) para que destaque */
-    font-weight: 700; 
-    /* Subimos un punto el tamaño */
     font-size: 13px; 
-    /* Oscurecemos un poco el gris para que no se pierda con el fondo */
-    color: #444b52; 
+    font-weight: 700; 
+    color: #444b52;
+    text-decoration: none;
     text-transform: uppercase;
-    /* Damos un poco más de aire entre letras */
     letter-spacing: 3px;
-    color: #444b52; 
-    transition: 0.3s;
+    transition: color 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
+.nav-link:hover { 
+    color: #8B0000; 
+}
+
+/* Adaptación de barra para PC, Tablet y Paisaje */
+@media (min-width: 1150px), (min-width: 768px) and (orientation: landscape) {
+    .menu-toggle { 
+        display: none !important; 
+    }
+
+    .desktop-menu { 
+        display: flex !important; 
+        gap: clamp(25px, 4vw, 60px); 
+        flex: 1;
+        align-items: center;
+    }
+
+    .mobile-overlay { 
+        display: none !important; 
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 80px;
+        z-index: 2000;
+        background-color: rgba(253, 253, 253, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid rgba(139, 0, 0, 0.08);
+    }
+
+    .menu-left {
+        justify-content: flex-start;
+        padding-right: 50px;
+    }
+
+    .menu-right {
+        justify-content: flex-end;
+        padding-left: 50px;
+    }
+
+    .asistencia-centro {
+        display: flex;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+}
+
+/* Comportamientos específicos de la barra en móviles */
+@media (max-width: 1149px) {
+    .desktop-menu { 
+        display: none !important; 
+    }
+
+    .nav-container {
+        width: 95%;
+        max-width: 1400px;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center;
+        position: relative;
+        padding: 0 20px;
+    }
+
+    .pagina-principal .asistencia-centro {
+        display: flex;
+        flex: 1;
+        justify-content: flex-start;
+        order: 1;
+    }
+
+    .pagina-interna .asistencia-centro {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        order: 2;
+    }
+
+    .pagina-interna .mobile-only-icon {
+        display: flex !important;
+        order: 1;
+        width: 35px;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 35px;
+        height: 18px;
+        background: none;
+        border: none;
+        z-index: 3000;
+        order: 3; 
+    }
+
+    .menu-toggle span { 
+        width: 100%; 
+        height: 2px; 
+        background-color: #8B0000; 
+    }
+
+    .asistencia-centro {
+        order: 2;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .mobile-home-icon {
+        display: flex;
+        order: 1;
+        width: 35px;
+        justify-content: flex-end;
+    }
+}
+
+/* Primer salto adaptativo para orientaciones verticales */
+@media (max-width: 1149px) and (orientation: portrait), (max-width: 1024px) {
+    .nav-container {
+        padding: 0 5%;
+    }
+
+    .menu-toggle {
+        width: 30px;
+        order: 2;
+    }
+
+    .menu-toggle:hover span {
+        background-color: #7f8c8d !important;
+    }
+
+    .menu-toggle span { 
+        background-color: #8B0000;
+        transition: background-color 0.3s ease;
+    }
+}
+/* #endregion */
 
 
-.nav-link:hover { color: #8B0000; }
+/* #region 3. MENÚ OVERLAY DESPLEGABLE (MÓVIL) */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.98) url('img/TesturaAcuarela.png');
+    z-index: 2500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-overlay::after {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 80px;
+    background: url('img/Hojas_pino.png') center/contain no-repeat;
+    filter: sepia(100%) saturate(600%) hue-rotate(-60deg) brightness(0.35) contrast(1.1);
+    opacity: 0.7;
+    margin-top: 40px;
+    transform: rotate(180deg);
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.mobile-link {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px !important;
+    color: #5d6d7e;
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.mobile-link:hover,
+.mobile-link:active {
+    color: #8B0000 !important;
+    letter-spacing: 7px;
+}
+
+.mobile-link:active {
+    transition: color 0.1s, letter-spacing 0.1s;
+}
+/* #endregion */
 
 
-
-/* --- BOTÓN ASISTENCIA --- */
-
-/* --- BOTÓN ASISTENCIA (FIJO PARA EVITAR SALTOS) --- */
+/* #region 4. BOTONES, ICONOS Y EFECTOS TÁCTILES GLOBALES */
 .btn-asistencia {
     display: inline-block;
     text-decoration: none;
     font-family: 'Playfair Display', serif;
-    font-size: 14px; /* Misma escala que el menú */
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    background-color: rgba(139, 0, 0, 0.03) !important; /* Un toque de color muy leve de fondo */
+    background-color: rgba(139, 0, 0, 0.03) !important;
     color: #8B0000 !important;
     padding: 14px 35px !important; 
     border-radius: 50px;
     border: 2px solid rgba(139, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
-
-
 
 .btn-asistencia:hover {
-
-    background-color:#8B0000 !important; /* Burdeos */
-
+    background-color: #8B0000 !important;
     color: #ffffff !important;
-
     border-color: #800020 !important;
-
 }
 
+.btn-asistencia:active {
+    background-color: #800020 !important;
+    color: #ffffff !important;
+    transform: scale(0.95);
+}
 
+.home-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(139, 0, 0, 0.1);
+    padding-bottom: 15px;
+}
 
-/* --- 4. HERO & NOMBRES --- */
+.home-icon:active {
+    transform: scale(0.95);
+}
 
-.hero {
-
-    position: relative;
+.home-icon-superior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    text-decoration: none;
     width: 100%;
-    /* Reservamos el espacio de la pantalla menos la navbar */
-    height: 100vh !important; 
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.home-icon-superior:active {
+    transform: scale(0.9);
+}
+
+.home-icon-superior svg {
+    stroke: #8B0000;
+    stroke-width: 1.1px;
+}
+
+.home-nav-icon {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.mobile-home-icon {
+    display: none;
+}
+
+@media (min-width: 1150px) {
+    .nav-container {
+        display: grid !important;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .home-nav-icon {
+        position: absolute;
+        left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .desktop-menu {
+        display: flex !important;
+    }
+
+    .asistencia-centro {
+        grid-column: 2;
+        justify-content: center;
+    }
+}
+/* #endregion */
+
+
+/* #region 5. SECCIÓN: HERO & NOMBRES PRINCIPALES */
+.hero {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
+    width: 100%;
+    height: 100vh !important; 
     display: flex;
-    flex-direction: column; /* Cambiamos a column para que el cuestionario baje */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-
-
 .capa {
-
     position: absolute;
-
-    width: 100%;
-
-    height: 100%;
-
     top: 0;
-
     left: 0;
-
+    width: 100%;
+    height: 100%;
 }
-
-
 
 .motivos {
-
     background: url('img/Motivo_adornos.png') center/contain repeat;
-
     opacity: 0.40;
-
     z-index: 2;
-
 }
-
-
 
 .foco-luz {
-
     background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%);
-
     z-index: 3;
-
 }
-
-
 
 .escenario {
-
     position: relative;
-
     z-index: 10;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     width: 100%;
-
     height: 100%;
-
     padding-top: 80px !important;
-
 }
-
-
 
 .bloque-nombres-sellado {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     flex: 0 1 auto;
-
 }
-
-
 
 .nombre {
-
     font-family: 'Pinyon Script', cursive;
-
     font-size: clamp(90px, 14vh, 160px);
-    
-    font-display: block; 
-    
-    opacity: 0; /* Empezamos invisible */
-   
-    animation: aparecerSuave 1s ease-in forwards; /* Aparece con elegancia */
-
-    animation-delay: 0.7s; /* Un pelín de retraso para un efecto más orgánico */;
-
     font-weight: 400 !important;
-
     line-height: 1.0 !important;
-
     color: #8B0000;
-
     text-align: center;
-
     width: 100%;
-    
     margin-bottom: 5px !important;
+    font-display: block; 
+    opacity: 0;
+    animation: aparecerSuave 1s ease-in forwards;
+    animation-delay: 0.7s;
 }
 
-
-
-.andrea { margin-bottom: 0px !important; }
-
-
+.andrea { 
+    margin-bottom: 0px !important; 
+}
 
 .ampersand {
     font-family: 'Pinyon Script', cursive;
-    font-size: clamp(50px, 8vh, 80px); /* <--- ¡CORREGIDO! Añadida la palabra 'clamp' que faltaba */
+    font-size: clamp(50px, 8vh, 80px);
     color: #8B0000;
-    opacity: 0; 
     margin: 10px 0 !important;
     line-height: 0.6 !important;
+    opacity: 0; 
     animation: aparecerSuave 1s ease-in forwards;
     animation-delay: 0.7s;
-} /* <--- Asegúrate de que esta llave cierra el bloque */
-
-
+}
 
 .nacho { 
     margin-top: 5px !important; 
 }
 
-/* --- 5. BLOQUE FECHA --- */
-
-.bloque-fecha {
-
-    position: relative;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    width: 100%;
-
-    margin-top: 35px !important;
-
-    z-index: 15;
-
-    opacity: 0; /* Empezamos invisible */
-   
-    animation: aparecerSuave 1s ease-in forwards; /* Aparece con elegancia */
-
-    animation-delay: 0.8s; /* Un pelín de retraso para un efecto más orgánico */;
-
-}
-
-
-
-.fecha-texto {
-
-    position: relative;
-
-    font-family: 'Playfair Display', serif;
-
-    font-weight: 400;
-
-    font-style: italic;
-
-    font-size: clamp(20px, 1.5vw, 24px);
-
-    letter-spacing: 0.35em;
-
-    color: #8B0000;
-
-    text-transform: uppercase;
-
-    white-space: nowrap;
-
-    border-top: 1px solid rgba(139, 0, 0, 0.15);
-
-    border-bottom: 1px solid rgba(139, 0, 0, 0.15);
-
-    padding: 15px 40px;
-
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-
-}
-
-
-
-/* --- 6. RESPONSIVE INTELIGENTE (GIRO DINÁMICO Y SIMETRÍA) --- */
-
-
-
-/* 1. MODO MÓVIL (Vertical o pantallas donde el menú no cabe) */
-
-/* El punto de corte a 1150px evita que el menú se vea apretado en tablets */
-
-@media (max-width: 1149px) and (orientation: portrait), (max-width: 1024px) {
-
-    .desktop-menu { display: none !important; }
-
-   
-
-    .nav-container {
-
-        display: flex;
-
-        justify-content: space-between;
-
-        align-items: center;
-
-        padding: 0 5%;
-
-    }
-
-
-
-    .menu-toggle {
-
-        display: flex !important;
-
-        flex-direction: column;
-
-        justify-content: space-between;
-
-        width: 30px;
-
-        height: 18px;
-
-        background: none;
-
-        border: none;
-
-        z-index: 3000;
-
-        order: 2; /* Hamburguesa a la derecha */
-
-    }
-
-    .menu-toggle:hover span {
-        background-color: #7f8c8d !important; /* Un gris elegante (puedes usar 'grey' si prefieres) */
-    }
-
-   
-
-    .menu-toggle span { width: 100%; height: 2px; background-color: #8B0000;transition: all 0.3s ease; /* Esto hace que el cambio a gris sea suave */ }
-
-    .nombre { font-size: clamp(70px, 18vw, 100px) !important; }
-
-}
-
-
-
-/* 2. MODO ORDENADOR, TABLET Y MÓVIL HORIZONTAL (Ajuste Fino) */
-
 @media (min-width: 1150px), (min-width: 768px) and (orientation: landscape) {
-
-    .menu-toggle { display: none !important; }
-
-    .desktop-menu { display: flex !important; }
-
-    .mobile-overlay { display: none !important; }
-
-
-
-    .navbar {
-
-    position: fixed;
-
-    top: 0;
-
-    width: 100%;
-
-    z-index: 2000;
-
-    background-color: rgba(253, 253, 253, 0.85);
-
-    backdrop-filter: blur(12px);
-
-    padding: 10px 0;
-
-    display: flex;
-
-    justify-content: center;
-
-    min-height: 80px;
-
-    border-bottom: 1px solid rgba(139, 0, 0, 0.08);
-
-}
-
-
-
-
-    .desktop-menu {
-        display: flex;
-        /* Aumentamos el espacio entre los enlaces */
-        gap: clamp(25px, 4vw, 60px); 
-        flex: 1;
-     align-items: center;
-    }
-
-
-
-    .menu-left {
-
-        justify-content: flex-start;
-
-        /* SEPARACIÓN FIJA CON EL BOTÓN: Nunca menos de 50px */
-
-        padding-right: 50px;
-
-    }
-
-
-
-    .menu-right {
-
-        justify-content: flex-end;
-
-        /* SEPARACIÓN FIJA CON EL BOTÓN: Nunca menos de 50px */
-
-        padding-left: 50px;
-
-    }
-
-
-
-    .asistencia-centro {
-
-        display: flex;
-
-        justify-content: center;
-
-        flex-shrink: 0;
-
-    }
-
-
-
-    /* --- BLOQUE CENTRAL (NOMBRES Y FECHA) --- */
-
     .hero {
-
-       position: relative;
-        width: 100%;
-        /* Reservamos el espacio de la pantalla menos la navbar */
-        height: 100vh !important; 
         position: absolute !important;
         top: 0 !important;
         left: 0 !important;
+        width: 100%;
+        height: 100vh !important; 
         display: flex;
-        flex-direction: column; /* Cambiamos a column para que el cuestionario baje */
+        flex-direction: column; 
         justify-content: center;
         align-items: center;
         overflow: hidden;
     }
 
-
-
-    .escenario { gap: 0; padding-top: 80px !important; }
-
-
+    .escenario { 
+        gap: 0; 
+        padding-top: 80px !important; 
+    }
 
     .ampersand {
-
-        line-height: 1;
-
+        line-height: 1 !important;
     }
-
-
 
     .nacho {
-
         transform: translateY(0) !important;
-
     }
-
 }
 
-
-
-
-/* --- 7. MENÚ OVERLAY (DISEÑO NUPCIAL CON ADORNOS) --- */
-
-.mobile-overlay {
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Ocupa todo el alto de la pantalla */
-    
-    display: flex; /* Activamos el modo caja flexible */
-    flex-direction: column; /* Apilamos las opciones una debajo de otra */
-    justify-content: center; /* Centro vertical matemático */
-    align-items: center; /* Centro horizontal matemático */
-    
-    background-image: url('img/TesturaAcuarela.png');
-    background-color: rgba(255, 255, 255, 0.98);
-    z-index: 2500;
-    
-    /* Animación de aparición */
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.5s ease;
+@media (max-width: 1149px) and (orientation: portrait), (max-width: 1024px) {
+    .nombre { 
+        font-size: clamp(70px, 18vw, 100px) !important; 
+    }
 }
 
-
-
-.mobile-overlay.active {
-
-    opacity: 1;
-
-    pointer-events: auto;
-
+@media (max-width: 1149px) {
+    .nombre { 
+        font-size: clamp(70px, 18vw, 100px) !important; 
+    }
 }
+/* #endregion */
 
 
-
-/* --- ADORNO INFERIOR CENTRADO (COLOR BURDEOS) --- */
-
-.mobile-overlay::after {
-
-    content: "";
-
-    display: block; /* Asegura que se comporte como un bloque debajo del texto */
-
-    width: 220px;
-
-    height: 80px;
-
-    background: url('img/Hojas_pino.png') center/contain no-repeat;
-
-   
-
-    /* EL FILTRO MÁGICO PARA EL COLOR BURDEOS */
-
-    filter: sepia(100%) saturate(600%) hue-rotate(-60deg) brightness(0.35) contrast(1.1);
-
-   
-
-    opacity: 0.7;
-
-    margin-top: 40px; /* Espacio elegante tras la última opción del menú */
-
-   
-
-    /* Invertimos el adorno para cerrar el diseño hacia abajo */
-
-    transform: rotate(180deg);
-
-   
-
-    /* Para que el diseño sea fluido */
-
-    transition: all 0.3s ease;
-
-}
-
-
-
-/* IMPORTANTE: Asegúrate de que el contenedor del menú tenga flex-direction: column
-
-para que el adorno se coloque debajo de los enlaces */
-
-.mobile-overlay {
-
+/* #region 6. SECCIÓN: HERO - BLOQUE FECHA */
+.bloque-fecha {
+    position: relative;
     display: flex;
-
-    flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
-
-    /* ... resto de tu configuración ... */
-
+    width: 100%;
+    margin-top: 35px !important;
+    z-index: 15;
+    opacity: 0;
+    animation: aparecerSuave 1s ease-in forwards;
+    animation-delay: 0.8s;
 }
 
-.mobile-nav-content {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 60px; /* Espaciado generoso entre opciones */
-
-    align-items: center;
-
-}
-
-
-
-.mobile-link {
-
+.fecha-texto {
+    position: relative;
     font-family: 'Playfair Display', serif;
-
-    font-size: 20px !important;
-
-    color: #5d6d7e;
-
-    text-decoration: none;
-
     font-weight: 400;
-
+    font-style: italic;
+    font-size: clamp(20px, 1.5vw, 24px);
+    letter-spacing: 0.35em;
+    color: #8B0000;
     text-transform: uppercase;
-
-    letter-spacing: 6px;
-
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-
-    transition: all 0.3s ease;
-
-}
-
-
-
-.mobile-link:hover {
-
-    color: #8B0000 !important;
-
-    letter-spacing: 7px;
-
-}
-
-
-
-/* --- LIMPIEZA FINAL --- */
-
-.nav-link, .mobile-link {
-
-    display: inline-block;
-
-    vertical-align: middle;
-
     white-space: nowrap;
-
+    border-top: 1px solid rgba(139, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(139, 0, 0, 0.15);
+    padding: 15px 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
+/* #endregion */
 
 
-
-
-
-/* --- EFECTO TÁCTIL PARA MÓVIL (SIMULANDO HOVER) --- */
-
-
-
-/* Cuando el dedo toca la opción en el menú hamburguesa */
-
-.mobile-link:active {
-
-    color: #8B0000 !important;
-
-    letter-spacing: 7px; /* El ligero estiramiento que ya tenías */
-
-    transition: 0.1s; /* Respuesta instantánea al toque */
-
-}
-
-
-
-/* Para el botón de Asistencia en el móvil */
-
-.btn-asistencia:active {
-
-    background-color: #800020 !important;
-
-    color: #ffffff !important;
-
-    transform: scale(0.95); /* Efecto de que el botón se hunde al pisarlo */
-
-}
-
-
-
-/* --- TRUCO PARA QUE EL IPHONE RESPONDA AL TOQUE AL INSTANTE --- */
-
-.mobile-link, .btn-asistencia {
-
-    -webkit-tap-highlight-color: transparent; /* Quita el recuadro gris feo de iOS */
-
-    cursor: pointer;
-
-}
-
-
-/* --- ESTILOS ESPECÍFICOS PÁGINA HISTORIA --- */
-
+/* #region 7. MAQUETACIÓN: PÁGINA HISTORIA DE AMOR */
 .header-historia {
     height: 30vh;
     display: flex;
@@ -795,9 +590,12 @@ para que el adorno se coloque debajo de los enlaces */
     opacity: 0.6;
 }
 
-/* Ajuste para que las imágenes en historia tengan un toque más artístico */
+.foto-wrapper {
+    overflow: hidden;
+}
+
 .foto-wrapper img {
-    filter: sepia(10%) contrast(1.05); /* Un toque vintage muy leve */
+    filter: sepia(10%) contrast(1.05);
     transition: transform 1s ease;
 }
 
@@ -805,165 +603,31 @@ para que el adorno se coloque debajo de los enlaces */
     transform: scale(1.05);
 }
 
-/* Espaciado extra entre bloques */
 .bloque-editorial {
     margin-bottom: 120px;
 }
+/* #endregion */
 
 
-/* Estilo especial para el enlace con icono */
-.home-icon {
-    display: flex !important;
-    align-items: center;
-    gap: 10px; /* Espacio entre la casa y la palabra Inicio */
-    justify-content: center;
-    margin-bottom: 10px; /* Un poco de aire extra para separarlo del resto */
-    border-bottom: 1px solid rgba(139, 0, 0, 0.1); /* Una línea muy fina divisoria */
-    padding-bottom: 15px;
-}
-
-/* Efecto al tocar el icono */
-.home-icon:active {
-    transform: scale(0.95);
-}
-
-/* Esto centra la casita y le da aire */
-.home-icon-superior {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px; /* Espacio generoso debajo de la casa */
-    text-decoration: none;
-    transition: transform 0.3s ease;
-    width: 100%; /* Asegura el centrado horizontal */
-}
-
-/* Efecto sutil al tocar con el dedo */
-.home-icon-superior:active {
-    transform: scale(0.9);
-}
-
-/* El trazo fino del dibujo */
-.home-icon-superior svg {
-    stroke: #8B0000; /* Color Burdeos Andrea & Nacho */
-    stroke-width: 1.1px;
-}
-
-/* Configuramos el contenedor para pantallas grandes */
-@media (min-width: 1150px) {
-    .nav-container {
-        display: grid !important;
-        /* Creamos 3 columnas: el centro (auto) y los lados reparten el espacio (1fr) */
-        grid-template-columns: 1fr auto 1fr; 
-        align-items: center;
-        gap: 20px;
-    }
-
-    /* La casita "flota" a la izquierda del primer bloque sin romper el grid */
-    .home-nav-icon {
-        position: absolute;
-        left: 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .desktop-menu {
-        display: flex !important;
-    }
-
-    .asistencia-centro {
-        grid-column: 2; /* Obligamos a que Asistencia sea el eje central */
-        justify-content: center;
-    }
-}
-
-/* Ajuste para que la casita no se pegue al borde */
-.home-nav-icon {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    
-}
-
-
-
-/* --- 6. RESPONSIVE MÓVIL (Punto de corte 1149px) --- */
-@media (max-width: 1149px) {
-    .desktop-menu { display: none !important; }
-
-    .nav-container {
-        width: 95%; /* Aumentamos del 92% al 95% para aprovechar más el ancho */
-        max-width: 1400px; /* Le damos un poco más de margen de expansión */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-    }
-
-    /* --- COMPORTAMIENTO PORTADA (Página Principal) --- */
-    .pagina-principal .asistencia-centro {
-        display: flex;
-        flex: 1;
-        justify-content: flex-start; /* Botón a la izquierda */
-        order: 1;
-    }
-
-    /* --- COMPORTAMIENTO HISTORIA (Página Interna) --- */
-    .pagina-interna .asistencia-centro {
-        display: flex;
-        flex: 1;
-        justify-content: center; /* Botón al centro */
-        order: 2;
-    }
-
-    /* La casita solo se ve en la página interna */
-    .pagina-interna .mobile-only-icon {
-        display: flex !important;
-        order: 1; /* Casa a la izquierda */
-        width: 35px;
-    }
-
-    /* La hamburguesa siempre a la derecha */
-    .menu-toggle {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 18px;
-        background: none;
-        border: none;
-        z-index: 3000;
-        order: 3; 
-    }
-
-    .menu-toggle span { width: 100%; height: 2px; background-color: #8B0000; }
-    
-    /* Ajuste de nombres para móvil */
-    .nombre { font-size: clamp(70px, 18vw, 100px) !important; }
-}
-
-
-
-/* --- NUEVA MAQUETACIÓN EDITORIAL "CAMINO BOTÁNICO" --- */
-
+/* #region 8. MAQUETACIÓN EDITORIAL: GALERÍA POLAROID */
 .contenedor-editorial {
+    position: relative;
+    z-index: 10;
+    margin-top: 160px;
     padding-top: 60px;
     padding-bottom: 150px;
 }
 
-/* La línea central sutil que une la historia */
 .timeline-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 80px 40px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
     position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    gap: 0; /* Controlamos el espacio manualmente */
 }
 
-/* Creamos la línea vertical burdeos de fondo */
 .timeline-grid::before {
     content: '';
     position: absolute;
@@ -981,102 +645,15 @@ para que el adorno se coloque debajo de los enlaces */
     justify-content: center;
     position: relative;
     z-index: 2;
-    margin-bottom: -40px; /* Superposición elegante */
+    margin-bottom: -40px;
 }
 
-/* Estilo de la foto (Marco blanco elegante, no burdeos) */
-.polaroid-frame {
-    background-color: white !important; /* Volvemos al blanco para que destaque sobre el fondo */
-    padding: 15px 15px 60px 15px !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.07) !important;
-    border-radius: 2px;
-    max-width: 320px;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.polaroid-frame img {
-    width: 100%;
-    aspect-ratio: 3/4; /* Formato vertical más editorial */
-    object-fit: cover;
-    filter: sepia(20%) contrast(1.02); /* Toque cálido coherente con tu portada */
-}
-
-.polaroid-year {
-    font-family: 'Pinyon Script', cursive;
-    color: #8B0000 !important; /* El burdeos de Andrea & Nacho */
-    font-size: 45px !important;
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    left: 0;
-}
-
-/* --- ASIMETRÍA (Izquierda y Derecha) --- */
-
-/* Fotos impares a la izquierda */
-.polaroid-item:nth-child(odd) {
-    justify-content: flex-start;
-    padding-left: 5%;
-}
-.polaroid-item:nth-child(odd) .polaroid-frame { transform: rotate(-2deg); }
-
-/* Fotos pares a la derecha */
-.polaroid-item:nth-child(even) {
-    justify-content: flex-end;
-    padding-right: 5%;
-}
-.polaroid-item:nth-child(even) .polaroid-frame { transform: rotate(2deg); }
-
-/* Efecto al pasar el ratón */
-.polaroid-item:hover {
-    z-index: 100;
-}
-.polaroid-item:hover .polaroid-frame {
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 25px 50px rgba(139, 0, 0, 0.1) !important;
-}
-
-/* --- AJUSTE PARA MÓVILES --- */
-@media (max-width: 768px) {
-    .timeline-grid::before { left: 20px; } /* Línea a un lado en móvil */
-    
-    .polaroid-item {
-        justify-content: flex-start !important;
-        padding-left: 50px !important;
-        padding-right: 20px !important;
-        margin-bottom: 60px;
-    }
-    
-    .polaroid-frame {
-        max-width: 100%;
-        transform: rotate(0deg) !important;
-    }
-}
-
-
-
-/* --- 2. CONTENEDOR PRINCIPAL --- */
-.contenedor-editorial {
-    position: relative;
-    z-index: 10;
-    margin-top: 160px;
-}
-
-.timeline-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 80px 40px; /* Mucho espacio vertical entre filas */
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto 150px auto;
-}
-
-/* --- 3. POLAROID ESTILO GALERÍA (Mantenidas) --- */
 .polaroid-frame {
     background-color: #8B0000 !important;
     padding: 10px 10px 45px 10px !important;
     box-shadow: 15px 25px 45px rgba(0,0,0,0.15) !important;
     border-radius: 1px;
+    max-width: 320px;
     transition: all 0.5s ease;
 }
 
@@ -1101,11 +678,37 @@ para que el adorno se coloque debajo de los enlaces */
     margin-top: 10px;
 }
 
-/* --- 4. MODELO SERPIENTE (Para cuando hay Hamburguesa) --- */
+.polaroid-item:nth-child(odd) {
+    justify-content: flex-start;
+    padding-left: 5%;
+}
+
+.polaroid-item:nth-child(odd) .polaroid-frame { 
+    transform: rotate(-2deg); 
+}
+
+.polaroid-item:nth-child(even) {
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+
+.polaroid-item:nth-child(even) .polaroid-frame { 
+    transform: rotate(2deg); 
+}
+
+.polaroid-item:hover {
+    z-index: 100;
+}
+
+.polaroid-item:hover .polaroid-frame {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 25px 50px rgba(139, 0, 0, 0.1) !important;
+}
+
 @media (max-width: 1149px) {
     .timeline-grid {
         grid-template-columns: 1fr !important;
-        gap: 140px 0 !important; /* Espaciado de lujo en móvil */
+        gap: 140px 0 !important;
         max-width: 450px;
     }
 
@@ -1113,416 +716,62 @@ para que el adorno se coloque debajo de los enlaces */
         display: flex !important;
         width: 100% !important;
     }
-
-    /* Zig-Zag */
-    .polaroid-item:nth-child(odd) { justify-content: flex-start; }
-    .polaroid-item:nth-child(even) { justify-content: flex-end; }
-
-    /* Rotaciones muy sutiles */
-    .polaroid-item:nth-child(odd) .polaroid-frame { transform: rotate(-1.5deg) !important; }
-    .polaroid-item:nth-child(even) .polaroid-frame { transform: rotate(1.5deg) !important; }
-
-    .polaroid-frame {
-        max-width: 190px !important;
-    }
 }
+/* #endregion */
 
 
-/* --- DISEÑO CAMINO BOTÁNICO NUESTRA HISTORIA --- */
-
-.contenedor-camino {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px 20px 100px 20px;
-    position: relative;
-}
-
-.titulo-historia {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.nombre-script {
-    font-family: 'Pinyon Script', cursive;
-    font-size: clamp(80px, 12vw, 160px);
-    color: #8B0000;
-    font-weight: 100;
-}
-
-
-/* La línea central del tiempo */
-.camino-botanico::before {
-        display: block !important; 
-        content: '';
-        position: absolute;
-        left: 50%; /* Centrada */
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: rgba(184, 134, 11, 0.3); /* Tu dorado */
-        transform: translateX(-50%);
-        z-index: 1;
-    }
-
-
-/* Cada bloque de año + foto */
-.punto-historia {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    min-height: 420px; /* DISTANCIA MATEMÁTICA: Todos los bloques medirán esto */
-}
-
-/* Estilo de la foto tipo Camafeo/Ovalada */
-.foto-ovalada {
-    width: 200px;
-    height: 270px;
-    margin: 0 auto;
-    border-radius: 100px; /* Crea el efecto ovalado */
-    overflow: hidden;
-    border: 1.5px solid #A99F92;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
-    position: relative;
-    z-index: 5;
-    background-color: #fdfdfd; /* Tapa la línea que pasa por detrás */
-}
-
-.foto-ovalada img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) brightness(1.02) contrast(1.04) !important;
-    transition: filter 0.6s ease;
-}
-/* Esto es opcional, pégalo justo debajo del bloque anterior */
-.foto-ovalada:hover img {
-    filter: grayscale(100%) brightness(1.08) contrast(1.06) !important;
-}
-
-/* Textos de los años */
-.año-script {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 55px;
-    color: #8B0000;
-    line-height: 1;
-}
-
-.hito-texto {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #5d6d7e;
-    margin-top: 5px;
-}
-
-/* Zig-Zag: Impares a la izquierda, Pares a la derecha */
-.punto-historia:nth-child(odd) .texto-historia {
-    text-align: right;
-    padding-right: 80px;
-}
-
-.punto-historia:nth-child(even) .texto-historia {
-    grid-column: 2;
-    text-align: left;
-    padding-left: 80px;
-}
-
-.punto-historia:nth-child(even) .foto-ovalada {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-/* Fondo de motivos atenuado para la historia */
-.motivos-historia {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('img/Motivo_adornos.png') center/contain repeat;
-    opacity: 0.08; /* Muy sutil para no distraer de las fotos */
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Ajuste móvil: todo en una columna */
-@media (max-width: 768px) {
-    .camino-botanico::before {
-        display: none; /* Quitamos la línea en móvil para ganar limpieza visual */
-    }
-
-    .contenedor-camino {
-        padding-top: 20px; /* Reducimos espacio superior en móvil */
-    }
-}
-
-/* Ajuste móvil: todo en una columna */
-@media (max-width: 768px) {
-
-    .header-historia {
-        height: auto !important; /* Quita el exceso de altura */
-        margin-top: 90px !important; /* Lo baja lo justo para que no lo tape la navbar */
-        display: block !important;
-    }
-    
-    /* 1. ELIMINAR LÍNEA Y PEGAR TÍTULO */
-    .linea-fina {
-        display: none !important; /* Quita la línea burdeos horizontal */
-    }
-
-    .titulo-historia {
-        margin-bottom: 10px !important; /* Espacio mínimo con el 2019 */
-        position: relative !important;
-        z-index: 10;
-    }
-
-    .nombre-script {
-        font-size: 55px !important; /* Tamaño legible en móvil */
-        display: block !important;
-        margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-    }
-
-    .contenedor-camino {
-        padding-top: 10px !important; /* REDUCIDO: Pegamos el bloque al título */
-    }
-
-    .camino-botanico::before {
-        display: none !important; 
-    }
-
-    /* 2. RESET DE CONTENEDOR (2019, 2020...) */
-    punto-historia {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        position: relative; /* Asegura que la línea se oriente respecto a este bloque */
-        margin-bottom: 200px !important;
-    }
-
-    /* Forzamos que el primer año suba un poco más si fuera necesario */
-    .punto-historia:first-child {
-        margin-top: -10px !important;
-    }
-
-    /* 3. TEXTOS */
-    .año-script {
-        font-size: 42px !important;
-        margin: 0 !important; 
-        line-height: 1 !important;
-        order: 1;
-    }
-
-    .hito-texto {
-        font-size: 11px !important;
-        margin: 0 !important;
-        letter-spacing: 1.5px;
-        order: 2;
-        padding-bottom: 5px;
-    }
-
-    /* 4. LA FOTO OVALADA */
-    .foto-ovalada {
-        order: 3; 
-        width: 280vw; 
-        aspect-ratio: 1 / 1;
-        height: calc(42vw * 1.35); 
-        max-width: 155px;
-        max-height: 210px;
-        border-radius: 50%;
-        border: 1.5px solid rgba(184, 134, 11, 0.8);
-        box-shadow: 0 15px 45px rgba(0,0,0,0.08);
-        margin: 0 auto !important;
-        z-index: 5;
-        background-color: #fdfdfd;
-        overflow: hidden;
-    }
-
-    /* 5. LÍNEA VERTICAL CONECTORA */
-    .punto-historia::after {
-        content: '';
-        position: absolute;
-        top: 55px; /* Esta es la altura máxima que le dimos a la foto (.foto-ovalada) */
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1px;
-        height: calc(100% - 210px + 100px); /* La hacemos un poco más larga para que llegue al siguiente año */
-        background: rgba(184, 134, 11, 0.3);
-        z-index: 1;
-    }
-}
-
-    .punto-historia {
-        margin-bottom: 10px !important; 
-        position: relative;
-    }
-
-    .punto-historia:last-child {
-    margin-bottom: 80px !important;
-    }
-
-    .punto-historia:last-child::after {
-    display: none !important;
-    }
-
-
-/* En móvil, ajustamos el margen para que no quede un hueco blanco gigante */
-@media (max-width: 768px) {
-    .titulo-historia {
-        margin-top: 110px !important;
-    }
-}
-
-
-
-/* --- COMPORTAMIENTO NAVBAR --- */
-.mobile-home-icon {
-    display: none; /* Escondido por defecto en PC */
-}
-
-@media (max-width: 1149px) {
-    .desktop-menu {
-        display: none !important; /* Esconde los textos laterales en móvil */
-    }
-
-    .nav-container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center;
-        padding: 0 20px;
-    }
-
-    .menu-toggle {
-        order: 3; /* Hamburguesa derecha */
-        width: 35px;
-    }
-
-    .asistencia-centro {
-        order: 2; /* Botón al centro */
-        flex: 1;
-        display: flex;
-        justify-content: center;
-    }
-
-    .mobile-home-icon {
-        display: flex; /* Casita */
-
-        order: 1; /* Casita a la izquierda */
-        width: 35px;
-        justify-content: flex-end;
-    }
-}
-
-
-
-/* --- SECCIÓN ASISTENCIA MÁGICA (EXPANSIÓN DESDE ARRIBA) --- */
+/* #region 9. INTERFAZ INTERACTIVA: MODAL DE ASISTENCIA EXPANSIBLE */
 .asistencia-full-page {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 3000 !important; /* Asegura que esté por encima */
-    display: none;            /* <--- PASO CLAVE: Debe estar oculto al cargar */
-    background-image: url('img/TesturaAcuarela.png');
-    background-color: #fdfdfd;
-    overflow-y: auto;
-    transform-origin: top center;
-    
-    /* Indicamos que la animación nazca en el centro superior (donde está el botón) */
+    z-index: 3000 !important;
+    display: none;
+    background: #fdfdfd url('img/TesturaAcuarela.png');
     transform-origin: top center; 
-    padding-top: 100px !important; /* Esto garantiza que el título NUNCA toque el techo */
-    overflow-y: auto; /* Permite hacer scroll si el formulario es largo */
+    overflow-y: auto;
 }
 
 .asistencia-full-page.active {
     display: block;
-    /* Usamos una animación de escala y opacidad */
     animation: expandirDesdeBoton 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-
-/* Animación: empieza pequeño en el botón y se hace grande */
-@keyframes expandirDesdeBoton {
-    from { 
-        opacity: 1; 
-        transform: scaleY(0); /* Empieza con altura cero */
-    }
-    to { 
-        opacity: 1; 
-        transform: scaleY(1); /* Se estira hasta completar la pantalla */
-    }
-}
-
-/* El botón de cerrar lo movemos un poco para que no estorbe */
-.cerrar-asistencia {
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    font-size: 50px;
-    background: none;
-    border: none;
-    color: #8B0000;
-    cursor: pointer;
-    z-index: 4001;
-    font-family: 'Playfair Display', serif;
-    transition: transform 0.3s ease;
-}
-
-.cerrar-asistencia:hover {
-    transform: rotate(90deg); /* Un pequeño detalle visual al pasar el ratón */
-}
+/* #endregion */
 
 
-
-/* La "receta" de la animación que hace que los nombres aparezcan */
-@keyframes aparecerSuave {
-    from { 
-        opacity: 0; 
-        transform: translateY(0px); /* Viene un poquito desde abajo */
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0);    /* Se queda en su sitio */
-    }
-}
-
-
-
-/* ==========================================================================
-    ESTILO BASE: EDITORIAL, LIMPIO Y PREMIUM
-   ========================================================================== */
-
+/* #region 10. FORMULARIO ASISTENCIA: ESTILOS GENERALES */
 .contenedor-formulario-centrado {
     width: 100%;
     margin: 0 auto;
     position: relative;
+    box-sizing: border-box;
 }
 
-/* Ajuste específico para el título principal */
-/* Ajuste específico para el título principal */
 .formulario-boda h1, 
 .titulo-asistencia { 
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(80px, 12vw, 150px) !important;
+    color: #8B0000 !important;
+    text-align: center !important;
     margin-top: 0 !important;
-    color: #8B0000 !important; /* CAMBIADO A: Burdeos */
     padding-top: 0 !important;
+    line-height: 1.0 !important;
 }
 
-/* Subtítulo bajo los nombres (Estilo Base Ordenador) */
 .subtitulo-etiqueta {
     font-family: 'Playfair Display', serif !important;
     font-size: 15px !important;
-    color: #5d6d7e !important; /* Gris seda */
     font-style: italic;
+    color: #5d6d7e !important;
     text-align: center;
     display: block;
     margin-top: -20px !important;  
     margin-bottom: 80px !important; 
 }
 
-/* Líneas de entrada de texto */
 .formulario-boda input[type="text"],
 .formulario-boda input[type="tel"] {
     font-family: 'Playfair Display', serif !important;
@@ -1535,17 +784,35 @@ para que el adorno se coloque debajo de los enlaces */
     padding: 12px 0 !important; 
     outline: none !important;
     width: 100% !important;
-    max-width: 600px !important; 
+    max-width: 450px !important; 
     margin: 0 auto;
     display: block;
     transition: border-bottom 0.3s ease;
+}
+
+.bloque-desplegable-boda {
+    display: none;
+    width: 100%;
+    max-width: 450px; 
+    margin: 20px auto 40px auto; 
+    padding-left: 20px; 
+    border-left: 2px solid rgba(139, 0, 0, 0.2); 
+    box-sizing: border-box;
 }
 
 .formulario-boda input:focus {
     border-bottom: 1px solid rgba(139, 0, 0, 0.6) !important;
 }
 
-/* --- BLOQUES DE PREGUNTA --- */
+.formulario-boda input::placeholder {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 17px !important;
+    color: #bdc3c7 !important;
+    font-style: italic;
+    opacity: 1;
+    text-align: center;
+}
+
 .grupo-input-nombre,
 .grupo-input-telefono,
 .grupo-input-asistencia {
@@ -1554,53 +821,78 @@ para que el adorno se coloque debajo de los enlaces */
     align-items: center;
     text-align: center;
     gap: 12px;
-    margin-bottom: 60px !important; 
+    margin-bottom: 40px !important; 
     padding: 0 10px;
+    width: 100%;
 }
 
-/* Etiquetas de las preguntas base */
 .grupo-input-nombre label,
 .grupo-input-telefono label,
 .grupo-input-asistencia label.titulo {
     font-family: 'Playfair Display', serif !important;
-    font-size: 17px !important; 
-    font-style: italic !important; 
-    color: #111E38 !important; 
-    text-transform: none !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.5px !important; 
-    margin-bottom: 12px !important;
+    font-size: clamp(18px, 4vw, 22px) !important; 
+    font-style: italic !important;
+    color: #111E38 !important;
+    margin-bottom: 8px !important;
+    display: block;
 }
 
-/* --- OPCIONES SÍ / NO (Ordenador en Línea Horizontal) --- */
+
 .opciones-radio {
     display: flex;
     justify-content: center;
-    gap: 60px;
-    margin-top: 10px;
+    align-items: center;    
+    gap: 40px;             
+    width: 100%;
+    max-width: 550px;        
+    margin: 0 auto 30px auto;
+}
+
+
+.grupo-input-asistencia .opciones-radio {
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+    gap: 15px !important; 
+    width: fit-content !important; 
 }
 
 .opciones-radio label {
     font-family: 'Playfair Display', serif !important;
-    font-size: 18px !important;
-    color: #7f8c8d !important;
-    text-transform: none !important;
-    font-weight: 400 !important;
+    font-size: 16px !important;
+    color: #5d6d7e !important; 
+    cursor: pointer;
+    display: flex;             /* Mantiene el círculo y el texto en la misma línea */
+    align-items: center;       /* ALINEACIÓN VERTICAL PERFECTA */
+    gap: 12px;                 /* Separación entre el círculo y el texto */
+    line-height: 1.2;          /* Ajusta la altura de línea */
+    padding: 8px 0;            /* Da aire al área de clic */
+}
+
+.opciones-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #111E38; /* Borde fino siempre */
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    margin: 0;
 }
 
-/* Círculos de selección */
-.opciones-radio input[type="radio"] {
-    accent-color: #111E38 !important; 
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+/* 2. El punto central (aparece solo al hacer clic) */
+.opciones-radio input[type="radio"]:checked::before {
+    content: '';
+    width: 8px; /* Tamaño del punto */
+    height: 8px;
+    background-color: #111E38; /* Color del punto */
+    border-radius: 50%;
 }
 
-/* --- BOTÓN DE ENVIAR BASE (Ordenador con texto Blanco corregido) --- */
 .btn-confirmar-grande {
     display: block !important;
     margin: 40px auto 80px !important;
@@ -1620,157 +912,88 @@ para que el adorno se coloque debajo de los enlaces */
     box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     transition: all 0.3s ease !important;
 }
+/* #endregion */
 
-/* --- PLACEHOLDER --- */
-.formulario-boda input::placeholder {
-    font-family: 'Playfair Display', serif !important;
-    font-size: 17px !important;
-    color: #bdc3c7 !important;
-    font-style: italic;
-    opacity: 1;
-    text-align: center;
+
+/* #region 11. FORMULARIO ASISTENCIA: CONTROL ÚNICO Y FLUIDO */
+
+/* 1. ESTILOS BASE (Móvil - Se aplica a todo por defecto) */
+.cerrar-asistencia {
+    position: fixed !important;
+    top: 20px !important;
+    left: 20px !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    border-radius: 50% !important;
+    padding: 10px !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 99999 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease !important;
+    color: #8B0000 !important;
 }
 
+.cerrar-asistencia svg {
+    width: 35px;
+    height: 35px;
+    stroke-width: 1.5;
+}
 
-/* ==========================================
-    AJUSTES PARA ORDENADOR (Desktop)
-   ========================================== */
-@media (min-width: 1024px) {
+.contenedor-formulario-centrado {
+    padding: 70px 20px 40px 20px !important; /* Base móvil */
+}
+
+/* 2. ADAPTACIÓN TABLET (A partir de 769px) */
+@media (min-width: 769px) {
+    .contenedor-formulario-centrado {
+        padding: 100px 60px 40px 60px !important; /* Más aire progresivo */
+    }
+}
+
+/* 3. ADAPTACIÓN ORDENADOR (A partir de 1025px - Salto a Absolute) */
+@media (min-width: 1025px) {
+    .cerrar-asistencia {
+        position: absolute !important; /* Cambia de fijo a absoluto */
+        top: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+        background: none !important; 
+    }
+
     .contenedor-formulario-centrado {
         max-width: 1000px;
-        margin: 20px auto; 
-        padding: 40px 100px;
-        /* Esto dibuja la tarjeta blanca en ordenadores */
-        background-color: rgba(255, 255, 255, 0.95) !important; 
+        margin: 40px auto;
+        padding: 60px 100px 40px 100px !important;
+        background-color: rgba(255, 255, 255, 0.95) !important;
         border-radius: 20px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
-        border: 1px solid rgba(139, 0, 0, 0.1) !important; 
-        backdrop-filter: blur(10px);
     }
+}
+/* #endregion */
 
-    .subtitulo-etiqueta {
-        font-size: 18px !important;
-        margin-top: -20px !important;  
-        margin-bottom: 80px !important; 
+
+/* #region 12. LIBRERÍA DE ANIMACIONES INTERNAS (@KEYWORDS) */
+@keyframes expandirDesdeBoton {
+    from { 
+        opacity: 1; 
+        transform: scaleY(0);
     }
-
-    /* Escalado tipográfico premium para el botón en ordenador */
-    .btn-confirmar-grande {
-        font-size: 15px !important;      
-        letter-spacing: 3px !important; 
-        padding: 16px 60px !important;  
+    to { 
+        opacity: 1; 
+        transform: scaleY(1);
     }
 }
 
-
-
-/* ==========================================
-    ESTILO PARA MÓVIL (Compacto y Corregido)
-   ========================================== */
-@media (max-width: 767px) {
-
-    /* 1. Forzamos a la pantalla completa a tirar de todo hacia el techo */
-    .asistencia-full-page {
-        padding-top: 80px !important; 
-        overflow-y: auto !important;
+@keyframes aparecerSuave {
+    from { 
+        opacity: 0; 
+        transform: translateY(0px);
     }
-    
-    /* Nueva regla de seguridad para móviles: */
-    .asistencia-full-page.active {
-        display: block !important;
-    }
-    /* 2. AJUSTE DE PRECISIÓN: Espaciado elegante de la cabecera en smartphones */
-    .subtitulo-etiqueta {
-        font-size: 15px !important;   
-        margin-top: -8px !important;    /* Deja respirar los rasgos caligráficos de "Asistencia" */
-        margin-bottom: 35px !important; /* Distancia armónica con la primera pregunta */
-    }
-    
-    /* 3. Contenedor del formulario en smartphones */
-    .contenedor-formulario-centrado {
-        /* Al hacerlo transparente y quitar la sombra, el recuadro desaparece en el móvil */
-        background-color: transparent !important; 
-        background: transparent !important;
-        box-shadow: none !important; 
-        border: none !important;
-        padding: 0px 15px !important; 
-        margin-top: 0 !important;
-        border-radius: 0 !important; 
-    }
-
-    /* 4. Bloque de títulos */
-    .titulo-historia {
-        margin-top: 0 !important;
-        margin-bottom: 45px !important; 
-    }
-
-    /* 5. El botón de enviar optimizado para móvil (Texto Blanco Garantizado) */
-    .btn-confirmar-grande {
-        min-width: 0px !important;      
-        width: 150px !important;       
-        padding: 12px 15px !important;  
-        font-size: 13px !important;    
-        letter-spacing: 2px !important; 
-        text-transform: uppercase !important;
-        font-weight: 400 !important;
-        background-color: #111E38 !important; /* Azul noche */
-        color: #ffffff !important; 
-        margin: 30px auto 40px auto !important; 
-        display: block !important;
-        border-radius: 2px !important; 
-    }
-
-    /* 6. Margen de la primera pregunta */
-    .formulario-boda .grupo-input-nombre:first-of-type {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-
-    .formulario-boda {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-    
-    /* Inputs recogidos en móvil */
-    .formulario-boda input[type="text"],
-    .formulario-boda input[type="tel"] {
-        font-size: 16px !important; 
-        max-width: 260px !important; 
-        border-bottom: 1px solid rgba(17, 30, 56, 0.2) !important; 
-    }
-    
-   /* --- BLOQUES DE PREGUNTA --- */
-    .grupo-input-nombre,
-    .grupo-input-telefono,
-    .grupo-input-asistencia {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        gap: 12px !important;
-        margin-bottom: 60px !important; 
-        padding: 0 10px !important;
-    }
-
-    /* 7. Rediseño Vertical y Simétrico para los botones de Sí / No en móvil */
-    .opciones-radio {
-        display: flex !important;
-        flex-direction: column !important; 
-        align-items: flex-start !important; 
-        gap: 16px !important;              
-        margin: 15px auto 0 auto !important;
-        width: fit-content !important;     
-    }
-
-    .opciones-radio label {
-        font-family: 'Playfair Display', serif !important;
-        font-size: 16px !important;
-        font-style: italic !important;
-        color: #7f8c8d !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;              
-        cursor: pointer !important;
-        text-align: left !important;
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
     }
 }
+/* #endregion */
