@@ -16,8 +16,7 @@ html, body {
 }
 /* #endregion */
 
-
-/* #region 2. NAVBAR Y MENÚS (ESCRITORIO Y ADAPTACIONES MÓVILES) */
+/* #region 2. NAVBAR Y MENÚS */
 .navbar {
     position: fixed;
     top: 0;
@@ -25,12 +24,20 @@ html, body {
     width: 100%;
     height: 80px;
     z-index: 2000;
-    background-color: rgba(253, 253, 253, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.4) !important; 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid rgba(139, 0, 0, 0.08);
+    border-bottom: none !important;
+    
+    /* PLEGADO: Transición suave */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Clase que aplicará el JS al hacer scroll hacia abajo */
+.navbar.navbar-hidden {
+    transform: translateY(-100%);
 }
 
 .nav-container {
@@ -115,13 +122,17 @@ html, body {
 
     .asistencia-centro {
         display: flex;
-        justify-content: center;
+        justify-content: center; /* Centrado por defecto para ORDENADOR */
+        align-items: center;
         flex-shrink: 0;
     }
+
 }
 
-/* Comportamientos específicos de la barra en móviles */
+
+/* --- AJUSTES MÓVILES (Agrupados por página para orden) --- */
 @media (max-width: 1149px) {
+     /* --- AJUSTES PARA PÁGINA NUESTRA HISTORIA --- */
     .desktop-menu { 
         display: none !important; 
     }
@@ -136,28 +147,67 @@ html, body {
         padding: 0 20px;
     }
 
-    .pagina-principal .asistencia-centro {
-        display: flex;
-        flex: 1;
-        justify-content: flex-start;
-        order: 1;
+    .pagina-interna .navbar {
+        background-image: url('img/Motivo_adornos.png') !important;
+        background-size: cover;
+        background-position: center 20%; 
+        
+        /* Usamos 'overlay' que combina mejor con fondos claros */
+        background-blend-mode: overlay !important; 
+        
+        /* Aquí está el truco: usamos una opacidad global en la imagen 
+        para que no sea necesario pelear con los modos de fusión */
+        opacity: 1; 
+        
+        /* Fondo blanco base */
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        
+        /* El blur ayuda a que el motivo deje de competir con el texto */
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    .pagina-interna .mobile-home-icon {
+        display: flex !important;
+        order: 1; /* PRIMERO: Casita a la izquierda */
+        width: 35px;
     }
 
     .pagina-interna .asistencia-centro {
         display: flex;
-        flex: 1;
-        justify-content: center;
-        order: 2;
+        flex: 1; /* Esto le ayuda a ocupar el espacio central */
+        justify-content: center !important; /* SEGUNDO: Asistencia al centro */
+        order: 2; 
     }
 
-    .pagina-interna .mobile-only-icon {
+    .pagina-interna .menu-toggle {
+        display: flex !important;
+        order: 3; /* TERCERO: Hamburguesa a la derecha */
+        margin-left: auto;
+    }
+
+
+
+    /* --- AJUSTES PARA PÁGINA PRINCIPAL --- */
+    .pagina-principal .mobile-home-icon {
         display: flex !important;
         order: 1;
         width: 35px;
     }
 
-    .menu-toggle {
+    .pagina-principal .mobile-home-icon {
         display: flex !important;
+        order: 2; /* Movemos la casita al centro */
+        width: 35px;
+    }
+
+    .pagina-principal .menu-toggle {
+        display: flex !important;
+        order: 3;
+        margin-left: auto;
+    }
+
+    .menu-toggle {
         flex-direction: column;
         justify-content: space-between;
         width: 35px;
@@ -165,7 +215,6 @@ html, body {
         background: none;
         border: none;
         z-index: 3000;
-        order: 3; 
     }
 
     .menu-toggle span { 
@@ -173,20 +222,7 @@ html, body {
         height: 2px; 
         background-color: #8B0000; 
     }
-
-    .asistencia-centro {
-        order: 2;
-        flex: 1;
-        display: flex;
-        justify-content: center;
-    }
-
-    .mobile-home-icon {
-        display: flex;
-        order: 1;
-        width: 35px;
-        justify-content: flex-end;
-    }
+    
 }
 
 /* Primer salto adaptativo para orientaciones verticales */
@@ -209,7 +245,22 @@ html, body {
         transition: background-color 0.3s ease;
     }
 }
-/* #endregion */
+
+@keyframes bajarDesdeArriba {
+    from { 
+        transform: translateY(-80px); /* Empieza 80px arriba (oculta) */
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(0);    /* Baja a su posición natural */
+        opacity: 1; 
+    }
+}
+
+.navbar {
+    /* Aplicamos la nueva animación */
+    animation: bajarDesdeArriba 1s ease-out forwards;
+}
 
 
 /* #region 3. MENÚ OVERLAY DESPLEGABLE (MÓVIL) */
@@ -258,7 +309,7 @@ html, body {
 .mobile-link {
     font-family: 'Playfair Display', serif;
     font-size: 20px !important;
-    color: #5d6d7e;
+    color: #111E38 !important; /* Azul oscuro */
     text-decoration: none;
     font-weight: 400;
     text-transform: uppercase;
@@ -272,17 +323,28 @@ html, body {
     transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
+.asistencia-burgundy {
+    color: #800020 !important; /* Burdeos */
+}
+
 .mobile-link:hover,
 .mobile-link:active {
-    color: #8B0000 !important;
     letter-spacing: 7px;
+}
+
+.mobile-link:hover {
+    color: #111E38 !important;
+}
+
+.asistencia-burgundy:hover,
+.asistencia-burgundy:active {
+    color: #800020 !important;
 }
 
 .mobile-link:active {
     transition: color 0.1s, letter-spacing 0.1s;
 }
 /* #endregion */
-
 
 /* #region 4. BOTONES, ICONOS Y EFECTOS TÁCTILES GLOBALES */
 .btn-asistencia {
@@ -358,7 +420,7 @@ html, body {
 }
 
 .mobile-home-icon {
-    display: none;
+    display: none !important; /* Oculta por defecto en todas partes */
 }
 
 @media (min-width: 1150px) {
@@ -452,8 +514,8 @@ html, body {
     margin-bottom: 5px !important;
     font-display: block; 
     opacity: 0;
-    animation: aparecerSuave 1s ease-in forwards;
-    animation-delay: 0.7s;
+    animation: aparecerSuave 0.5s ease-in forwards;
+    animation-delay: 0.2s;
 }
 
 .andrea { 
@@ -467,8 +529,8 @@ html, body {
     margin: 10px 0 !important;
     line-height: 0.6 !important;
     opacity: 0; 
-    animation: aparecerSuave 1s ease-in forwards;
-    animation-delay: 0.7s;
+    animation: aparecerSuave 0.5s ease-in forwards;
+    animation-delay: 0.2s;
 }
 
 .nacho { 
@@ -527,8 +589,8 @@ html, body {
     margin-top: 35px !important;
     z-index: 15;
     opacity: 0;
-    animation: aparecerSuave 1s ease-in forwards;
-    animation-delay: 0.8s;
+    animation: aparecerSuave 0.8s ease-in forwards;
+    animation-delay: 0.5s;
 }
 
 .fecha-texto {
@@ -548,177 +610,96 @@ html, body {
 }
 /* #endregion */
 
-
-/* #region 7. MAQUETACIÓN: PÁGINA HISTORIA DE AMOR */
+/* #region 7. TÍTULO DE PÁGINA (CORREGIDO) */
 .header-historia {
-    height: 30vh;
+    /* 100px es el espacio necesario para que se vea justo debajo de la navbar de 80px */
+    padding-top: 120px; 
+    padding-bottom: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     text-align: center;
-    margin-top: 80px;
+    width: 100%;
 }
 
-.contenido-titulo .frase-script {
-    font-size: clamp(60px, 10vw, 120px);
-    margin-bottom: 20px;
-}
-
-.linea-decorativa {
-    width: 60px;
-    height: 1px;
-    background: #8B0000;
-    margin: 0 auto;
-    opacity: 0.5;
-}
-
-.bloque-frase-central {
-    padding: 150px 20px;
-    text-align: center;
-    background-color: transparent;
-}
-
-.bloque-frase-central .frase-script {
-    font-size: clamp(40px, 6vw, 80px);
-    color: rgba(139, 0, 0, 0.7);
-}
-
-.footer-historia {
-    padding: 100px 0;
-    text-align: center;
-    opacity: 0.6;
-}
-
-.foto-wrapper {
-    overflow: hidden;
-}
-
-.foto-wrapper img {
-    filter: sepia(10%) contrast(1.05);
-    transition: transform 1s ease;
-}
-
-.foto-wrapper:hover img {
-    transform: scale(1.05);
-}
-
-.bloque-editorial {
-    margin-bottom: 120px;
+.titulo-historia {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important; /* Tono ligeramente más suave */
+    opacity: 0.9;
+    margin: 0 !important;
 }
 /* #endregion */
 
 
-/* #region 8. MAQUETACIÓN EDITORIAL: GALERÍA POLAROID */
-.contenedor-editorial {
-    position: relative;
-    z-index: 10;
-    margin-top: 160px;
-    padding-top: 60px;
-    padding-bottom: 150px;
+/* #region 8. CAMINO BOTÁNICO: DISEÑO ESCALONADO ESCRITORIO */
+
+/* 1. Visibilidad estricta */
+.diseno-escritorio { display: none !important; }
+.diseno-movil { display: block !important; }
+
+@media (min-width: 1024px) {
+    .diseno-escritorio { display: block !important; }
+    .diseno-movil { display: none !important; }
 }
 
-.timeline-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 80px 40px;
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto 150px auto;
-    position: relative;
-}
-
-.timeline-grid::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(139, 0, 0, 0.2) 10%, rgba(139, 0, 0, 0.2) 90%, transparent);
-    z-index: 1;
-}
-
-.polaroid-item {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    margin-bottom: -40px;
-}
-
-.polaroid-frame {
-    background-color: #8B0000 !important;
-    padding: 10px 10px 45px 10px !important;
-    box-shadow: 15px 25px 45px rgba(0,0,0,0.15) !important;
-    border-radius: 1px;
-    max-width: 320px;
-    transition: all 0.5s ease;
-}
-
-.polaroid-frame img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.1) brightness(0.95);
-    transition: filter 0.6s ease;
-}
-
-.polaroid-frame:hover img {
-    filter: grayscale(0%) contrast(1) brightness(1);
-}
-
-.polaroid-year {
-    font-family: 'Pinyon Script', cursive;
-    color: white;
-    font-size: 26px;
-    text-align: center;
-    display: block;
-    margin-top: 10px;
-}
-
-.polaroid-item:nth-child(odd) {
-    justify-content: flex-start;
-    padding-left: 5%;
-}
-
-.polaroid-item:nth-child(odd) .polaroid-frame { 
-    transform: rotate(-2deg); 
-}
-
-.polaroid-item:nth-child(even) {
-    justify-content: flex-end;
-    padding-right: 5%;
-}
-
-.polaroid-item:nth-child(even) .polaroid-frame { 
-    transform: rotate(2deg); 
-}
-
-.polaroid-item:hover {
-    z-index: 100;
-}
-
-.polaroid-item:hover .polaroid-frame {
-    transform: scale(1.05) rotate(0deg) !important;
-    box-shadow: 0 25px 50px rgba(139, 0, 0, 0.1) !important;
-}
-
-@media (max-width: 1149px) {
-    .timeline-grid {
-        grid-template-columns: 1fr !important;
-        gap: 140px 0 !important;
-        max-width: 450px;
+/* 2. ESCRITORIO: FILAS DESPLAZADAS */
+@media (min-width: 1024px) {
+    .camino-botanico { 
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 80px 40px;
+        padding: 80px 50px;
+        max-width: 1100px;
+        margin: 0 auto;
+        align-items: start;
+    }
+    
+    .punto-historia { 
+        display: flex; flex-direction: column; align-items: center; 
+        text-align: center; position: relative;
     }
 
-    .polaroid-item {
-        display: flex !important;
-        width: 100% !important;
+    /* FILA 1: Mover ligeramente a la izquierda */
+    .punto-historia:nth-child(-n+4) {
+        margin-right: 50px; 
     }
+
+    /* FILA 2: Mover a la derecha */
+    .punto-historia:nth-child(n+5) {
+        margin-left: 100px;
+    }
+
+    /* Estilos de elementos */
+    .diseno-escritorio .foto-ovalada { 
+        width: 180px; height: 180px; border-radius: 50%; 
+        overflow: hidden; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .diseno-escritorio .foto-ovalada img { width: 100%; height: 100%; object-fit: cover; }
+    .diseno-escritorio .año-script { font-family: 'Pinyon Script', cursive; font-size: 42px; color: #8B0000; display: block; margin-bottom: 5px; }
+    .diseno-escritorio .hito-texto { font-family: 'Playfair Display', serif; font-size: 18px; color: #5D6D7E; }
+
+    /* Copos posicionados entre fotos */
+    .punto-historia::after { 
+        content: '❄'; position: absolute; right: -40px; top: 60px; 
+        color: #C5A059; font-size: 30px; 
+    }
+    /* Limpieza de copos al final de cada fila */
+    .punto-historia:nth-child(4)::after, .punto-historia:last-child::after { display: none !important; }
 }
+
+/* 3. MÓVIL: SIN CAMBIOS (Se queda centrado) */
+.diseno-movil { width: 90%; margin: 40px auto; display: flex; flex-direction: column; align-items: center; }
+.punto-historia-movil { margin-bottom: 50px; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; }
+.foto-ovalada-movil { width: 120px; height: 120px; border-radius: 50%; clip-path: circle(50% at 50% 50%); overflow: hidden; margin-bottom: 15px; background: #fff; }
+.diseno-movil .año-script { font-family: 'Pinyon Script', cursive; font-size: 28px; color: #8B0000; display: block; }
+.diseno-movil .hito-texto { font-family: 'Playfair Display', serif; font-size: 14px; color: #5D6D7E; margin: 0; }
+.punto-historia-movil::after { content: '❄'; display: block; margin-top: 25px; color: #C5A059; font-size: 20px; }
+.foto-ovalada-movil img { width: 100%; height: 100%; object-fit: cover; }
+.punto-historia-movil:last-child::after { display: none !important; }
+
 /* #endregion */
-
 
 /* #region 9. INTERFAZ INTERACTIVA: MODAL DE ASISTENCIA EXPANSIBLE */
 .asistencia-full-page {
