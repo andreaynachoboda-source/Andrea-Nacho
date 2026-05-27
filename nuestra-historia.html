@@ -8,28 +8,138 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
-<div id="seccion-asistencia-overlay" class="asistencia-full-page">
-    <button class="cerrar-asistencia" onclick="cerrarAsistencia()">&times;</button>
-    
-    <main class="header-historia">
-        <div class="contenedor-camino">
-            <div class="titulo-historia">
-                <h1 class="nombre-script">Asistencia</h1>
+
+
+ <div id="seccion-asistencia-overlay" class="asistencia-full-page">
+        <div class="contenedor-formulario-centrado">
+            <button class="cerrar-asistencia">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="formulario-boda">
+                <h1 class="titulo-asistencia" style="color: #8B0000 !important; text-align: center;">Asistencia</h1>
+                <p class="subtitulo-etiqueta">Por favor, confirma tu presencia en nuestro gran día</p>
             </div>
-            <div class="contenedor-formulario-centrado">
-                <p style="font-family: 'Playfair Display'; text-align: center; color: #5d6d7e; letter-spacing: 2px;">
-                    PRÓXIMAMENTE EL FORMULARIO
-                </p>
-            </div>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSd9njxF7JqC1Iv31iT0pjI1ti4DAZNm0GTBwpf4nlHtOXzxRA/formResponse" method="POST" id="form-boda" target="hidden_iframe" class="formulario-boda" autocomplete="off">
+                
+                <div class="grupo-input-nombre">
+                    <label style="color: #111E38 !important;">Nombre y Apellidos <span class="asterisco-rojo">*</span></label>
+                    <input type="text" name="entry.85827570" placeholder="Tu nombre completo..." required style="color: #333333 !important;">
+                </div>
+
+                <div class="grupo-input-asistencia">
+                    <label class="titulo" style="color: #111E38 !important;">¿Podréis acompañarnos? <span class="asterisco-rojo">*</span></label>
+                    <div class="opciones-radio">
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1044971269" value="¡Sí, allí estaré!" onclick="gestionarAsistencia(true)" required> ¡Sí, allí estaré!</label>
+                        <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1044971269" value="Lo siento, no puedo ir" onclick="gestionarAsistencia(false)"> Lo siento, no puedo ir</label>
+                    </div>
+                </div>
+
+                <div id="bloque-confirmado" style="display:none;">
+                    
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">DNI / Pasaporte <span class="asterisco-rojo">*</span></label>
+                        <input type="text" id="dni-principal-input" name="entry.1693712857" placeholder="Escribe tu DNI o Pasaporte..." style="color: #333333 !important;">
+                    </div>
+
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">Tus Alergias o Intolerancias</label>
+                        <input type="text" name="entry.750939641" placeholder="Ninguna, celíaco, etc..." style="color: #333333 !important;">
+                    </div>
+
+                    <div class="grupo-input-asistencia">
+                        <label class="titulo" style="color: #111E38 !important;">¿Vienes acompañado/a? <span class="asterisco-rojo">*</span></label>
+                        <div class="opciones-radio">
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1318985222" value="Sí" onclick="verAcompanante(true)"> Sí</label>
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.1318985222" value="No" onclick="verAcompanante(false)" checked> No</label>
+                        </div>
+                    </div>
+
+                    <div id="bloque-seccion-acomp" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">Nombre y Apellidos del acompañante</label>
+                            <input type="text" name="entry.1717837555" placeholder="Nombre de tu acompañante..." style="color: #333333 !important;">
+                        </div>
+
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">DNI / Pasaporte del acompañante <span class="asterisco-rojo">*</span></label>
+                            <input type="text" id="dni-acompanante-input" name="entry.41774219" placeholder="DNI de tu acompañante..." style="color: #333333 !important;">
+                        </div>
+
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">Alergias o menú especial del acompañante</label>
+                            <input type="text" name="entry.645895321" placeholder="Alergias de tu acompañante..." style="color: #333333 !important;">
+                        </div>
+                    </div>
+
+                    <div class="grupo-input-asistencia">
+                        <label class="titulo" style="color: #111E38 !important;">¿Asistís con hijos mayores de 14 años? <span class="asterisco-rojo">*</span></label>
+                        <div class="opciones-radio">
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.504827782" value="Sí" onclick="verHijosMayores(true)"> Sí</label>
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.504827782" value="No" onclick="verHijosMayores(false)" checked> No</label>
+                        </div>
+                    </div>
+
+                    <div id="bloque-seccion-hijos-mayores" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px; width: 100%; max-width: 600px; margin: 0 auto 40px auto;">
+                        <div class="grupo-input-nombre" style="width: 100%;">
+                            <label style="color: #111E38 !important; line-height: 1.4;">Datos de los hijos y sus parejas (Nombre y Apellidos + DNI + alergias) <span class="asterisco-rojo">*</span></label>
+                            <p style="font-size: 13px; color: #7f8c8d; font-style: italic; margin-top: -5px; margin-bottom: 10px; max-width: 500px; text-align: center; line-height: 1.4;">
+                                Por motivos de seguridad, la Armada solicita el DNI de todos los asistentes mayores de 14 años.
+                            </p>
+                            <textarea id="hijos-mayores-input" name="entry.672410260" placeholder="Ejemplo: &#10;Hijo 1: Alejandro Pérez - 12345678A - Sin alergias&#10;Pareja Hijo 1: Marta Gómez - 87654321B - Celíaca" style="width: 100% !important; min-height: 120px; font-family: 'Playfair Display', serif; font-size: 16px; padding: 12px; border: 1px solid rgba(139, 0, 0, 0.2); border-radius: 5px; background: transparent; color: #333; resize: vertical; outline: none; text-align: left; box-sizing: border-box;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="grupo-input-asistencia">
+                        <label class="titulo" style="color: #111E38 !important;">¿Asistís con niños menores de 14 años? <span class="asterisco-rojo">*</span></label>
+                        <div class="opciones-radio">
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.769120622" value="Sí" onclick="verNinos(true)"> Sí</label>
+                            <label style="color: #7f8c8d !important;"><input type="radio" name="entry.769120622" value="No" onclick="verNinos(false)" checked> No</label>
+                        </div>
+                    </div>
+
+                    <div id="bloque-seccion-ninos" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">¿Cuántos niños os acompañan?</label>
+                            <input type="text" name="entry.1965253487" placeholder="Número de niños menores..." style="color: #333333 !important;">
+                        </div>
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">Nombres y edades de los niños</label>
+                            <input type="text" name="entry.1079713451" placeholder="Ej: Lucas (5), Sofía (8)..." style="color: #333333 !important;">
+                        </div>
+                        <div class="grupo-input-nombre">
+                            <label style="color: #111E38 !important;">Alergias o intolerancias de los niños <span class="asterisco-rojo">*</span></label>
+                            <input type="text" id="alergias-ninos-input" name="entry.430685118" placeholder="Alergias o intolerancias de los pequeños..." style="color: #333333 !important;">
+                        </div>
+                    </div>
+
+                    <div class="grupo-input-telefono">
+                        <label style="color: #111E38 !important;">Un número de contacto <span class="asterisco-rojo">*</span></label>
+                        <input type="tel" name="entry.112131532" placeholder="Escribe tu teléfono móvil..." style="color: #333333 !important;">
+                    </div>
+
+                    <div class="grupo-input-nombre">
+                        <label style="color: #111E38 !important;">¿Qué canción no puede faltar en la fiesta?</label>
+                        <input type="text" name="entry.1309928777" placeholder="Dinos ese temazo que te hace bailar..." style="color: #333333 !important;">
+                    </div>
+
+                </div> 
+
+                <button type="submit" class="btn-confirmar-grande" style="margin-top: 30px;">ENVIAR</button>
+            </form>
+
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="comprobarEnvioReal()"></iframe>
         </div>
-    </main>
 </div>
 
 <body class="pagina-interna">
 
-    <nav class="navbar">
+<nav class="navbar">
     <div class="nav-container">
-        
         <button class="menu-toggle" id="menuToggle">
             <span></span><span></span><span></span>
         </button>
@@ -41,7 +151,7 @@
         </div>
 
         <div class="asistencia-centro">
-            <a href="asistencia.html" class="btn-asistencia">Asistencia</a>
+            <a href="#" class="btn-asistencia" onclick="event.preventDefault(); abrirAsistencia();">Asistencia</a>
         </div>
 
         <div class="desktop-menu menu-right">
@@ -59,116 +169,66 @@
     </div>
 </nav>
 
-    <header class="header-historia">
-        <div class="titulo-historia">
-            <h1 class="nombre-script">Nuestra Historia</h1>
-        </div>
-    </header>
+<main class="contenedor-historia-general">
+    <section class="header-historia">
+        <h1 class="titulo-historia">Nuestra Historia</h1>
+    </section>
 
-    <main class="contenedor-camino">
+    <div class="diseno-escritorio">
         <div class="camino-botanico">
-            
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2019</span>
-                    <p class="hito-texto">El Comienzo</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2019.png" alt="2019" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2020</span>
-                    <p class="hito-texto">Post pandemia</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2020.png" alt="2020" loading="lazy">
-                </div>
-            </div>
-
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2021</span>
-                 <p class="hito-texto">Veranos al sol</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2021.png" alt="2021" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2022</span>
-                    <p class="hito-texto">Graduación</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2022.png" alt="2022" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2023</span>
-                    <p class="hito-texto">Rutas</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2023.png" alt="2023" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2024</span>
-                    <p class="hito-texto">Viajes</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2024.png" alt="2024" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2025</span>
-                    <p class="hito-texto">El "Sí, quiero"</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2025.png" alt="2025" loading="lazy">
-                </div>
-            </div>
-
-            <div class="punto-historia">
-                <div class="texto-historia">
-                    <span class="año-script">2026</span>
-                    <p class="hito-texto">Objetivos</p>
-                </div>
-                <div class="foto-ovalada">
-                    <img src="img/Foto2026.png" alt="2026" loading="lazy">
-                </div>
-            </div>
-
-            
-
-            </div>
-    </main>
-
-    <div class="mobile-overlay" id="mobileMenu">
-        <div class="mobile-nav-content">
-            <a href="index.html" class="mobile-link">Inicio</a>
-            <a href="la-boda.html" class="mobile-link">La Boda</a>
-            <a href="direccion.html" class="mobile-link">Dirección</a>
-            <a href="alojamientos.html" class="mobile-link">Alojamiento</a>
-            <a href="regalos.html" class="mobile-link">Regalos</a>
-            <a href="contacto.html" class="mobile-link">Contacto</a>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2019.png" alt="2019"></div><div class="texto-historia"><span class="año-script">2019</span><p class="hito-texto">El Comienzo</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2020.png" alt="2020"></div><div class="texto-historia"><span class="año-script">2020</span><p class="hito-texto">Post pandemia</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2021.png" alt="2021"></div><div class="texto-historia"><span class="año-script">2021</span><p class="hito-texto">Veranos al sol</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2022.png" alt="2022"></div><div class="texto-historia"><span class="año-script">2022</span><p class="hito-texto">Graduación</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2023.png" alt="2023"></div><div class="texto-historia"><span class="año-script">2023</span><p class="hito-texto">Rutas</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2024.png" alt="2024"></div><div class="texto-historia"><span class="año-script">2024</span><p class="hito-texto">Viajes</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2025.png" alt="2025"></div><div class="texto-historia"><span class="año-script">2025</span><p class="hito-texto">El "Sí, quiero"</p></div></div>
+            <div class="punto-historia"><div class="foto-ovalada"><img src="img/Foto2026.png" alt="2026"></div><div class="texto-historia"><span class="año-script">2026</span><p class="hito-texto">Objetivos</p></div></div>
         </div>
     </div>
 
-    <script>
+    <div class="diseno-movil">
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2019.png" alt="2019"></div><div class="texto-historia-movil"><span class="año-script">2019</span><p class="hito-texto">El Comienzo</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2020.png" alt="2020"></div><div class="texto-historia-movil"><span class="año-script">2020</span><p class="hito-texto">Post pandemia</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2021.png" alt="2021"></div><div class="texto-historia-movil"><span class="año-script">2021</span><p class="hito-texto">Veranos al sol</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2022.png" alt="2022"></div><div class="texto-historia-movil"><span class="año-script">2022</span><p class="hito-texto">Graduación</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2023.png" alt="2023"></div><div class="texto-historia-movil"><span class="año-script">2023</span><p class="hito-texto">Rutas</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2024.png" alt="2024"></div><div class="texto-historia-movil"><span class="año-script">2024</span><p class="hito-texto">Viajes</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2025.png" alt="2025"></div><div class="texto-historia-movil"><span class="año-script">2025</span><p class="hito-texto">El "Sí, quiero"</p></div></div>
+        <div class="punto-historia-movil"><div class="foto-ovalada-movil"><img src="img/Foto2026.png" alt="2026"></div><div class="texto-historia-movil"><span class="año-script">2026</span><p class="hito-texto">Objetivos</p></div></div>
+    </div>
+</main>
+
+<div class="mobile-overlay" id="mobileMenu">
+    <div class="mobile-nav-content">
+        <a href="index.html" class="mobile-link">Inicio</a>
+        <a href="la-boda.html" class="mobile-link">La Boda</a>
+        <a href="direccion.html" class="mobile-link">Dirección</a>
+        <a href="alojamientos.html" class="mobile-link">Alojamiento</a>
+        <a href="regalos.html" class="mobile-link">Regalos</a>
+        <a href="contacto.html" class="mobile-link">Contacto</a>
+       <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); cerrarMenuYAbrirAsistencia();">Asistencia</a>
+    </div>
+</div>
+
+<script>
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileOverlay = document.querySelector('.mobile-overlay');
     const asistenciaOverlay = document.getElementById('seccion-asistencia-overlay');
+
+    window.submitted = false;
+
+    document.getElementById('form-boda').onsubmit = function() {
+        window.submitted = true;
+    };
+
+    function comprobarEnvioReal() {
+        if(window.submitted) {
+            alert('¡Muchas gracias! Hemos recibido vuestra confirmación de asistencia.');
+            cerrarAsistencia();
+            window.submitted = false; 
+        }
+    }
 
     // --- LÓGICA HAMBURGUESA ---
     menuToggle.addEventListener('click', () => {
@@ -185,17 +245,65 @@
 
     // --- LÓGICA ASISTENCIA ---
     function abrirAsistencia() {
+        asistenciaOverlay.style.display = 'block';
         asistenciaOverlay.classList.add('active');
-        // Cerramos el menú hamburguesa si estaba abierto
         mobileOverlay.classList.remove('active');
         menuToggle.classList.remove('open');
     }
 
     function cerrarAsistencia() {
+        asistenciaOverlay.style.display = 'none';
         asistenciaOverlay.classList.remove('active');
     }
 
-    // Buscamos todos los botones que digan "Asistencia" en esta página
+    document.querySelector('.cerrar-asistencia').addEventListener('click', cerrarAsistencia);
+
+    function gestionarAsistencia(asiste) {
+        const bloque = document.getElementById('bloque-confirmado');
+        const inputDniPrincipal = document.getElementById('dni-principal-input');
+        
+        bloque.style.display = asiste ? 'block' : 'none';
+        document.getElementsByName('entry.112131532')[0].required = asiste; 
+        
+        if (inputDniPrincipal) {
+            inputDniPrincipal.required = asiste;
+            if (!asiste) inputDniPrincipal.value = ''; 
+        }
+        
+        if (!asiste) {
+            verAcompanante(false);
+            verHijosMayores(false);
+            verNinos(false);
+        }
+    }
+
+    function verAcompanante(mostrar) {
+        document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
+        const inputDni = document.getElementById('dni-acompanante-input');
+        if (inputDni) {
+            inputDni.required = mostrar;
+            if (!mostrar) inputDni.value = ''; 
+        }
+    }
+
+    function verHijosMayores(mostrar) {
+        document.getElementById('bloque-seccion-hijos-mayores').style.display = mostrar ? 'block' : 'none';
+        const inputHijos = document.getElementById('hijos-mayores-input');
+        if (inputHijos) {
+            inputHijos.required = mostrar;
+            if (!mostrar) inputHijos.value = ''; 
+        }
+    }
+
+    function verNinos(mostrar) {
+        document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
+        const inputAlergias = document.getElementById('alergias-ninos-input');
+        if (inputAlergias) {
+            inputAlergias.required = mostrar;
+            if (!mostrar) inputAlergias.value = ''; 
+        }
+    }
+
     document.querySelectorAll('.btn-asistencia, .mobile-link').forEach(boton => {
         if(boton.textContent.trim().toLowerCase().includes('asistencia')) {
             boton.addEventListener('click', (e) => {
@@ -204,9 +312,23 @@
             });
         }
     });
+
+
+    window.cerrarMenuYAbrirAsistencia = () => {
+    // 1. Buscamos el menú móvil
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuToggle = document.getElementById('menuToggle');
+    
+    // 2. Le decimos al menú: "¡Cierra!"
+    if (mobileMenu) mobileMenu.classList.remove('active');
+    if (menuToggle) menuToggle.classList.remove('active');
+    
+    // 3. Le decimos a la página: "¡Deja que el usuario mueva la pantalla otra vez!"
+    document.body.style.overflow = 'auto';
+    
+    // 4. Finalmente, le decimos al formulario: "¡Ábrete, sésamo!"
+    window.abrirAsistencia();
+};
 </script>
-
-
-
 </body>
 </html>
