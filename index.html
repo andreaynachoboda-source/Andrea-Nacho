@@ -301,14 +301,17 @@
     }
 
     
+  
     function cerrarAsistencia() {
-        document.querySelector('.asistencia-full-page').classList.remove('active');}
-        document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.asistencia-full-page').classList.remove('active');
+    } // <--- Este cierre es prematuro
+    document.addEventListener('DOMContentLoaded', function() {
         const botonCerrar = document.querySelector('.cerrar-asistencia');
         if (botonCerrar) {
             botonCerrar.addEventListener('click', cerrarAsistencia);
         }
 });
+
 </script> 
 </body>
 </html>
