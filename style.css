@@ -261,7 +261,7 @@ html, body {
     /* Aplicamos la nueva animación */
     animation: bajarDesdeArriba 1s ease-out forwards;
 }
-
+/* #endregion */
 
 /* #region 3. MENÚ OVERLAY DESPLEGABLE (MÓVIL) */
 .mobile-overlay {
@@ -366,6 +366,7 @@ html, body {
     cursor: pointer;
 }
 
+
 .btn-asistencia:hover {
     background-color: #8B0000 !important;
     color: #ffffff !important;
@@ -445,6 +446,31 @@ html, body {
     .asistencia-centro {
         grid-column: 2;
         justify-content: center;
+    }
+}
+
+
+/* --- AJUSTE TÁCTIL ELEGANTE: MÓVIL EN NUESTRA HISTORIA --- */
+@media (max-width: 1149px) {
+    .pagina-interna .btn-asistencia {
+        /* Estado inicial: Transparente y sutil */
+        opacity: 1 !important;
+        background-color: rgba(100, 115, 125, 0.20) !important;
+        border: 1.5px solid rgba(100, 115, 125, 0.5) !important;
+        color: #8B0000 !important;
+        
+        /* Esta transición es la clave de la elegancia */
+        transition: all 0.3s ease !important; 
+    }
+
+    /* ESTADO AL PULSAR CON EL DEDO (Active) */
+    .pagina-interna .btn-asistencia:active {
+        /* Al pulsar, el fondo se oscurece ligeramente y el borde se define */
+        background-color: rgba(100, 115, 125, 0.15) !important;
+        border: 1.5px solid rgba(100, 115, 125, 0.9) !important;
+        
+        /* Un pequeño efecto de escala para que se sienta físico */
+        transform: scale(0.96) !important;
     }
 }
 /* #endregion */
@@ -613,7 +639,7 @@ html, body {
 /* #region 7. TÍTULO DE PÁGINA (CORREGIDO) */
 .header-historia {
     /* 100px es el espacio necesario para que se vea justo debajo de la navbar de 80px */
-    padding-top: 120px; 
+    padding-top: 113px; 
     padding-bottom: 3px;
     display: flex;
     justify-content: center;
@@ -626,9 +652,13 @@ html, body {
     font-family: 'Pinyon Script', cursive !important;
     font-weight: 400 !important;
     font-size: clamp(60px, 12vw, 120px) !important;
-    color: #7a2030 !important; /* Tono ligeramente más suave */
-    opacity: 0.9;
+    color: #7a2030 !important;
     margin: 0 !important;
+    
+    /* Propiedades añadidas para la animación */
+    opacity: 0; 
+    animation: aparecerSuave 0.8s ease-in forwards;
+    animation-delay: 0.3s; /* Un pequeño retraso para que se vea elegante */
 }
 /* #endregion */
 
@@ -680,11 +710,7 @@ html, body {
     .diseno-escritorio .año-script { font-family: 'Pinyon Script', cursive; font-size: 42px; color: #8B0000; display: block; margin-bottom: 5px; }
     .diseno-escritorio .hito-texto { font-family: 'Playfair Display', serif; font-size: 18px; color: #5D6D7E; }
 
-    /* Copos posicionados entre fotos */
-    .punto-historia::after { 
-        content: '❄'; position: absolute; right: -40px; top: 60px; 
-        color: #C5A059; font-size: 30px; 
-    }
+    
     /* Limpieza de copos al final de cada fila */
     .punto-historia:nth-child(4)::after, .punto-historia:last-child::after { display: none !important; }
 }
@@ -695,7 +721,6 @@ html, body {
 .foto-ovalada-movil { width: 120px; height: 120px; border-radius: 50%; clip-path: circle(50% at 50% 50%); overflow: hidden; margin-bottom: 15px; background: #fff; }
 .diseno-movil .año-script { font-family: 'Pinyon Script', cursive; font-size: 28px; color: #8B0000; display: block; }
 .diseno-movil .hito-texto { font-family: 'Playfair Display', serif; font-size: 14px; color: #5D6D7E; margin: 0; }
-.punto-historia-movil::after { content: '❄'; display: block; margin-top: 25px; color: #C5A059; font-size: 20px; }
 .foto-ovalada-movil img { width: 100%; height: 100%; object-fit: cover; }
 .punto-historia-movil:last-child::after { display: none !important; }
 
@@ -975,6 +1000,232 @@ html, body {
     to { 
         opacity: 1; 
         transform: translateY(0);
+    }
+}
+/* #endregion */
+
+
+/* #region 13. SECCIÓN: EL GRAN DÍA (CORREGIDO) */
+
+.seccion-boda {
+    padding-top: 113px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column; /* Asegura que título y caja vayan uno debajo del otro */
+    align-items: center;
+    width: 100%;
+}
+
+.titulo-boda {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.titulo-timeline {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 24px !important;
+    font-style: italic;
+    color: #5d6d7e !important;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 0px !important;
+    margin-bottom: 40px !important;
+    text-align: center !important;
+    display: block !important;
+    width: 100%;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+    animation-delay: 0.3s;
+}
+
+.caja-estilo {
+    background: rgba(255, 255, 255, 0.6); 
+    border: 1px solid rgba(139, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 50px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    max-width: 700px;
+    width: 90%; 
+    margin: -30px auto 20px auto !important;
+    backdrop-filter: blur(10px);
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 50px; /* <--- Aumenta este valor para bajar todo el contenido */
+}
+
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: rgba(139, 0, 0, 0.2);
+    top: 0px !important;       /* Esto fuerza que la línea toque el tope del contenedor */
+    height: 100% !important; 
+}
+
+
+/* 1. Contenedor de cada evento */
+.timeline-item {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* CAMBIO: alineamos al inicio (arriba) */
+    padding-bottom: 40px;
+    position: relative;
+    gap: 0; 
+    margin-bottom: 100px !important;
+}
+
+
+/* 2. Estilo de la hora  */
+.timeline-time {
+    flex: 1;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px !important;
+    color: #111E38;
+    line-height: 20px;    /* IGUALA el line-height al del h3 */
+}
+
+/* 3. Estilo del contenido (título y descripción) */
+.timeline-content {
+    flex: 1;
+}
+
+/* 4. Estilo del título del evento (Ceremonia/Recepción) */
+.timeline-content h3 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 20px !important; 
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8B0000 !important;
+    margin: 0 !important; /* BORRA el margin-bottom: 5px */
+    line-height: 20px;    /* IGUALA el line-height a tu font-size */
+}
+
+/* 5. Estilo de la descripción (texto en cursiva) */
+.timeline-content p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #5d6d7e;
+    font-size: 16px;
+    line-height: 1.5; /* Mejora la legibilidad al aumentar la letra */
+    margin-top: 8px !important; /* Separa un poco el subtexto del título h3 */
+}
+
+/* Forzamos que el punto esté en el centro sin ocupar espacio extra en el flex */
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #8B0000;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* AJUSTE SIMÉTRICO: Todos los paddings son iguales para que la separación sea uniforme */
+
+/* Lado IMPAR */
+.timeline-item:nth-child(odd) .timeline-time { 
+    text-align: right; 
+    padding-right: 40px; /* Separación de la hora hacia el centro */
+}
+
+.timeline-item:nth-child(odd) .timeline-content { 
+    text-align: left; 
+    padding-left: 40px;  /* Separación del título hacia el centro */
+}
+
+/* Lado PAR */
+.timeline-item:nth-child(even) .timeline-time { 
+    text-align: left; 
+    padding-left: 40px;  /* Debe ser igual al padding-right del impar */
+    order: 2; 
+}
+
+.timeline-item:nth-child(even) .timeline-content { 
+    text-align: right; 
+    padding-right: 40px; /* Debe ser igual al padding-left del impar */
+    order: 1; 
+}
+/* #region 13. SECCIÓN: EL GRAN DÍA (MÓVIL LIMPIO) */
+@media (max-width: 600px) {
+
+    .titulo-timeline {
+        font-family: 'Playfair Display', serif !important;
+        font-size: 14px !important;
+        font-style: italic;
+        color: #5d6d7e !important;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        margin-top: 0px !important;
+        margin-bottom: 20px !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100%;
+        opacity: 0;
+        animation: aparecerSuave 0.8s ease-in forwards;
+        animation-delay: 0.3s;
+    }
+
+    /* Contenedor principal de la línea */
+    .timeline-container {
+        margin-top: 0px !important;
+    }
+
+    .timeline-container::before {
+        top: 25px !important;
+        height: calc(100% - 25px) !important;
+    }
+
+    /* Configuración de cada fila */
+    .timeline-item {
+        display: flex !important;
+        align-items: center !important;
+        margin-bottom: 30px !important; /* Separación vertical entre bloques */
+        position: relative;
+    }
+
+    /* Unificación de espacios para hora y contenido */
+    .timeline-time, 
+    .timeline-content {
+        flex: 1 !important;
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+        margin-bottom: 0 !important; /* Eliminamos márgenes internos que causaban errores */
+    }
+
+    /* Ajustes de tipografía */
+    .timeline-time { 
+        font-size: 16px !important; 
+        text-align: right; 
+    }
+    
+    .timeline-content h3 { 
+        font-size: 15px !important; 
+    }
+
+    /* Limpieza de reglas pares/impares para evitar saltos visuales */
+    .timeline-item:nth-child(even) .timeline-time,
+    .timeline-item:nth-child(even) .timeline-content {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+
+    .timeline-content p {
+        font-size: 14px !important; /* Ajusta este valor según prefieras (ej. 12px o 13px) */
     }
 }
 /* #endregion */
