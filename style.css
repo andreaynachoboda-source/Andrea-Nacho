@@ -268,8 +268,8 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
+    width: 100% !important;
+    height: 100vh !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -289,12 +289,12 @@ html, body {
 .mobile-overlay::after {
     content: "";
     display: block;
-    width: 220px;
-    height: 80px;
+    width: 180px;
+    height: 60px;
     background: url('img/Hojas_pino.png') center/contain no-repeat;
     filter: sepia(100%) saturate(600%) hue-rotate(-60deg) brightness(0.35) contrast(1.1);
     opacity: 0.7;
-    margin-top: 40px;
+    margin-top: 30px;
     transform: rotate(180deg);
     transition: all 0.3s ease;
 }
@@ -303,7 +303,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 30px;
 }
 
 .mobile-link {
@@ -1004,8 +1004,8 @@ html, body {
 }
 /* #endregion */
 
+/* #region 13. SECCIÓN LA BODA */
 
-/* #region 13. SECCIÓN: EL GRAN DÍA (CORREGIDO) */
 
 .seccion-boda {
     padding-top: 113px;
@@ -1226,6 +1226,194 @@ html, body {
 
     .timeline-content p {
         font-size: 14px !important; /* Ajusta este valor según prefieras (ej. 12px o 13px) */
+    }
+}
+/* #endregion */
+
+
+
+/* #region 14. SECCIÓN: DIRECCIÓN */
+
+.seccion-direccion {
+    padding-top: 113px; /* Espacio para que empiece debajo de la navbar */
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo-direccion {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.caja-estilo-direccion {
+    /* Eliminamos fondo, bordes, sombras y desenfoque */
+    background: transparent !important; 
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    
+    /* Mantenemos el espaciado y estructura */
+    padding: 20px 0; /* Ajustado para que respire sin el marco */
+    max-width: 800px; 
+    width: 90%; 
+    margin: 0 auto !important;
+    margin-top: -20px !important;
+}
+
+/* --- ESTILO PARA EL ENLACE DEL MAPA --- */
+.link-mapa {
+    color: #924040 !important; /* Tu color Burdeos */
+    text-decoration: none; /* Quitamos el subrayado feo del navegador */
+    border-bottom: 1px solid rgba(146, 64, 64, 0.4); /* Un toque sutil y elegante */
+    padding-bottom: 2px; /* Espacio para que no se pegue */
+    transition: all 0.3s ease;
+}
+
+.link-mapa:hover {
+    color: #5d0000; /* Un tono apenas un poco más profundo al pasar el ratón */
+    border-bottom: 1px solid #8B0000; /* El borde se marca más al interactuar */
+}
+
+
+/* Estilo para los párrafos principales */
+.parrafo-direccion {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #2c3e50; /* Azul oscuro para lectura clara */
+    line-height: 1.8; /* Más espaciado entre líneas para textos largos */
+    text-align: center; /* Centrado elegante */
+    margin-bottom: 25px !important;
+}
+
+/* Estilo específico para la nota con asterisco */
+.nota-acceso {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5d6d7e; /* Gris suave */
+    line-height: 1.6;
+    text-align: center;
+    margin-top: -10px !important; /* Juntar un poco a la nota anterior */
+    margin-bottom: 30px !important;
+}
+
+/* Estilo para los párrafos de estacionamiento y DNI (Mismo estilo que principal) */
+.parrafo-importante-direccion {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #111E38;
+    line-height: 1.8;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 25px !important;
+}
+
+/* --- CONTENEDOR PARA LAS DOS ILUSTRACIONES --- */
+.contenedor-ilustraciones-direccion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Espacio entre las dos imágenes */
+    margin-top: 50px;
+    width: 100%;
+    flex-wrap: wrap; /* Para que en móvil se pongan una debajo de otra */
+}
+.contenedor-imagen-acuarela {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    background: #ffffff; /* Aseguramos fondo blanco para el marco */
+    padding:3px 3px 30px 3px !important;
+    padding-bottom: 20px; /* Esto da espacio entre el texto y el borde inferior */
+}
+
+.pie-acuarela {
+    font-family: 'Playfair Display', serif;
+    color: #111E38; 
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 15px 10px 0 10px; /* Añadimos márgenes laterales por seguridad */
+    margin-top: -5px !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.contenedor-imagen-acuarela img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto opcional: un pequeño zoom al pasar el ratón */
+.contenedor-imagen-acuarela img:hover {
+    transform: scale(1.02);
+}
+
+.ilustracion-item {
+    flex: 1;
+    max-width: 350px;
+    min-width: 280px;
+    /* CAMBIO AQUÍ: Cambiamos a columna para que el texto quede debajo de la imagen */
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Aseguramos que la imagen dentro del item no se vea afectada por el flex horizontal */
+.ilustracion-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block; /* Importante para que no haya espacio extra debajo */
+}
+
+
+
+/* --- ADAPTACIÓN MÓVIL (Región 14) --- */
+@media (max-width: 600px) {
+    .caja-estilo-direccion {
+        padding: 40px 20px;
+    }
+
+    .caja-estilo-direccion h2 {
+        font-size: 20px !important;
+        letter-spacing: 3px;
+    }
+
+    .parrafo-direccion,
+    .parrafo-importante-direccion {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .nota-acceso {
+        font-size: 14px;
+    }
+
+    .contenedor-ilustraciones-direccion {
+        gap: 20px; /* Menos espacio en móvil */
+        flex-direction: column; /* Una debajo de otra */
+    }
+
+    .ilustracion-item {
+        max-width: 100%; /* Ocupan todo el ancho en móvil */
     }
 }
 /* #endregion */
