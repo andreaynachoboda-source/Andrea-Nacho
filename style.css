@@ -726,23 +726,68 @@ html, body {
 
 /* #endregion */
 
-/* #region 9. INTERFAZ INTERACTIVA: MODAL DE ASISTENCIA EXPANSIBLE */
+/* #region 9 y 11 UNIFICADOS: MODAL DE ASISTENCIA */
+
+/* Estado oculto por defecto */
 .asistencia-full-page {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 3000 !important;
-    display: none;
-    background: #fdfdfd url('img/TesturaAcuarela.png');
-    transform-origin: top center; 
+    z-index: 9999;
+    background-color: #ffffff;
+    background-image: url('img/TesturaAcuarela.png');
+    display: none; /* OCULTO POR DEFECTO */
     overflow-y: auto;
 }
 
+/* Cuando el JS añade la clase 'active', se muestra */
 .asistencia-full-page.active {
-    display: block;
-    animation: expandirDesdeBoton 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    display: block !important;
+    animation: bajarDesdeArriba 0.6s ease-out forwards;
+}
+
+@keyframes bajarDesdeArriba {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+/* Botón de cierre */
+.cerrar-asistencia {
+    position: fixed !important;
+    top: 20px !important;
+    left: 20px !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    border-radius: 50% !important;
+    padding: 10px !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 10000 !important;
+    color: #8B0000 !important;
+}
+
+@media (min-width: 1025px) {
+    .cerrar-asistencia {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+        background: none !important;
+    }
+    .contenedor-formulario-centrado {
+        max-width: 800px;
+        margin: 80px auto !important;
+        padding: 60px 100px !important;
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+    }
+}
+
+/* Nueva regla para anular la animación */
+.asistencia-full-page.no-animar {
+    animation: none !important;
 }
 /* #endregion */
 
@@ -762,7 +807,7 @@ html, body {
     font-size: clamp(80px, 12vw, 150px) !important;
     color: #8B0000 !important;
     text-align: center !important;
-    margin-top: 0 !important;
+    margin-top: 80px !important;
     padding-top: 0 !important;
     line-height: 1.0 !important;
 }
@@ -775,7 +820,14 @@ html, body {
     text-align: center;
     display: block;
     margin-top: -20px !important;  
-    margin-bottom: 80px !important; 
+    margin-bottom: 90px !important; 
+}
+
+/* Ajuste de separación del subtítulo solo en móvil */
+@media (max-width: 1024px) {
+    .subtitulo-etiqueta {
+        margin-bottom: 150px !important; /* Ajusta este valor a tu gusto */
+    }
 }
 
 .formulario-boda input[type="text"],
@@ -787,7 +839,7 @@ html, body {
     border-bottom: 1px solid rgba(139, 0, 0, 0.2) !important;
     background: transparent !important;
     text-align: center;
-    padding: 12px 0 !important; 
+    padding: 12px 0 !important;
     outline: none !important;
     width: 100% !important;
     max-width: 450px !important; 
@@ -918,65 +970,7 @@ html, body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     transition: all 0.3s ease !important;
 }
-/* #endregion */
 
-
-/* #region 11. FORMULARIO ASISTENCIA: CONTROL ÚNICO Y FLUIDO */
-
-/* 1. ESTILOS BASE (Móvil - Se aplica a todo por defecto) */
-.cerrar-asistencia {
-    position: fixed !important;
-    top: 20px !important;
-    left: 20px !important;
-    background: rgba(255, 255, 255, 0.5) !important;
-    border-radius: 50% !important;
-    padding: 10px !important;
-    border: none !important;
-    cursor: pointer !important;
-    z-index: 99999 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease !important;
-    color: #8B0000 !important;
-}
-
-.cerrar-asistencia svg {
-    width: 35px;
-    height: 35px;
-    stroke-width: 1.5;
-}
-
-.contenedor-formulario-centrado {
-    padding: 70px 20px 40px 20px !important; /* Base móvil */
-}
-
-/* 2. ADAPTACIÓN TABLET (A partir de 769px) */
-@media (min-width: 769px) {
-    .contenedor-formulario-centrado {
-        padding: 100px 60px 40px 60px !important; /* Más aire progresivo */
-    }
-}
-
-/* 3. ADAPTACIÓN ORDENADOR (A partir de 1025px - Salto a Absolute) */
-@media (min-width: 1025px) {
-    .cerrar-asistencia {
-        position: absolute !important; /* Cambia de fijo a absoluto */
-        top: 20px !important;
-        right: 20px !important;
-        left: auto !important;
-        background: none !important; 
-    }
-
-    .contenedor-formulario-centrado {
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 60px 100px 40px 100px !important;
-        background-color: rgba(255, 255, 255, 0.95) !important;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
-    }
-}
 /* #endregion */
 
 
@@ -1086,6 +1080,18 @@ html, body {
     margin-bottom: 100px !important;
 }
 
+.link-timeline {
+    color: #111E38 !important; /* Mismo azul que el texto, para que parezca natural */
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(17, 30, 56, 0.3); /* Subrayado fino y elegante */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.link-timeline:hover {
+    color: #8B0000 !important; /* Se vuelve burdeos al pasar el ratón */
+    border-bottom: 1px solid #8B0000;
+}
 
 /* 2. Estilo de la hora  */
 .timeline-time {
@@ -1160,7 +1166,7 @@ html, body {
     padding-right: 40px; /* Debe ser igual al padding-left del impar */
     order: 1; 
 }
-/* #region 13. SECCIÓN: EL GRAN DÍA (MÓVIL LIMPIO) */
+
 @media (max-width: 600px) {
 
     .titulo-timeline {
@@ -1232,9 +1238,9 @@ html, body {
 
 
 
-/* #region 14. SECCIÓN: DIRECCIÓN */
+/* #region 14. SECCIÓN: EL ENTORNO */
 
-.seccion-direccion {
+.seccion-elentorno {
     padding-top: 113px; /* Espacio para que empiece debajo de la navbar */
     padding-bottom: 80px;
     display: flex;
@@ -1243,7 +1249,7 @@ html, body {
     width: 100%;
 }
 
-.titulo-direccion {
+.titulo-elentorno {
     font-family: 'Pinyon Script', cursive !important;
     font-weight: 400 !important;
     font-size: clamp(60px, 12vw, 120px) !important;
@@ -1253,7 +1259,7 @@ html, body {
     animation: aparecerSuave 0.8s ease-in forwards;
 }
 
-.caja-estilo-direccion {
+.caja-estilo-elentorno {
     /* Eliminamos fondo, bordes, sombras y desenfoque */
     background: transparent !important; 
     border: none !important;
@@ -1269,7 +1275,7 @@ html, body {
     margin-top: -20px !important;
 }
 
-/* --- ESTILO PARA EL ENLACE DEL MAPA --- */
+/* --- ESTILO PARA EL ENLACE DE GOOGLE MAPS --- */
 .link-mapa {
     color: #924040 !important; /* Tu color Burdeos */
     text-decoration: none; /* Quitamos el subrayado feo del navegador */
@@ -1285,7 +1291,7 @@ html, body {
 
 
 /* Estilo para los párrafos principales */
-.parrafo-direccion {
+.parrafo-elentorno {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
     color: #2c3e50; /* Azul oscuro para lectura clara */
@@ -1307,7 +1313,7 @@ html, body {
 }
 
 /* Estilo para los párrafos de estacionamiento y DNI (Mismo estilo que principal) */
-.parrafo-importante-direccion {
+.parrafo-importante-elentorno {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
     color: #111E38;
@@ -1318,7 +1324,7 @@ html, body {
 }
 
 /* --- CONTENEDOR PARA LAS DOS ILUSTRACIONES --- */
-.contenedor-ilustraciones-direccion {
+.contenedor-ilustraciones-elentorno {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1329,7 +1335,7 @@ html, body {
 }
 .contenedor-imagen-acuarela {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 30px auto 0 auto;
     overflow: hidden;
     border-radius: 10px;
@@ -1386,34 +1392,337 @@ html, body {
 
 
 
-/* --- ADAPTACIÓN MÓVIL (Región 14) --- */
+/* --- ADAPTACIÓN MÓVIL (Región 14) OPTIMIZADA --- */
 @media (max-width: 600px) {
-    .caja-estilo-direccion {
+    .caja-estilo-elentorno {
         padding: 40px 20px;
     }
 
-    .caja-estilo-direccion h2 {
+    .caja-estilo-elentorno h2 {
         font-size: 20px !important;
         letter-spacing: 3px;
     }
 
-    .parrafo-direccion,
-    .parrafo-importante-direccion {
-        font-size: 15px;
-        line-height: 1.7;
+    /* Ajuste para el look "Editorial" */
+    .parrafo-elentorno,
+    .parrafo-importante-elentorno {
+        font-size: 13.5px !important; /* Más pequeño para que el bloque sea más fino */
+        line-height: 1.8 !important;   /* Más aire entre líneas para compensar el tamaño */
+        letter-spacing: 0.02em !important; /* El toque de lujo que separa las letras */
+        text-align: center !important;
+        width: 95% !important;
+        margin: 0 auto 20px auto !important;
     }
 
-    .nota-acceso {
-        font-size: 14px;
-    }
-
-    .contenedor-ilustraciones-direccion {
-        gap: 20px; /* Menos espacio en móvil */
-        flex-direction: column; /* Una debajo de otra */
+    .contenedor-ilustraciones-elentorno {
+        gap: 20px;
+        flex-direction: column;
     }
 
     .ilustracion-item {
-        max-width: 100%; /* Ocupan todo el ancho en móvil */
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    /* 1. Ajuste para que la acuarela se pegue al texto (Subirla) */
+    .contenedor-imagen-acuarela {
+        margin-top: 0px !important; /* Cuanto más bajo sea este número, más sube */
+        margin-bottom: 20px !important;
+    }
+
+    /* 2. Clase "Sándwich" para las frases que van arriba y abajo */
+    .frase-sandwich {
+        text-align: center !important;
+        width: 75% !important; /* Más estrecho para el efecto sándwich */
+        margin: 15px auto !important;
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        letter-spacing: 0.05em !important;
+        color: #444; /* Un tono gris elegante */
+    }
+   
+}
+
+
+/* #endregion */
+
+
+/* #region 15. SECCIÓN: DIRECCIÓN */
+
+.seccion-direccion {
+    padding-top: 113px; /* Espacio bajo la navbar */
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo-direccion {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+
+/* El enlace principal (más marcado) */
+.link-mapa {
+    color: #924040 !important;
+    border-bottom: 1px solid #924040;
+    text-decoration: none;
+}
+
+/* El nuevo enlace sutil para la calle */
+.link-sutil {
+    color: #5d6d7e !important; /* Un gris-azulado elegante */
+    text-decoration: none;
+    border-bottom: 1px dotted #5d6d7e; /* Punteado en lugar de sólido */
+    font-style: italic; /* Un toque diferenciador */
+    transition: all 0.3s ease;
+}
+
+.link-sutil:hover {
+    color: #924040 !important;
+    border-bottom: 1px solid #924040;
+}
+.caja-estilo-direccion {
+    background: transparent !important; 
+    border: none !important;
+    padding: 20px 0;
+    max-width: 800px; 
+    width: 90%; 
+    margin: 0 auto !important;
+}
+
+
+
+.imagen-mapa {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.imagen-mapa:hover {
+    transform: scale(1.01);
+}
+
+/* --- PÁRRAFOS Y TEXTOS --- */
+.parrafo-direccion, .parrafo-importante-direccion, .nota-acceso {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #2c3e50;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 25px !important;
+}
+
+/* --- ADAPTACIÓN MÓVIL --- */
+@media (max-width: 600px) {
+    .caja-estilo-direccion {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px 20px !important;
+        margin-top: 20px !important;
+    }
+    
+}
+
+/* #endregion */
+
+/* #region 16. SECCIÓN: REGALOS */
+    .seccion-regalos {
+        padding-top: 113px;
+        padding-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .titulo-regalos {
+        font-family: 'Pinyon Script', cursive !important;
+        font-weight: 400 !important;
+        font-size: clamp(60px, 12vw, 120px) !important;
+        color: #7a2030 !important;
+        margin: 0 0 5px 0 !important;
+        opacity: 0;
+        animation: aparecerSuave 0.8s ease-in forwards;
+    }
+
+    .caja-estilo-regalos {
+        background: transparent !important; 
+        border: none !important;
+        padding: 20px 0;
+        max-width: 800px; 
+        width: 90%; 
+        margin: 0 auto !important;
+    }
+
+    .contenedor-cuenta {
+            width: 100%;
+            margin: 30px auto;
+            text-align: center;
+            padding: 30px; /* Aumentamos un poco el padding interno para que respire */
+            
+            /* Fondo y bordes */
+            background: #ffffff !important; /* Fondo blanco sólido */
+            border-radius: 12px;
+            border: 1px solid rgba(139, 0, 0, 0.08); /* Borde muy sutil */
+            
+            /* LA SOMBRA QUE BUSCAS */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important; 
+            
+            /* Transición por si quieres añadir un efecto al pasar el ratón */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+       
+.contenedor-cuenta:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+            transform: translateY(-2px);
+    }
+
+ .numero-iban {
+        display: block;
+        font-family: 'Courier New', Courier, monospace !important; /* Fuente monoespaciada */
+        font-size: 22px;
+        color: #7a2030; /* Un color oscuro sólido para máxima legibilidad */
+        font-weight: 700;
+        margin-top: 15px;
+        letter-spacing: 3px; /* Espaciado extra para que cada número respire */
+        background: #f9f9f9; /* Un fondo muy suave para delimitar el número */
+        padding: 10px;
+        border-radius: 5px;
+ }
+
+ .parrafo-regalos, .parrafo-importante-regalos, .nota-acceso {
+        font-family: 'Playfair Display', serif;
+        font-size: 17px;
+        color: #2c3e50;
+        line-height: 1.8;
+        text-align: center;
+        margin-bottom: 50px !important;
+ }
+.nota-pie-regalos {
+            font-family: 'Playfair Display', serif; /* La misma que los párrafos */
+            font-size: 15px !important; /* Más pequeña para que sea secundaria */
+            font-style: italic; /* El cursiva ayuda a que se lea como una nota personal */
+            color: #555 !important;
+            text-align: center;
+            margin-top: 25px !important;
+            opacity: 0.8;
+}
+
+
+
+.contenedor-cuenta {
+        background: rgba(255, 255, 255, 0.5) !important;
+        border: none !important;
+        box-shadow: none !important;
+        max-width: 800px;             /* Aumentado de 600px a 800px para mayor amplitud */
+        margin: 80px auto !important; /* Más margen superior/inferior */
+        padding: 80px !important;     /* Más aire interior para que el contenido no esté apretado */
+}
+
+    /* 2. Etiqueta más grande */
+.etiqueta-regalo {
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: 15px !important;
+        letter-spacing: 4px !important;
+        text-transform: uppercase;
+        color: #7a2030 !important;
+        margin-bottom: 20px !important;
+}
+
+    /* 3. Nombres con mayor escala */
+.nombres-cuenta {
+        font-size: 24px !important;    /* Aumentamos para que los nombres tengan protagonismo */
+        margin-bottom: 40px !important;
+}
+
+    /* 4. IBAN más generoso */
+.numero-iban {
+        background: transparent !important;
+        border-top: 1px solid rgba(122, 32, 48, 0.2) !important;
+        padding-top: 40px !important;  /* Más separación de la línea */
+        font-size: 26px !important;    /* Aumentamos de 20px a 26px para máxima legibilidad */
+        letter-spacing: 6px !important; /* Más espaciado entre números */
+        color: #7a2030 !important;
+        font-weight: 400;
+}
+
+
+
+@media (max-width: 600px) {
+    /* 1. Contenedor: Limpio, sin bordes agresivos */
+    .contenedor-cuenta {
+        background: rgba(255, 255, 255, 0.6) !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px 20px !important;
+        margin-top: 20px !important;
+    }
+
+    /* 2. Etiqueta: Limpia y minimalista */
+    .etiqueta-regalo {
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: 11px !important;
+        letter-spacing: 4px !important;
+        text-transform: uppercase;
+        color: #7a2030 !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* 3. Nombres: Protagonistas */
+    .parrafo-importante-regalos {
+        font-size: 17px !important;
+        line-height: 1.3 !important;
+        color: #111E38 !important;
+        margin-bottom: 30px !important; /* Más aire para separar de la línea */
+    }
+
+    .nombres-cuenta {
+        font-family: 'Courier New', monospace; /* Elegante y clásica */
+        font-size: 20px !important;            /* Un punto más grande que los párrafos */
+        color: #2c3e50 !important;             /* Un tono gris muy oscuro, casi negro, para elegancia */
+        line-height: 1.4 !important;           /* Un interlineado justo para que los nombres no se peguen */
+        margin-bottom: 25px !important;        /* Espacio para respirar antes del IBAN */
+        font-weight: 500;                      /* Un peso medio para que tengan presencia */
+        letter-spacing: 0.5px;                 /* Una pizca de aire entre letras */
+    }
+    /* 4. El IBAN: Integrado, sin fondo gris */
+    .numero-iban {
+        font-family: 'Courier New', monospace !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;  /* Esta es la línea que añade la negrita */
+        color: #7a2030 !important;
+        letter-spacing: 1.5px !important;
+        display: block;
+        text-align: center;
+        background: transparent !important; 
+        padding-top: 20px !important;
+        border-top: 1px solid rgba(122, 32, 48, 0.2) !important;
+    }
+
+   .nota-pie-regalos {
+        font-family: 'Playfair Display', serif;
+        font-size: 15px !important;    /* Tamaño perfecto para móvil */
+        font-style: italic;
+        line-height: 1.7 !important;   /* Clave: aire extra para la cursiva */
+        color: #444 !important;        /* Contraste óptimo */
+        text-align: center;
+        margin-top: 25px !important;
+        padding: 0 20px !important;    /* Margen para que no toque los bordes del móvil */
+        font-weight: 400 !important;   /* Aseguramos que tenga cuerpo */
     }
 }
+
 /* #endregion */
