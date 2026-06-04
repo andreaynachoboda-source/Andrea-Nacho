@@ -10,7 +10,8 @@
 </head>
 
 
- <div id="seccion-asistencia-overlay" class="asistencia-full-page">
+ 
+    <div id="seccion-asistencia-overlay" class="asistencia-full-page">
         <div class="contenedor-formulario-centrado">
             <button class="cerrar-asistencia">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -146,8 +147,8 @@
 
         <div class="desktop-menu menu-left">
             <a href="index.html" class="nav-link">Inicio</a>
-            <a href="nuestra-historia.html" class="nav-link">Nuestra Historia</a>
             <a href="la-boda.html" class="nav-link">La Boda</a>
+            <a href="el-entorno.html" class="nav-link">El Entorno</a>
         </div>
 
         <div class="asistencia-centro">
@@ -155,7 +156,7 @@
         </div>
 
         <div class="desktop-menu menu-right">
-            <a href="alojamientos.html" class="nav-link">Alojamiento</a>
+            <a href="direccion.html" class="nav-link">Dirección</a>
             <a href="regalos.html" class="nav-link">Regalos</a>
             <a href="contacto.html" class="nav-link">Contacto</a>
         </div>
@@ -203,132 +204,96 @@
     <div class="mobile-nav-content">
         <a href="index.html" class="mobile-link">Inicio</a>
         <a href="la-boda.html" class="mobile-link">La Boda</a>
+        <a href="el-entorno.html" class="mobile-link">El Entorno</a>
         <a href="direccion.html" class="mobile-link">Dirección</a>
-        <a href="alojamientos.html" class="mobile-link">Alojamiento</a>
         <a href="regalos.html" class="mobile-link">Regalos</a>
         <a href="contacto.html" class="mobile-link">Contacto</a>
-        <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); cerrarMenuYAbrirAsistencia();">Asistencia</a>
+        <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); abrirAsistenciaInstantanea();">Asistencia</a>
     </div>
 </div>
 
+
 <script>
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileOverlay = document.querySelector('.mobile-overlay');
-    const asistenciaOverlay = document.getElementById('seccion-asistencia-overlay');
-
-    window.submitted = false;
-
-    document.getElementById('form-boda').onsubmit = function() {
-        window.submitted = true;
-    };
-
-    function comprobarEnvioReal() {
-        if(window.submitted) {
-            alert('¡Muchas gracias! Hemos recibido vuestra confirmación de asistencia.');
-            cerrarAsistencia();
-            window.submitted = false; 
-        }
+    
+    function abrirAsistencia() {
+        const overlay = document.getElementById('seccion-asistencia-overlay');
+        overlay.classList.remove('no-animar'); // Nos aseguramos de que pueda animar
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
-    // --- LÓGICA HAMBURGUESA ---
-    menuToggle.addEventListener('click', () => {
-        mobileOverlay.classList.toggle('active');
-        menuToggle.classList.toggle('open');
-    });
+    // Función para abrir INSTANTÁNEO (Hamburguesa)
+    function abrirAsistenciaInstantanea() {
+        const overlay = document.getElementById('seccion-asistencia-overlay');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuToggle = document.getElementById('menuToggle');
 
-    mobileOverlay.addEventListener('click', (e) => {
-        if (e.target === mobileOverlay) {
-            mobileOverlay.classList.remove('active');
-            menuToggle.classList.remove('open');
-        }
-    });
+        overlay.classList.add('no-animar'); // Quitamos la animación
+        overlay.classList.add('active');    // Mostramos
+        document.body.style.overflow = 'hidden';
 
-    // --- LÓGICA ASISTENCIA ---
-    function abrirAsistencia() {
-        asistenciaOverlay.style.display = 'block';
-        asistenciaOverlay.classList.add('active');
-        mobileOverlay.classList.remove('active');
-        menuToggle.classList.remove('open');
+        // Cerramos el menú
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (menuToggle) menuToggle.classList.remove('open');
     }
 
     function cerrarAsistencia() {
-        asistenciaOverlay.style.display = 'none';
-        asistenciaOverlay.classList.remove('active');
+        const overlay = document.getElementById('seccion-asistencia-overlay');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
 
-    document.querySelector('.cerrar-asistencia').addEventListener('click', cerrarAsistencia);
-
-    function gestionarAsistencia(asiste) {
-        const bloque = document.getElementById('bloque-confirmado');
-        const inputDniPrincipal = document.getElementById('dni-principal-input');
-        
-        bloque.style.display = asiste ? 'block' : 'none';
-        document.getElementsByName('entry.112131532')[0].required = asiste; 
-        
-        if (inputDniPrincipal) {
-            inputDniPrincipal.required = asiste;
-            if (!asiste) inputDniPrincipal.value = ''; 
-        }
-        
-        if (!asiste) {
-            verAcompanante(false);
-            verHijosMayores(false);
-            verNinos(false);
-        }
+    // --- Función llamada desde la hamburguesa ---
+    function cerrarMenuYAbrirAsistencia() {
+        abrirAsistencia();
     }
 
-    function verAcompanante(mostrar) {
-        document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
-        const inputDni = document.getElementById('dni-acompanante-input');
-        if (inputDni) {
-            inputDni.required = mostrar;
-            if (!mostrar) inputDni.value = ''; 
-        }
-    }
-
-    function verHijosMayores(mostrar) {
-        document.getElementById('bloque-seccion-hijos-mayores').style.display = mostrar ? 'block' : 'none';
-        const inputHijos = document.getElementById('hijos-mayores-input');
-        if (inputHijos) {
-            inputHijos.required = mostrar;
-            if (!mostrar) inputHijos.value = ''; 
-        }
-    }
-
-    function verNinos(mostrar) {
-        document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
-        const inputAlergias = document.getElementById('alergias-ninos-input');
-        if (inputAlergias) {
-            inputAlergias.required = mostrar;
-            if (!mostrar) inputAlergias.value = ''; 
-        }
-    }
-
-    document.querySelectorAll('.btn-asistencia, .mobile-link').forEach(boton => {
-        if(boton.textContent.trim().toLowerCase().includes('asistencia')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Evento para el botón de la barra de navegación (usando clase .btn-asistencia)
+        const botones = document.querySelectorAll('.btn-asistencia');
+        botones.forEach(boton => {
             boton.addEventListener('click', (e) => {
-                e.preventDefault(); 
+                e.preventDefault();
                 abrirAsistencia();
+            });
+        });
+
+        // Evento para el botón de cerrar formulario
+        const botonCerrar = document.querySelector('.cerrar-asistencia');
+        if (botonCerrar) {
+            botonCerrar.addEventListener('click', cerrarAsistencia);
+        }
+
+        // --- Lógica Menú Hamburguesa ---
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                menuToggle.classList.toggle('open');
             });
         }
     });
 
-
-    window.cerrarMenuYAbrirAsistencia = () => {
-    // 1. Buscamos el menú móvil
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuToggle = document.getElementById('menuToggle');
-    
-    // 2. Le decimos al menú: "¡Cierra!"
-    if (mobileMenu) mobileMenu.classList.remove('active');
-    if (menuToggle) menuToggle.classList.remove('active');
-    
-    // 3. Le decimos a la página: "¡Deja que el usuario mueva la pantalla otra vez!"
-    document.body.style.overflow = 'auto';
-    
-    // 4. Finalmente, le decimos al formulario: "¡Ábrete, sésamo!"
-    window.abrirAsistencia();
-};
+    // --- Lógica de visibilidad del formulario (Sin cambios) ---
+    function gestionarAsistencia(si) {
+        document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none';
+    }
+    function verAcompanante(si) {
+        document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none';
+    }
+    function verHijosMayores(si) {
+        document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none';
+    }
+    function verNinos(si) {
+        document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none';
+    }
+    function comprobarEnvioReal() {
+        alert("¡Muchas gracias por confirmar tu asistencia!");
+        cerrarAsistencia();
+        document.getElementById('form-boda').reset();
+    }
 </script>
+
 </body>
 </html>
