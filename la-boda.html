@@ -141,10 +141,10 @@
                 <span></span><span></span><span></span>
             </button>
 
-            <div class="desktop-menu menu-left">
+            <div class="desktop-menu">
                 <a href="index.html" class="nav-link">Inicio</a>
                 <a href="nuestra-historia.html" class="nav-link">Nuestra Historia</a>
-                <a href="la-boda.html" class="nav-link">La Boda</a>
+                <a href="el-entorno.html" class="nav-link">El Entorno</a>
             </div>
 
             <div class="asistencia-centro">
@@ -152,7 +152,7 @@
             </div>
 
             <div class="desktop-menu menu-right">
-                <a href="alojamientos.html" class="nav-link">Alojamiento</a>
+                <a href="direccion.html" class="nav-link">Dirección</a>
                 <a href="regalos.html" class="nav-link">Regalos</a>
                 <a href="contacto.html" class="nav-link">Contacto</a>
             </div>
@@ -192,7 +192,13 @@
                         <div class="timeline-time">12:15</div>
                         <div class="timeline-content">
                             <h3>Ceremonia</h3>
-                            <p>Parroquia Castrense de la Armada</p>
+                            <p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Parroquia+Castrense+de+la+Armada" 
+                                target="_blank" 
+                                class="link-timeline">
+                                Parroquia Castrense de la Armada
+                                </a>
+                            </p>
                         </div>
                     </div>
 
@@ -252,11 +258,11 @@
         <div class="mobile-nav-content">
             <a href="index.html" class="mobile-link">Inicio</a>
             <a href="nuestra-historia.html" class="mobile-link">Nuestra Historia</a>
+            <a href="el-entorno.html" class="mobile-link">El Entorno</a>
             <a href="direccion.html" class="mobile-link">Dirección</a>
-            <a href="alojamientos.html" class="mobile-link">Alojamiento</a>
             <a href="regalos.html" class="mobile-link">Regalos</a>
             <a href="contacto.html" class="mobile-link">Contacto</a>
-            <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); cerrarMenuYAbrirAsistencia();">Asistencia</a>
+           <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); abrirAsistenciaInstantanea();">Asistencia</a>
         </div>
     </div>
 
@@ -264,91 +270,84 @@
     
 
     <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileOverlay = document.querySelector('.mobile-overlay');
-        const asistenciaOverlay = document.getElementById('seccion-asistencia-overlay');
 
-        window.submitted = false;
-
-        // Validación para el formulario
-        const formBoda = document.getElementById('form-boda');
-        if (formBoda) {
-            formBoda.onsubmit = function() {
-                window.submitted = true;
-            };
-        }
-
-        function comprobarEnvioReal() {
-            if(window.submitted) {
-                alert('¡Muchas gracias! Hemos recibido vuestra confirmación de asistencia.');
-                cerrarAsistencia();
-                window.submitted = false; 
-            }
-        }
-
-        // --- LÓGICA HAMBURGUESA ---
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                mobileOverlay.classList.toggle('active');
-                menuToggle.classList.toggle('open');
-            });
-        }
-
-        mobileOverlay.addEventListener('click', (e) => {
-            if (e.target === mobileOverlay) {
-                mobileOverlay.classList.remove('active');
-                menuToggle.classList.remove('open');
-            }
-        });
-
-        // --- LÓGICA ASISTENCIA ---
         function abrirAsistencia() {
-            asistenciaOverlay.style.display = 'block';
-            asistenciaOverlay.classList.add('active');
+            const overlay = document.getElementById('seccion-asistencia-overlay');
+            overlay.classList.remove('no-animar'); // Nos aseguramos de que pueda animar
+            overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
+        // Función para abrir INSTANTÁNEO (Hamburguesa)
+        function abrirAsistenciaInstantanea() {
+            const overlay = document.getElementById('seccion-asistencia-overlay');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.getElementById('menuToggle');
+
+            overlay.classList.add('no-animar'); // Quitamos la animación
+            overlay.classList.add('active');    // Mostramos
+            document.body.style.overflow = 'hidden';
+
+            // Cerramos el menú
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            if (menuToggle) menuToggle.classList.remove('open');
+        }
+
         function cerrarAsistencia() {
-            asistenciaOverlay.style.display = 'none';
-            asistenciaOverlay.classList.remove('active');
+            const overlay = document.getElementById('seccion-asistencia-overlay');
+            overlay.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
-        // Cierre del formulario con la X
-        const btnCerrar = document.querySelector('.cerrar-asistencia');
-        if (btnCerrar) {
-            btnCerrar.addEventListener('click', cerrarAsistencia);
-        }
-
-        // Función que conecta el menú con la asistencia
+        // --- Función llamada desde la hamburguesa ---
         function cerrarMenuYAbrirAsistencia() {
-            mobileOverlay.classList.remove('active');
-            menuToggle.classList.remove('open');
             abrirAsistencia();
         }
 
-        // Funciones de lógica del formulario
-        function gestionarAsistencia(asiste) {
-            const bloque = document.getElementById('bloque-confirmado');
-            if (bloque) bloque.style.display = asiste ? 'block' : 'none';
-            
-            const inputDni = document.getElementById('dni-principal-input');
-            if (inputDni) inputDni.required = asiste;
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Evento para el botón de la barra de navegación (usando clase .btn-asistencia)
+            const botones = document.querySelectorAll('.btn-asistencia');
+            botones.forEach(boton => {
+                boton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    abrirAsistencia();
+                });
+            });
 
-        function verAcompanante(mostrar) {
-            document.getElementById('bloque-seccion-acomp').style.display = mostrar ? 'block' : 'none';
-            document.getElementById('dni-acompanante-input').required = mostrar;
-        }
+            // Evento para el botón de cerrar formulario
+            const botonCerrar = document.querySelector('.cerrar-asistencia');
+            if (botonCerrar) {
+                botonCerrar.addEventListener('click', cerrarAsistencia);
+            }
 
-        function verHijosMayores(mostrar) {
-            document.getElementById('bloque-seccion-hijos-mayores').style.display = mostrar ? 'block' : 'none';
-            document.getElementById('hijos-mayores-input').required = mostrar;
-        }
+            // --- Lógica Menú Hamburguesa ---
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    menuToggle.classList.toggle('open');
+                });
+            }
+        });
 
-        function verNinos(mostrar) {
-            document.getElementById('bloque-seccion-ninos').style.display = mostrar ? 'block' : 'none';
-            document.getElementById('alergias-ninos-input').required = mostrar;
+        // --- Lógica de visibilidad del formulario (Sin cambios) ---
+        function gestionarAsistencia(si) {
+            document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none';
+        }
+        function verAcompanante(si) {
+            document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none';
+        }
+        function verHijosMayores(si) {
+            document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none';
+        }
+        function verNinos(si) {
+            document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none';
+        }
+        function comprobarEnvioReal() {
+            alert("¡Muchas gracias por confirmar tu asistencia!");
+            cerrarAsistencia();
+            document.getElementById('form-boda').reset();
         }
     </script>
 
