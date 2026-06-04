@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Boda - Andrea & Nacho</title>
+    <title>Boda de Andrea & Nacho</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
+
 <body class="pagina-interna">
 
     <div id="seccion-asistencia-overlay" class="asistencia-full-page">
@@ -141,10 +142,10 @@
                 <span></span><span></span><span></span>
             </button>
 
-            <div class="desktop-menu">
+            <div class="desktop-menu menu-left">
                 <a href="index.html" class="nav-link">Inicio</a>
                 <a href="nuestra-historia.html" class="nav-link">Nuestra Historia</a>
-                <a href="el-entorno.html" class="nav-link">El Entorno</a>
+                <a href="la-boda.html" class="nav-link">La Boda</a>
             </div>
 
             <div class="asistencia-centro">
@@ -170,107 +171,51 @@
     </nav>
 
 
-    <main class="contenedor-editorial">
-        <div class="bloque-editorial">
-            <div class="caja-relato">
-                <section class="seccion-boda">
-                    <h1 class="titulo-boda">La Boda</h1>
-                    </section>
-            </div>
-        </div>
-
-        <section class="timeline-boda">
+    <section id="entorno" class="seccion-elentorno">
+        <h1 class="titulo-elentorno">El Entorno</h1>
         
-            
-            <div class="caja-estilo"> 
-                <h2 class="titulo-timeline">El Gran Día</h2>
-                
-                <div class="timeline-container">
+        <div class="caja-estilo-elentorno">
+            <p class="parrafo-elentorno">
+                Detalles que reflejan la belleza del lugar donde celebraremos nuestro compromiso.
+            </p>
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">12:15</div>
-                        <div class="timeline-content">
-                            <h3>Ceremonia</h3>
-                            <p>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Parroquia+Castrense+de+la+Armada" 
-                                target="_blank" 
-                                class="link-timeline">
-                                Parroquia Castrense de la Armada
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">14:00</div>
-                        <div class="timeline-content">
-                            <h3>Recepción</h3>
-                            <p>Coctel de bienvenida</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">15:30</div>
-                        <div class="timeline-content">
-                            <h3>Convite</h3>
-                            <p>Almuerzo en el salón</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">16:00</div>
-                        <div class="timeline-content">
-                            <h3>Momento Dulce</h3>
-                            <p>Corte de Tarta Nupcial</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">18:30</div>
-                        <div class="timeline-content">
-                            <h3>Apertura del Baile</h3>
-                            <p>Baile de los novios</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-time">19:00</div>
-                        <div class="timeline-content">
-                            <h3>Fiesta y Barra Libre</h3>
-                            <p>¡A bailar hasta que el cuerpo aguante!</p>
-                        </div>
+            <div class="contenedor-ilustraciones-elentorno">
+                <div class="ilustracion-item">
+                    <div class="contenedor-imagen-acuarela">
+                        <img src="img/Acuarela_parroquia.png" alt="Acuarela Parroquia">
+                        <p class="pie-acuarela">Parroquia Castrense</p>
                     </div>
                 </div>
-
                 
+                <div class="ilustracion-item">
+                    <div class="contenedor-imagen-acuarela">
+                        <img src="img/Camara-oficiales.png" alt="Ilustración Acceso Cámara">
+                        <p class="pie-acuarela">Cámara de Oficiales</p>
+                    </div>
+                </div>
             </div>
-         </section>
+        </div>
+    </section>
 
-    </main>
+
 
     <div class="mobile-overlay" id="mobileMenu">
         <div class="mobile-nav-content">
             <a href="index.html" class="mobile-link">Inicio</a>
             <a href="nuestra-historia.html" class="mobile-link">Nuestra Historia</a>
-            <a href="el-entorno.html" class="mobile-link">El Entorno</a>
+            <a href="la-boda.html" class="mobile-link">La Boda</a>
             <a href="direccion.html" class="mobile-link">Dirección</a>
             <a href="regalos.html" class="mobile-link">Regalos</a>
             <a href="contacto.html" class="mobile-link">Contacto</a>
-           <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); abrirAsistenciaInstantanea();">Asistencia</a>
+            <a href="#" class="mobile-link asistencia-burgundy" onclick="event.preventDefault(); abrirAsistenciaInstantanea();">Asistencia</a>
+    </div>
         </div>
     </div>
 
    
     
 
-    <script>
-
+   <script>
         function abrirAsistencia() {
             const overlay = document.getElementById('seccion-asistencia-overlay');
             overlay.classList.remove('no-animar'); // Nos aseguramos de que pueda animar
@@ -350,6 +295,5 @@
             document.getElementById('form-boda').reset();
         }
     </script>
-
 </body>
 </html>
