@@ -666,53 +666,69 @@ html, body {
 /* #region 8. CAMINO BOTÁNICO: DISEÑO ESCALONADO ESCRITORIO */
 
 /* 1. Visibilidad estricta */
-.diseno-escritorio { display: none !important; }
-.diseno-movil { display: block !important; }
+
+.diseno-escritorio { display: none; }
+.diseno-movil { display: block; }
 
 @media (min-width: 1024px) {
     .diseno-escritorio { display: block !important; }
     .diseno-movil { display: none !important; }
-}
 
-/* 2. ESCRITORIO: FILAS DESPLAZADAS */
-@media (min-width: 1024px) {
-    .camino-botanico { 
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 80px 40px;
-        padding: 80px 50px;
-        max-width: 1100px;
+   .camino-botanico { 
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 80px 60px; /* Mayor espacio para que los elementos respiren */
+        padding: 100px 20px;
+        max-width: 1000px;
         margin: 0 auto;
-        align-items: start;
+        
+        /* Elegancia: sin bordes, usamos sombra sutil si es necesario */
+        border: none !important;
+        background: transparent;
+        
+        /* Aseguramos que la tipografía herede la suavidad */
+        align-items: flex-start;
     }
     
     .punto-historia { 
-        display: flex; flex-direction: column; align-items: center; 
-        text-align: center; position: relative;
+        flex: 0 0 220px; /* Ancho fijo para control total */
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+        /* Eliminamos cualquier resto de grid-column */
+        grid-column: auto !important; 
     }
 
-    /* FILA 1: Mover ligeramente a la izquierda */
-    .punto-historia:nth-child(-n+4) {
-        margin-right: 50px; 
-    }
-
-    /* FILA 2: Mover a la derecha */
-    .punto-historia:nth-child(n+5) {
-        margin-left: 100px;
-    }
-
-    /* Estilos de elementos */
     .diseno-escritorio .foto-ovalada { 
-        width: 180px; height: 180px; border-radius: 50%; 
-        overflow: hidden; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        width: 180px; 
+        height: 180px; 
+        border-radius: 50%; 
+        overflow: hidden; 
+        margin-bottom: 25px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    .diseno-escritorio .foto-ovalada img { width: 100%; height: 100%; object-fit: cover; }
-    .diseno-escritorio .año-script { font-family: 'Pinyon Script', cursive; font-size: 42px; color: #8B0000; display: block; margin-bottom: 5px; }
-    .diseno-escritorio .hito-texto { font-family: 'Playfair Display', serif; font-size: 18px; color: #5D6D7E; }
-
     
-    /* Limpieza de copos al final de cada fila */
-    .punto-historia:nth-child(4)::after, .punto-historia:last-child::after { display: none !important; }
+    .diseno-escritorio .foto-ovalada img { 
+        width: 100%; height: 100%; object-fit: cover; 
+    }
+
+    .diseno-escritorio .año-script { 
+        font-family: 'Pinyon Script', cursive; 
+        font-size: 42px; 
+        color: #8B0000; 
+        display: block; 
+        margin-bottom: 5px; 
+    }
+
+    .diseno-escritorio .hito-texto { 
+        font-family: 'Playfair Display', serif; 
+        font-size: 18px; 
+        color: #5D6D7E; 
+        max-width: 220px; 
+        margin: 0 auto;
+    }
 }
 
 /* 3. MÓVIL: SIN CAMBIOS (Se queda centrado) */
@@ -1823,3 +1839,6 @@ html, body {
 
 }
 /* #endregion */
+
+
+
