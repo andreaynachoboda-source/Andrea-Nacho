@@ -1506,6 +1506,10 @@ html, body {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    
+    /* Estas dos líneas son las que centran la imagen */
+    display: block;
+    margin: 0 auto;
 }
 
 .imagen-mapa:hover {
@@ -1725,4 +1729,97 @@ html, body {
     }
 }
 
+/* #endregion */
+
+
+
+/* #region 17. SECCIÓN: CONTACTO */
+
+
+.titulo-contacto {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.seccion-contacto-minimal {
+    /* Mismo valor que en .seccion-direccion para mantener consistencia */
+    padding-top: 113px !important; 
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Esto asegura que todo el contenido esté centrado */
+    width: 100%;
+}
+
+.caja-estilo-contacto {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 30px 20px !important;
+    margin-top: 0 !important; /* Ponlo en 0 porque el padding-top de la sección ya hace el trabajo */
+}
+
+.bloque-contacto {
+    margin: 40px 0;
+}
+
+/* Ajuste de los nombres */
+.nombre-destacado {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; /* Reducido de 1.8rem a 1.3rem */
+    margin-bottom: 8px; /* Un poco menos de margen */
+    letter-spacing: 0.5px; /* Un toque más sutil */
+    color: #111E38; /* Mantenemos el color azul oscuro */
+}
+
+/* Ajuste de la dirección para que sea proporcional */
+.detalles {
+    font-size: 0.95rem; /* Un poco más pequeño que antes */
+    color: #7f8c8d;
+    margin: 4px 0;
+}
+
+/* El teléfono también un poquito más pequeño para acompañar */
+.enlace-telefono {
+    display: inline-block;
+    margin-top: 8px;
+    color: #8B0000;
+    text-decoration: none;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.separador {
+    width: 50px;
+    height: 1px;
+    background-color: #8B0000;
+    margin: 0 auto;
+}
+/* Ajuste para móviles: las tarjetas se ponen una encima de otra */
+
+@media (max-width: 600px) {
+
+    .seccion-contacto-minimal {
+    /* Ajusta este valor (ej. 100px) para que coincida exactamente 
+       con el espacio que tienen tus otras páginas bajo el nav */
+    padding-top: 100px !important; 
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+    .caja-estilo-contacto {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px 20px !important;
+        margin-top: 20px !important;
+    }
+
+    .tarjetas-contacto { gap: 30px; }
+    .tarjeta { border-left: none; border-top: 1px solid #8B0000; text-align: center; }
+
+}
 /* #endregion */
