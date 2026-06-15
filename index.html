@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body class="pagina-principal">
 
@@ -193,74 +194,68 @@
     </div>
 
     <script>
-        function abrirAsistencia() {
-            const overlay = document.getElementById('seccion-asistencia-overlay');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function cerrarAsistencia() {
-            const overlay = document.getElementById('seccion-asistencia-overlay');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Evento para el botón de la barra de navegación
         document.addEventListener('DOMContentLoaded', () => {
-            const botones = document.querySelectorAll('.btn-asistencia');
-            
-            botones.forEach(boton => {
+            // --- 1. GESTIÓN ASISTENCIA ---
+            const overlayAsistencia = document.getElementById('seccion-asistencia-overlay');
+            const botonesAsistencia = document.querySelectorAll('.btn-asistencia');
+            const botonCerrarAsistencia = document.querySelector('.cerrar-asistencia');
+
+            botonesAsistencia.forEach(boton => {
                 boton.addEventListener('click', (e) => {
-                    e.preventDefault(); // Evita que siga el enlace
-                    abrirAsistencia();
+                    e.preventDefault();
+                    overlayAsistencia.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
             });
 
-            // Evento para el botón de cerrar
-            const botonCerrar = document.querySelector('.cerrar-asistencia');
-            if (botonCerrar) {
-                botonCerrar.addEventListener('click', cerrarAsistencia);
+            if (botonCerrarAsistencia) {
+                botonCerrarAsistencia.addEventListener('click', () => {
+                    overlayAsistencia.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
             }
-        });
 
+            // --- 2. GESTIÓN MENÚ HAMBURGUESA Y OVERLAY ---
+            const menuToggle = document.getElementById('menuToggle'); // Asegúrate que tu botón tiene ID="menuToggle"
+            const mobileMenu = document.querySelector('.mobile-overlay'); // Usamos la clase de tu CSS
 
-        // Script para el menú hamburguesa
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.getElementById('menuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-
+            // Abrir/Cerrar hamburguesa
             if (menuToggle && mobileMenu) {
                 menuToggle.addEventListener('click', () => {
                     mobileMenu.classList.toggle('active');
-                    // Opcional: animar el botón hamburguesa a una X
-                    menuToggle.classList.toggle('open'); 
+                    menuToggle.classList.toggle('open');
                 });
             }
+
+            // Cerrar al pinchar fuera o en un enlace
+            mobileMenu.addEventListener('click', (event) => {
+                if (event.target === mobileMenu || event.target.classList.contains('mobile-link')) {
+                    mobileMenu.classList.remove('active');
+                    if (menuToggle) menuToggle.classList.remove('open');
+                }
+            });
         });
 
-
-        // Funciones de visibilidad del formulario
-            function gestionarAsistencia(si) {
-                document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none';
-            }
-
-            function verAcompanante(si) {
-                document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none';
-            }
-
-            function verHijosMayores(si) {
-                document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none';
-            }
-
-            function verNinos(si) {
-                document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none';
-            }
-
-            function comprobarEnvioReal() {
-                alert("¡Muchas gracias por confirmar tu asistencia!");
-                cerrarAsistencia();
-                document.getElementById('form-boda').reset();
-            }
-    </script> 
+        // --- 3. FUNCIONES FORMULARIO (No necesitan estar dentro de DOMContentLoaded) ---
+        function gestionarAsistencia(si) {
+            document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none';
+        }
+        function verAcompanante(si) {
+            document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none';
+        }
+        function verHijosMayores(si) {
+            document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none';
+        }
+        function verNinos(si) {
+            document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none';
+        }
+        function comprobarEnvioReal() {
+            alert("¡Muchas gracias por confirmar tu asistencia!");
+            const overlayAsistencia = document.getElementById('seccion-asistencia-overlay');
+            overlayAsistencia.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('form-boda').reset();
+        }
+    </script>
 </body>
 </html>
