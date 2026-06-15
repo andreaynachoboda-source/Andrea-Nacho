@@ -214,26 +214,24 @@
 
    
     
-
-   <script>
+    <script>
+        // --- LÓGICA DE ASISTENCIA ---
         function abrirAsistencia() {
             const overlay = document.getElementById('seccion-asistencia-overlay');
-            overlay.classList.remove('no-animar'); // Nos aseguramos de que pueda animar
+            overlay.classList.remove('no-animar');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        // Función para abrir INSTANTÁNEO (Hamburguesa)
         function abrirAsistenciaInstantanea() {
             const overlay = document.getElementById('seccion-asistencia-overlay');
             const mobileMenu = document.getElementById('mobileMenu');
             const menuToggle = document.getElementById('menuToggle');
 
-            overlay.classList.add('no-animar'); // Quitamos la animación
-            overlay.classList.add('active');    // Mostramos
+            overlay.classList.add('no-animar');
+            overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            // Cerramos el menú
             if (mobileMenu) mobileMenu.classList.remove('active');
             if (menuToggle) menuToggle.classList.remove('open');
         }
@@ -244,56 +242,58 @@
             document.body.style.overflow = 'auto';
         }
 
-        // --- Función llamada desde la hamburguesa ---
-        function cerrarMenuYAbrirAsistencia() {
-            abrirAsistencia();
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            // Evento para el botón de la barra de navegación (usando clase .btn-asistencia)
-            const botones = document.querySelectorAll('.btn-asistencia');
-            botones.forEach(boton => {
+            // --- 1. Eventos Asistencia ---
+            document.querySelectorAll('.btn-asistencia').forEach(boton => {
                 boton.addEventListener('click', (e) => {
                     e.preventDefault();
                     abrirAsistencia();
                 });
             });
 
-            // Evento para el botón de cerrar formulario
-            const botonCerrar = document.querySelector('.cerrar-asistencia');
-            if (botonCerrar) {
-                botonCerrar.addEventListener('click', cerrarAsistencia);
+            const overlay = document.getElementById('seccion-asistencia-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', (e) => {
+                    // Si el clic es en el fondo (overlay) pero no en el formulario interno
+                    if (e.target === overlay) cerrarAsistencia();
+                });
             }
 
-            // --- Lógica Menú Hamburguesa ---
+            const botonCerrar = document.querySelector('.cerrar-asistencia');
+            if (botonCerrar) botonCerrar.addEventListener('click', cerrarAsistencia);
+
+            // --- 2. Lógica Menú Hamburguesa ---
             const menuToggle = document.getElementById('menuToggle');
             const mobileMenu = document.getElementById('mobileMenu');
+            
             if (menuToggle && mobileMenu) {
                 menuToggle.addEventListener('click', () => {
                     mobileMenu.classList.toggle('active');
                     menuToggle.classList.toggle('open');
                 });
+
+                // Cierre intuitivo hamburguesa al pinchar fuera
+                mobileMenu.addEventListener('click', (e) => {
+                    if (e.target === mobileMenu || e.target.classList.contains('mobile-link')) {
+                        mobileMenu.classList.remove('active');
+                        menuToggle.classList.remove('open');
+                    }
+                });
             }
         });
 
-        // --- Lógica de visibilidad del formulario (Sin cambios) ---
-        function gestionarAsistencia(si) {
-            document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none';
-        }
-        function verAcompanante(si) {
-            document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none';
-        }
-        function verHijosMayores(si) {
-            document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none';
-        }
-        function verNinos(si) {
-            document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none';
-        }
+        // --- Lógica visibilidad formulario ---
+        function gestionarAsistencia(si) { document.getElementById('bloque-confirmado').style.display = si ? 'block' : 'none'; }
+        function verAcompanante(si) { document.getElementById('bloque-seccion-acomp').style.display = si ? 'block' : 'none'; }
+        function verHijosMayores(si) { document.getElementById('bloque-seccion-hijos-mayores').style.display = si ? 'block' : 'none'; }
+        function verNinos(si) { document.getElementById('bloque-seccion-ninos').style.display = si ? 'block' : 'none'; }
+        
         function comprobarEnvioReal() {
             alert("¡Muchas gracias por confirmar tu asistencia!");
             cerrarAsistencia();
             document.getElementById('form-boda').reset();
         }
     </script>
+   
 </body>
 </html>
