@@ -290,6 +290,25 @@
             cerrarAsistencia();
             document.getElementById('form-boda').reset();
         }
+
+        // --- CIERRE INTELIGENTE AL PINCHAR FUERA ---
+        document.addEventListener('click', (e) => {
+            const overlayAsistencia = document.getElementById('seccion-asistencia-overlay');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.getElementById('menuToggle');
+
+            // Cerrar Asistencia si pinchan en el fondo
+            if (e.target === overlayAsistencia) {
+                cerrarAsistencia();
+            }
+
+            // Cerrar Menú Hamburguesa si pinchan fuera
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('open');
+            }
+        });
+        
     </script>
 
 </body>
