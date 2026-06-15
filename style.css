@@ -1200,17 +1200,13 @@ html, body {
     animation: aparecerSuave 0.8s ease-in forwards;
 }
 
-.caja-estilo-elentorno {
+.caja-estilo-elentorno, .caja-estilo-direccion {
     background: transparent !important; 
     border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
     padding: 20px 0;
     max-width: 800px; 
     width: 90%; 
     margin: 0 auto !important;
-    margin-top: -20px !important;
 }
 
 .link-mapa {
@@ -1369,88 +1365,59 @@ html, body {
 }
 /* #endregion */
 
-/* #region 14. SECCIÓN: DIRECCIÓN */
-
-    .seccion-direccion {
-        padding-top: 113px;
-        padding-bottom: 80px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .titulo-direccion {
-        font-family: 'Pinyon Script', cursive !important;
-        font-weight: 400 !important;
-        font-size: clamp(60px, 12vw, 120px) !important;
-        color: #7a2030 !important;
-        margin: 0 0 5px 0 !important;
-        opacity: 0;
-        animation: aparecerSuave 0.8s ease-in forwards;
-    }
-
-    .link-mapa {
-        color: #924040 !important;
-        border-bottom: 1px solid #924040;
-        text-decoration: none;
-    }
-
-    .link-sutil {
-        color: #5d6d7e !important;
-        text-decoration: none;
-        border-bottom: 1px dotted #5d6d7e;
-        font-style: italic;
-        transition: all 0.3s ease;
-    }
-
-    .link-sutil:hover {
-        color: #924040 !important;
-        border-bottom: 1px solid #924040;
-    }
-
-    .caja-estilo-direccion {
-        background: transparent !important; 
-        border: none !important;
-        padding: 20px 0;
-        max-width: 800px; 
-        width: 90%; 
-        margin: 0 auto !important;
-    }
-
-    .imagen-mapa {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .imagen-mapa:hover {
-        transform: scale(1.01);
-    }
-
-    .parrafo-direccion, .parrafo-importante-direccion, .nota-acceso {
-        font-family: 'Playfair Display', serif;
-        font-size: 17px;
-        color: #2c3e50;
-        line-height: 1.8;
-        text-align: center;
-        margin-bottom: 25px !important;
-    }
-
-    @media (max-width: 600px) {
-        .caja-estilo-direccion {
-            border: none !important;
-            box-shadow: none !important;
-            padding: 30px 20px !important;
-            margin-top: 20px !important;
-        }
-    
+/* #region 14. SECCIÓN: DIRECCIÓN (Igualada a El Entorno) */
+.seccion-direccion {
+    padding-top: 113px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
+
+.titulo-direccion {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.caja-estilo-elentorno, .caja-estilo-direccion {
+    background: transparent !important; 
+    border: none !important;
+    padding: 20px 0;
+    max-width: 800px; 
+    width: 90%; 
+    margin: 0 auto !important;
+}
+
+.parrafo-direccion {
+    /* Mismos valores que .parrafo-elentorno */
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: #003B5C;
+    line-height: 1.8;
+    text-align: center;
+    margin-bottom: 25px !important;
+}
+
+/* Ajustes para móvil iguales a El Entorno */
+@media (max-width: 600px) {
+    .caja-estilo-direccion {
+        padding: 40px 20px;
+    }
+
+    .parrafo-direccion {
+        font-size: 13.5px !important;
+        line-height: 1.8 !important;
+        width: 95% !important;
+        margin: 0 auto 20px auto !important;
+    }
+}
+
 /* #endregion */
 
 /* #region 15. SECCIÓN: REGALOS */
@@ -1642,3 +1609,86 @@ html, body {
 /* #endregion */
 
 /* #region 16. SECCIÓN: CONTACTO */
+
+.titulo-contacto {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.seccion-contacto-minimal {
+    padding-top: 113px !important; 
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+.caja-estilo-contacto {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 30px 20px !important;
+    margin-top: 0 !important; 
+}
+
+.bloque-contacto {
+    margin: 40px 0;
+}
+
+
+.nombre-destacado {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; 
+    margin-bottom: 8px; 
+    letter-spacing: 0.5px; 
+    color: #003B5C; 
+}
+
+
+.detalles {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    margin: 4px 0;
+}
+
+.enlace-telefono {
+    display: inline-block;
+    margin-top: 8px;
+    color: #8B0000;
+    text-decoration: none;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.separador {
+    width: 50px;
+    height: 1px;
+    background-color: #8B0000;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+
+    .seccion-contacto-minimal {
+    padding-top: 100px !important; 
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+    .caja-estilo-contacto {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px 20px !important;
+        margin-top: 20px !important;
+    }
+
+    .tarjetas-contacto { gap: 30px; }
+    .tarjeta { border-left: none; border-top: 1px solid #8B0000; text-align: center; }
+
+}
+/* #endregion */
