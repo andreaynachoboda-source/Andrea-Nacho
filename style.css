@@ -269,7 +269,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100% !important;
-    height: 100vh !important;
+    height: 100dvh !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
