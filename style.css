@@ -1365,7 +1365,7 @@ html, body {
 }
 /* #endregion */
 
-/* #region 14. SECCIÓN: DIRECCIÓN (Igualada a El Entorno) */
+/* #region 14. SECCIÓN: DIRECCIÓN*/
 .seccion-direccion {
     padding-top: 113px;
     padding-bottom: 80px;
@@ -1385,7 +1385,7 @@ html, body {
     animation: aparecerSuave 0.8s ease-in forwards;
 }
 
-.caja-estilo-elentorno, .caja-estilo-direccion {
+.caja-estilo-direccion {
     background: transparent !important; 
     border: none !important;
     padding: 20px 0;
@@ -1394,8 +1394,31 @@ html, body {
     margin: 0 auto !important;
 }
 
+.contenedor-imagen-acuarela {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 3px 3px 30px 3px !important;
+}
+
+.pie-acuarela {
+    font-family: 'Playfair Display', serif;
+    color: #003B5C; 
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 15px 10px 0 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
 .parrafo-direccion {
-    /* Mismos valores que .parrafo-elentorno */
     font-family: 'Playfair Display', serif;
     font-size: 17px;
     color: #003B5C;
@@ -1416,6 +1439,29 @@ html, body {
         width: 95% !important;
         margin: 0 auto 20px auto !important;
     }
+    .contenedor-imagen-acuarela {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 3px 3px 30px 3px !important;
+}
+
+.pie-acuarela {
+    font-family: 'Playfair Display', serif;
+    color: #003B5C; 
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 15px 10px 0 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
 }
 
 /* #endregion */
