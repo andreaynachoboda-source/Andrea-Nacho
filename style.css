@@ -17,11 +17,15 @@ html, body {
 /* #endregion */
 
 /* #region 2. NAVBAR Y MENÚS */
+html {
+    scrollbar-gutter: stable;
+}
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100%; 
+    padding-right: env(safe-area-inset-right); 
     height: 80px;
     z-index: 2000;
     background-color: rgba(255, 255, 255, 0.4) !important; 
@@ -29,7 +33,7 @@ html, body {
     -webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: center;
-    border-bottom: none !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -334,27 +338,26 @@ html, body {
     font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    background-color: rgba(139, 0, 0, 0.03) !important;
-    color: #8B0000 !important;
+    background-color: rgba(0, 59, 92, 0.24) !important;
+    color: #8B0000 !important; 
     padding: 14px 35px !important; 
     border-radius: 50px;
-    border: 2px solid rgba(139, 0, 0, 0.3);
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid rgba(0, 59, 92, 0.6) !important;
+    transition: all 0.3s ease;
     white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 }
 
-
 .btn-asistencia:hover {
-    background-color: #8B0000 !important;
+    background-color: #003B5C !important;
     color: #ffffff !important;
-    border-color: #800020 !important;
+    border-color: #003B5C !important;
 }
 
 .btn-asistencia:active {
-    background-color: #800020 !important;
+    background-color: #002a42 !important;
     color: #ffffff !important;
+    border-color: #002a42 !important;
     transform: scale(0.95);
 }
 
@@ -429,21 +432,12 @@ html, body {
 }
 
 @media (max-width: 1149px) {
-    .pagina-interna .btn-asistencia {
-        /* Estado inicial: Transparente y sutil */
-        opacity: 1 !important;
-        background-color: rgba(100, 115, 125, 0.20) !important;
-        border: 1.5px solid rgba(100, 115, 125, 0.5) !important;
-        color: #8B0000 !important;
-        
-        /* Esta transición es la clave de la elegancia */
-        transition: all 0.3s ease !important; 
-    }
 
     .pagina-interna .btn-asistencia:active {
-        background-color: rgba(100, 115, 125, 0.15) !important;
-        border: 1.5px solid rgba(100, 115, 125, 0.9) !important;
+        background-color: rgba(0, 59, 92, 0.1) !important; 
+        border: 1.5px solid rgba(0, 59, 92, 0.9) !important;
         transform: scale(0.96) !important;
+        color: #003B5C !important; /* Ahora el texto azul también se animará suavemente */
     }
 }
 /* #endregion */
@@ -471,7 +465,11 @@ html, body {
 }
 
 .motivos {
-    background: url('img/Motivo_adornos.png') center/contain repeat;
+    background-image: url('img/Motivo_adornos.png');
+    background-position: center;
+    background-repeat: repeat;
+    /* Ajusta el 150% a tu gusto. También puedes usar px (ej: 500px) */
+    background-size: 200%; 
     opacity: 0.40;
     z-index: 2;
 }
@@ -1655,86 +1653,3 @@ html, body {
 /* #endregion */
 
 /* #region 16. SECCIÓN: CONTACTO */
-
-.titulo-contacto {
-    font-family: 'Pinyon Script', cursive !important;
-    font-weight: 400 !important;
-    font-size: clamp(60px, 12vw, 120px) !important;
-    color: #7a2030 !important;
-    margin: 0 0 5px 0 !important;
-    opacity: 0;
-    animation: aparecerSuave 0.8s ease-in forwards;
-}
-
-.seccion-contacto-minimal {
-    padding-top: 113px !important; 
-    padding-bottom: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    width: 100%;
-}
-
-.caja-estilo-contacto {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 30px 20px !important;
-    margin-top: 0 !important; 
-}
-
-.bloque-contacto {
-    margin: 40px 0;
-}
-
-
-.nombre-destacado {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; 
-    margin-bottom: 8px; 
-    letter-spacing: 0.5px; 
-    color: #003B5C; 
-}
-
-
-.detalles {
-    font-size: 0.95rem;
-    color: #7f8c8d;
-    margin: 4px 0;
-}
-
-.enlace-telefono {
-    display: inline-block;
-    margin-top: 8px;
-    color: #8B0000;
-    text-decoration: none;
-    font-style: italic;
-    font-size: 0.95rem;
-}
-
-.separador {
-    width: 50px;
-    height: 1px;
-    background-color: #8B0000;
-    margin: 0 auto;
-}
-
-@media (max-width: 600px) {
-
-    .seccion-contacto-minimal {
-    padding-top: 100px !important; 
-    padding-bottom: 60px;
-    text-align: center;
-}
-
-    .caja-estilo-contacto {
-        border: none !important;
-        box-shadow: none !important;
-        padding: 30px 20px !important;
-        margin-top: 20px !important;
-    }
-
-    .tarjetas-contacto { gap: 30px; }
-    .tarjeta { border-left: none; border-top: 1px solid #8B0000; text-align: center; }
-
-}
-/* #endregion */
