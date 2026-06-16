@@ -42,18 +42,20 @@ html {
 }
 
 .nav-container {
-    width: 92%;
-    max-width: 1300px;
-    display: flex;
-    justify-content: space-between;
+    width: 95%;
+    max-width: 1400px;
+    display: grid !important; /* Activamos Grid */
+    grid-template-columns: minmax(min-content, 1fr) auto minmax(min-content, 1fr);
     align-items: center;
+    gap: 15px;
 }
 
 .desktop-menu {
     display: flex;
     align-items: center;
-    gap: clamp(15px, 2.5vw, 45px);
-    flex: 1;
+    gap: clamp(10px, 2vw, 40px);
+    flex-wrap: nowrap; /* Evita que los enlaces salten a otra línea */
+    white-space: nowrap; /* Evita que el texto de 'Nuestra Historia' se parta */
 }
 
 .menu-right { 
@@ -78,7 +80,8 @@ html {
     color: #8B0000; 
 }
 
-@media (min-width: 1150px), (min-width: 768px) and (orientation: landscape) {
+
+@media (min-width: 1150px) { 
     .menu-toggle { 
         display: none !important; 
     }
@@ -129,6 +132,7 @@ html {
 
 }
 
+
 @media (max-width: 1149px) {
     .desktop-menu { 
         display: none !important; 
@@ -146,8 +150,14 @@ html {
 
     .pagina-interna .navbar {
         background-image: url('img/Motivo_adornos.png') !important;
-        background-size: cover;
-        background-position: center 20%;
+        
+        /* CAMBIO AQUÍ: Tamaño fijo para nitidez y repetición */
+        background-size: 600px auto !important; 
+        background-repeat: repeat-x !important;
+        
+        /* Centrado del motivo */
+        background-position: center bottom !important; 
+        
         background-blend-mode: overlay !important;
         opacity: 1; 
         background-color: rgba(255, 255, 255, 0.7) !important;
@@ -468,7 +478,6 @@ html {
     background-image: url('img/Motivo_adornos.png');
     background-position: center;
     background-repeat: repeat;
-    /* Ajusta el 150% a tu gusto. También puedes usar px (ej: 500px) */
     background-size: 200%; 
     opacity: 0.40;
     z-index: 2;
@@ -558,6 +567,10 @@ html {
 
     .nacho {
         transform: translateY(0) !important;
+    }
+    .motivos {
+        /* Tamaño para ordenador (más grande para cubrir el espacio sin estirarse) */
+        background-size: 2500px auto; 
     }
 }
 
@@ -1653,3 +1666,86 @@ html {
 /* #endregion */
 
 /* #region 16. SECCIÓN: CONTACTO */
+
+.titulo-contacto {
+    font-family: 'Pinyon Script', cursive !important;
+    font-weight: 400 !important;
+    font-size: clamp(60px, 12vw, 120px) !important;
+    color: #7a2030 !important;
+    margin: 0 0 5px 0 !important;
+    opacity: 0;
+    animation: aparecerSuave 0.8s ease-in forwards;
+}
+
+.seccion-contacto-minimal {
+    padding-top: 113px !important; 
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+.caja-estilo-contacto {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 30px 20px !important;
+    margin-top: 0 !important; 
+}
+
+.bloque-contacto {
+    margin: 40px 0;
+}
+
+
+.nombre-destacado {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; 
+    margin-bottom: 8px; 
+    letter-spacing: 0.5px; 
+    color: #003B5C; 
+}
+
+
+.detalles {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    margin: 4px 0;
+}
+
+.enlace-telefono {
+    display: inline-block;
+    margin-top: 8px;
+    color: #8B0000;
+    text-decoration: none;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.separador {
+    width: 50px;
+    height: 1px;
+    background-color: #8B0000;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+
+    .seccion-contacto-minimal {
+    padding-top: 100px !important; 
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+    .caja-estilo-contacto {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 30px 20px !important;
+        margin-top: 20px !important;
+    }
+
+    .tarjetas-contacto { gap: 30px; }
+    .tarjeta { border-left: none; border-top: 1px solid #8B0000; text-align: center; }
+
+}
+/* #endregion */
