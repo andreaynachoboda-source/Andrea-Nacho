@@ -1749,3 +1749,24 @@ html {
 
 }
 /* #endregion */
+
+
+/* #region 17. Estilo para campos con error */
+.input-error {
+    border: 2px solid #8B0000 !important;
+}
+
+/* Estilo para el mensaje de aviso */
+.mensaje-error {
+    color: #8B0000;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.error-sombreado {
+    border: 1px solid #8B0000 !important;
+    box-shadow: 0 0 8px rgba(139, 0, 0, 0.6) !important;
+    outline: none;
+}
+/* #endregion */
