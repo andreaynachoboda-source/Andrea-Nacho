@@ -61,7 +61,7 @@
 
                     <div id="bloque-seccion-acomp" style="display:none; border-left: 2px solid rgba(139,0,0,0.2); padding-left: 20px; margin-bottom: 30px;">
                         <div class="grupo-input-nombre">
-                            <label style="color: #111E38 !important;">Nombre y Apellidos del acompañante</label>
+                            <label style="color: #111E38 !important;">Nombre y Apellidos del acompañante <span class="asterisco-rojo">*</span></label>
                             <input type="text" name="entry.1717837555" placeholder="Nombre de tu acompañante..." style="color: #333333 !important;">
                         </div>
 
@@ -129,7 +129,7 @@
 
                 </div> 
 
-                <button type="submit" class="btn-confirmar-grande" style="margin-top: 30px;">ENVIAR</button>
+                <button type="button" class="btn-confirmar-grande" style="margin-top: 30px;" onclick="validarYEnviar()">ENVIAR</button>
             </form>
 
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="comprobarEnvioReal()"></iframe>
@@ -286,6 +286,72 @@
         cerrarAsistencia();
         document.getElementById('form-boda').reset();
     }
+
+
+    function validarYEnviar() {
+            const form = document.getElementById('form-boda');
+            
+            // Elementos principales
+            const inputDNI = document.getElementById('dni-principal-input');
+            const inputTel = document.querySelector('input[name="entry.112131532"]');
+            
+            // Elementos condicionales
+            const inputDNIAcomp = document.getElementById('dni-acompanante-input');
+            const inputHijos = document.getElementById('hijos-mayores-input');
+            
+            // Radios
+            const radioSi = document.querySelector('input[name="entry.1044971269"][value="¡Sí, allí estaré!"]');
+            const radioAcompSi = document.querySelector('input[name="entry.1318985222"][value="Sí"]');
+            const radioHijosSi = document.querySelector('input[name="entry.504827782"][value="Sí"]');
+            
+            // Expresiones regulares
+            const regexDoc = /^([0-9]{8}[A-Z]|[A-Z]{3}[0-9]{6})$/i;
+            const regexTel = /^[0-9]{9}$/;
+            // Esta regex busca si existe al menos un patrón de 8 números + 1 letra (DNI español) en el texto
+            const regexDNIEnTexto = /[0-9]{8}[A-Z]/i;
+
+            let esValido = true;
+
+            // Función para marcar error y quitarlo al escribir
+            function marcarError(el) {
+                el.classList.add('error-sombreado');
+                el.addEventListener('input', () => el.classList.remove('error-sombreado'), { once: true });
+                esValido = false;
+            }
+
+            // 1. Validar campos obligatorios básicos si asistís
+            if (radioSi.checked) {
+                // DNI Principal
+                if (!inputDNI.value || !regexDoc.test(inputDNI.value)) marcarError(inputDNI);
+                
+                // Teléfono (siempre obligatorio si asiste)
+                if (!inputTel.value || !regexTel.test(inputTel.value)) marcarError(inputTel);
+                
+                // DNI Acompañante (si está visible)
+                if (radioAcompSi.checked && (!inputDNIAcomp.value || !regexDoc.test(inputDNIAcomp.value))) {
+                    marcarError(inputDNIAcomp);
+                }
+                
+                // Datos Hijos (si está visible) - validamos que contenga un DNI válido
+                if (radioHijosSi.checked) {
+                    const textoHijos = inputHijos.value.trim();
+                    if (!textoHijos || !regexDNIEnTexto.test(textoHijos)) {
+                        marcarError(inputHijos);
+                    }
+                }
+            }
+
+            if (!esValido) {
+                // Encuentra el primer elemento con error y haz scroll hacia él
+                const primerError = document.querySelector('.error-sombreado');
+                primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                primerError.focus();
+                return;
+            }
+
+            form.submit();
+        }
+
 </script>
 
 </body>
